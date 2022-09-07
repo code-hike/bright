@@ -1,6 +1,5 @@
 export async function getStaticProps() {
   const { labels } = require("../data/themes.json");
-  console.log(labels);
   return {
     props: {
       labels: labels.map((x) => x.label),

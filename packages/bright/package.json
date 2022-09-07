@@ -2,9 +2,11 @@
   "name": "@code-hike/bright",
   "dependencies": {
     "import-meta-resolve": "^2.0.0",
-    "react": "experimental",
     "unzipit": "^1.4.0",
     "vscode-oniguruma": "^1.0.0",
     "vscode-textmate": "^7.0.0"
+  },
+  "devDependencies": {
+    "react": "experimental"
   }
 }
