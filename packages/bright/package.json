@@ -27,6 +27,7 @@
     "vscode-textmate": "^7.0.0"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
   }
 }

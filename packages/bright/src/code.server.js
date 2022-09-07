@@ -1,25 +1,66 @@
 import React, { Suspense } from "react";
-import { toTokens } from "./highlighter.js";
+import { createRegistry, toTokens } from "./highlighter.js";
 
 Code.defaultTheme = "Dracula Soft";
 Code.api = "https://bright.codehike.org/api";
 
-async function highlight(code, lang, label) {
-  const themeResponse = await fetch(`${Code.api}/theme?label=${label}`);
-  const theme = await themeResponse.json();
-  const lines = await toTokens(code, lang, theme);
+const themePromises = {};
+const themeCache = {};
+let registryPromise = null;
+let registry = null;
 
+function highlight(code, lang, label) {
+  const promises = [];
+  if (!registryPromise) {
+    registryPromise = createRegistry()
+      .then((r) => (registry = { data: r }))
+      .catch((e) => (registry = { error: e + "" }));
+  }
+  if (!registry) {
+    promises.push(registryPromise);
+  }
+  if (!themePromises[label]) {
+    themePromises[label] = fetch(`${Code.api}/theme?label=${label}`)
+      .then((r) => {
+        // console.log("fetched", `${Code.api}/theme?label=${label}`);
+        return r.json();
+      })
+      .then(
+        (theme) =>
+          (themeCache[label] = {
+            data: theme,
+            error: theme ? undefined : `Theme ${label} not found`,
+          })
+      )
+      .catch((e) => (themeCache[label] = { error: e + "" }));
+  }
+  if (!themeCache[label]) {
+    promises.push(themePromises[label]);
+  }
+
+  if (promises.length) {
+    throw Promise.all(promises);
+  }
+
+  const error = registry.error || themeCache[label].error;
+  if (error) {
+    return { error };
+  }
+
+  const theme = themeCache[label].data;
+
+  const lines = toTokens(code, lang, theme, registry.data);
   return {
-    fg: theme.fg,
-    bg: theme.bg,
-    lines,
+    data: {
+      fg: theme.fg,
+      bg: theme.bg,
+      lines,
+    },
   };
 }
 
 function InnerCode({ children, lang, theme }) {
-  const result = useData(`code-${children}-${lang}-${theme}`, () =>
-    highlight(children, lang, theme)
-  );
+  const result = highlight(children, lang, theme);
 
   if (result.error) {
     return <pre>{result.error}</pre>;
@@ -53,23 +94,3 @@ function Code(props) {
 }
 
 export { Code };
-
-const cache = {};
-function useData(key, fetcher) {
-  if (!cache[key]) {
-    let data;
-    let error;
-    let promise;
-    cache[key] = () => {
-      if (error !== undefined || data !== undefined) return { data, error };
-      if (!promise) {
-        promise = fetcher()
-          .then((r) => (data = r))
-          // Convert all errors to plain string for serialization
-          .catch((e) => (error = e + ""));
-      }
-      throw promise;
-    };
-  }
-  return cache[key]();
-}

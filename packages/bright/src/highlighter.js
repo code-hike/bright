@@ -5,23 +5,12 @@ import fs from "node:fs/promises";
 import { resolve } from "import-meta-resolve";
 import { parse } from "./parse.js";
 
-export async function toTokens(code, lang, theme) {
-  const registry = await createRegistry(grammars, theme);
-  const scope = flagToScope(lang);
-
-  const grammar = registry._syncRegistry._grammars[scope];
-  if (!grammar) {
-    throw new Error("No grammar for `" + lang);
-  }
-  return parse(code, grammar, registry.getColorMap());
-}
-/** @type {Map<string, Grammar>} */
 const registered = new Map();
-/** @type {Map<string, string>} */
 const names = new Map();
-/** @type {Map<string, string>} */
 const extensions = new Map();
-async function createRegistry(grammars, theme) {
+
+export async function createRegistry() {
+  // console.log("creating registry");
   for (const grammar of grammars) {
     const scope = grammar.scopeName;
     // for (const d of grammar.extensions) extensions.set(d, scope);
@@ -35,7 +24,6 @@ async function createRegistry(grammars, theme) {
       return registered.get(scopeName);
     },
   });
-  registry.setTheme(theme);
 
   await Promise.all(
     [...registered.keys()].map((d) => {
@@ -44,6 +32,17 @@ async function createRegistry(grammars, theme) {
   );
 
   return registry;
+}
+
+export function toTokens(code, lang, theme, registry) {
+  registry.setTheme(theme);
+  const scope = flagToScope(lang);
+
+  const grammar = registry._syncRegistry._grammars[scope];
+  if (!grammar) {
+    throw new Error("No grammar for `" + lang);
+  }
+  return parse(code, grammar, registry.getColorMap());
 }
 
 function flagToScope(flag) {
