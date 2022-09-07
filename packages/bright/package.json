@@ -1,7 +1,7 @@
 {
   "name": "bright",
   "version": "0.1.0",
-  "repository": "@code-hike/bright",
+  "repository": "https://github.com/code-hike/bright",
   "homepage": "https://bright.codehike.org",
   "funding": "https://github.com/code-hike/bright?sponsor=1",
   "license": "MIT",

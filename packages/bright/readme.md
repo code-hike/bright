@@ -5,18 +5,16 @@
 ## Usage
 
 ```
-yarn add @code-hike/bright
+yarn add bright
 ```
 
 Use it in your **server components**:
 
 ```jsx
 // my-component.server.js
-import { Code } from "@code-hike/bright";
+import { Code } from "bright";
 
-const code = `
-console.log("hello");
-`.trim();
+const code = `console.log("hello")`;
 
 export default function MyComponent() {
   return (
@@ -39,7 +37,7 @@ Use any theme listed [here](https://bright.codehike.org/):
 Set the theme globally instead of using the `theme` prop:
 
 ```jsx
-import { Code } from "@code-hike/bright";
+import { Code } from "bright";
 
 Code.defaultTheme = "Slack Theme Ochin";
 
