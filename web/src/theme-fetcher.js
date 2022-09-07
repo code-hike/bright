@@ -1,6 +1,6 @@
 import { unzip } from "unzipit";
 import data from "../data/themes.json";
-import JSON5 from "json5";
+import { parse } from "jsonc-parser";
 
 export async function fetchTheme(label) {
   const result = data.labels.find((x) => x.label === label);
@@ -22,7 +22,10 @@ export async function fetchTheme(label) {
   const themeFile = entries[themePath];
 
   const rawTheme = await themeFile.text();
-  const theme = JSON5.parse(rawTheme);
+  const errors = [];
+  const theme = parse(rawTheme, errors, {
+    allowTrailingComma: true,
+  });
 
   return fixTheme(theme);
 }
