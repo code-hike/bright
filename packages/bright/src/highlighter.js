@@ -1,6 +1,6 @@
 import { Registry } from "vscode-textmate";
 import grammars from "./all-grammars.js";
-import * as vscodeOniguruma from "vscode-oniguruma";
+import vscodeOniguruma from "vscode-oniguruma";
 import fs from "node:fs/promises";
 import { resolve } from "import-meta-resolve";
 import { parse } from "./parse.js";
