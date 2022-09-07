@@ -1,5 +1,6 @@
 import { unzip } from "unzipit";
 import data from "../data/themes.json";
+import JSON5 from "json5";
 
 export async function fetchTheme(label) {
   const result = data.labels.find((x) => x.label === label);
@@ -20,7 +21,10 @@ export async function fetchTheme(label) {
   const themePath = themePaths[label];
   const themeFile = entries[themePath];
 
-  return fixTheme(await themeFile.json());
+  const rawTheme = await themeFile.text();
+  const theme = JSON5.parse(rawTheme);
+
+  return fixTheme(theme);
 }
 
 function getMarketplaceLink(publisherDotExtId) {
