@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { toTokens } from "./bright";
+import { toTokens } from "./highlighter.js";
 
 Code.defaultTheme = "Dracula Soft";
 Code.api = "https://bright.codehike.org/api";

@@ -8,7 +8,6 @@ import { parse } from "./parse.js";
 export async function toTokens(code, lang, theme) {
   const registry = await createRegistry(grammars, theme);
   const scope = flagToScope(lang);
-  console.log(scope);
 
   const grammar = registry._syncRegistry._grammars[scope];
   if (!grammar) {
