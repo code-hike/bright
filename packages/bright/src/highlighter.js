@@ -7,22 +7,16 @@ import { tokenize } from "./tokenizer.js"
 
 const registered = new Map()
 const names = new Map()
-const extensions = new Map()
 
 export async function createRegistry() {
-  // console.log("creating registry");
-  for (const grammar of grammars) {
-    const scope = grammar.scopeName
-    // for (const d of grammar.extensions) extensions.set(d, scope);
-    for (const d of grammar.names) names.set(d, scope)
-    registered.set(scope, grammar)
-  }
+  grammars.forEach((grammar) => {
+    grammar.names.forEach((name) => names.set(name, grammar.scopeName))
+    registered.set(grammar.scopeName, grammar)
+  })
 
   const registry = new Registry({
     onigLib: createOniguruma(),
-    async loadGrammar(scopeName) {
-      return registered.get(scopeName)
-    },
+    loadGrammar: async (scopeName) => registered.get(scopeName),
   })
 
   await Promise.all(
@@ -36,28 +30,12 @@ export async function createRegistry() {
 
 export function toTokens(code, lang, theme, registry) {
   registry.setTheme(theme)
-  const scope = flagToScope(lang)
-
+  const scope = names.get(lang)
   const grammar = registry._syncRegistry._grammars[scope]
   if (!grammar) {
     throw new Error("No grammar for `" + lang)
   }
   return tokenize(code, grammar, registry.getColorMap())
-}
-
-function flagToScope(flag) {
-  if (typeof flag !== "string") {
-    throw new TypeError("Expected `string` for `flag`, got `" + flag + "`")
-  }
-
-  const normal = flag
-    .toLowerCase()
-    .replace(/^[ \t]+/, "")
-    .replace(/\/*[ \t]*$/g, "")
-
-  return (
-    names.get(normal) || extensions.get(normal) || extensions.get("." + normal)
-  )
 }
 
 async function createOniguruma() {
