@@ -9,23 +9,24 @@ const registered = new Map()
 const names = new Map()
 
 export async function createRegistry() {
+  const registry = newRegistry()
+  await loadGrammars(registry, grammars)
+  return registry
+}
+
+function newRegistry() {
+  return new Registry({
+    onigLib: createOniguruma(),
+    loadGrammar: async (scopeName) => registered.get(scopeName),
+  })
+}
+
+export async function loadGrammars(registry, grammars) {
   grammars.forEach((grammar) => {
     grammar.names.forEach((name) => names.set(name, grammar.scopeName))
     registered.set(grammar.scopeName, grammar)
   })
-
-  const registry = new Registry({
-    onigLib: createOniguruma(),
-    loadGrammar: async (scopeName) => registered.get(scopeName),
-  })
-
-  await Promise.all(
-    [...registered.keys()].map((d) => {
-      return registry.loadGrammar(d)
-    })
-  )
-
-  return registry
+  await Promise.all([...registered.keys()].map((d) => registry.loadGrammar(d)))
 }
 
 export function toTokens(code, lang, theme, registry) {
