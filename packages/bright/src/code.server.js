@@ -1,29 +1,29 @@
-import React, { Suspense } from "react";
-import { createRegistry, toTokens } from "./highlighter.js";
+import React, { Suspense } from "react"
+import { createRegistry, toTokens } from "./highlighter.js"
 
-Code.defaultTheme = "Dracula Soft";
-Code.api = "https://bright.codehike.org/api";
+Code.defaultTheme = "Dracula Soft"
+Code.api = "https://bright.codehike.org/api"
 
-const themePromises = {};
-const themeCache = {};
-let registryPromise = null;
-let registry = null;
+const themePromises = {}
+const themeCache = {}
+let registryPromise = null
+let registry = null
 
 function highlight(code, lang, label) {
-  const promises = [];
+  const promises = []
   if (!registryPromise) {
     registryPromise = createRegistry()
       .then((r) => (registry = { data: r }))
-      .catch((e) => (registry = { error: e + "" }));
+      .catch((e) => (registry = { error: e + "" }))
   }
   if (!registry) {
-    promises.push(registryPromise);
+    promises.push(registryPromise)
   }
   if (!themePromises[label]) {
     themePromises[label] = fetch(`${Code.api}/theme?label=${label}`)
       .then((r) => {
         // console.log("fetched", `${Code.api}/theme?label=${label}`);
-        return r.json();
+        return r.json()
       })
       .then(
         (theme) =>
@@ -32,41 +32,41 @@ function highlight(code, lang, label) {
             error: theme ? undefined : `Theme ${label} not found`,
           })
       )
-      .catch((e) => (themeCache[label] = { error: e + "" }));
+      .catch((e) => (themeCache[label] = { error: e + "" }))
   }
   if (!themeCache[label]) {
-    promises.push(themePromises[label]);
+    promises.push(themePromises[label])
   }
 
   if (promises.length) {
-    throw Promise.all(promises);
+    throw Promise.all(promises)
   }
 
-  const error = registry.error || themeCache[label].error;
+  const error = registry.error || themeCache[label].error
   if (error) {
-    return { error };
+    return { error }
   }
 
-  const theme = themeCache[label].data;
+  const theme = themeCache[label].data
 
-  const lines = toTokens(code, lang, theme, registry.data);
+  const lines = toTokens(code, lang, theme, registry.data)
   return {
     data: {
       fg: theme.fg,
       bg: theme.bg,
       lines,
     },
-  };
+  }
 }
 
 function InnerCode({ children, lang, theme }) {
-  const result = highlight(children, lang, theme);
+  const result = highlight(children, lang, theme)
 
   if (result.error) {
-    return <pre>{result.error}</pre>;
+    return <pre>{result.error}</pre>
   }
 
-  const { lines, fg, bg } = result.data;
+  const { lines, fg, bg } = result.data
 
   return (
     <pre style={{ background: bg, color: fg }}>
@@ -83,14 +83,14 @@ function InnerCode({ children, lang, theme }) {
         ))}
       </code>
     </pre>
-  );
+  )
 }
 function Code(props) {
   return (
     <Suspense fallback={"Loading..."}>
       <InnerCode {...props} theme={props.theme || Code.defaultTheme} />
     </Suspense>
-  );
+  )
 }
 
-export { Code };
+export { Code }
