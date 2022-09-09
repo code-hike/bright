@@ -48,4 +48,4 @@ Code.defaultTheme = "Slack Theme Ochin";
 
 - Thanks [LEI Zongmin](https://github.com/leizongmin) for providing the `bright` npm package name
 
-- Thanks [Shiki](https://github.com/shiki/shiki) and [starry-night](https://github.com/wooorm/starry-night) for the textmate grammars and how to use them with Oniguruma
+- Thanks [Shiki](https://github.com/shikijs/shiki) and [starry-night](https://github.com/wooorm/starry-night) for the textmate grammars and how to use them with Oniguruma
