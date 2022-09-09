@@ -1,5 +1,4 @@
 import { Registry } from "vscode-textmate"
-import grammars from "./all-grammars.js"
 import vscodeOniguruma from "vscode-oniguruma"
 import fs from "node:fs/promises"
 import { resolve } from "import-meta-resolve"
@@ -8,13 +7,7 @@ import { tokenize } from "./tokenizer.js"
 const registered = new Map()
 const names = new Map()
 
-export async function createRegistry() {
-  const registry = newRegistry()
-  await loadGrammars(registry, grammars)
-  return registry
-}
-
-function newRegistry() {
+export function newRegistry() {
   return new Registry({
     onigLib: createOniguruma(),
     loadGrammar: async (scopeName) => registered.get(scopeName),

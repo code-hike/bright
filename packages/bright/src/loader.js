@@ -1,7 +1,9 @@
-import { createRegistry } from "./highlighter"
+import { newRegistry, loadGrammars } from "./highlighter"
+import grammars from "./all-grammars.js"
 
 const promises = {}
 const cache = {}
+let registry = null
 
 async function fetchTheme(api, themeLabel) {
   const r = await fetch(`${api}/theme?label=${themeLabel}`)
@@ -29,15 +31,17 @@ function getTheme(api, themeLabel) {
   return { promise: promises[key] }
 }
 
-function getRegistry() {
-  const key = "registry"
+function getRegistry(lang) {
+  registry = registry || newRegistry()
+  const key = "grammar-" + lang
   if (cache[key]) {
     return cache[key]
   }
   if (!promises[key]) {
-    promises[key] = createRegistry()
-      .then((r) => {
-        cache[key] = { data: r }
+    // TODO only load the grammars for the given lang
+    promises[key] = loadGrammars(registry, grammars)
+      .then(() => {
+        cache[key] = { data: registry }
       })
       .catch((e) => {
         cache[key] = { error: e + "" }
@@ -56,7 +60,7 @@ export function load(api, lang, themeLabel) {
     promises.push(theme.promise)
   }
 
-  const registry = getRegistry()
+  const registry = getRegistry(lang)
   if (registry.promise) {
     promises.push(registry.promise)
   }
