@@ -1,20 +1,57 @@
-import fs from "node:fs/promises";
+import { NextResponse } from "next/server"
+import grammars from "../../data/all-grammars.js"
 
-export default async (req, res) => {
-  // https://github.com/shikijs/shiki/tree/main/packages/shiki/languages
-  const files = await fs.readdir("./data/grammars");
-  const grammars = await Promise.all(
-    files.map(async (file) => {
-      const content = await fs.readFile("./data/grammars/" + file, "utf-8");
-      return JSON.parse(content);
-    })
-  );
-  grammars.forEach((g) => {
-    const lang = languages.find((l) => l.scopeName === g.scopeName);
-    g.names = [g.name, ...(lang?.aliases || [])];
-  });
-  res.status(200).json(grammars);
-};
+// api/grammars?lang=js
+export default async (req) => {
+  const url = new URL(req.url)
+  const lang = url.searchParams.get("lang")
+  console.log("fetching grammar", lang)
+  const grammars = await getGrammarsByLang(lang)
+
+  const res = NextResponse.json(grammars)
+  res.headers.set("Cache-Control", "s-maxage=1, stale-while-revalidate")
+  return res
+}
+
+export const config = {
+  runtime: "experimental-edge",
+}
+
+async function getGrammarsByLang(lang, included = []) {
+  if (included.includes(lang)) {
+    return []
+  }
+
+  const grammar = await getGrammar(lang)
+  // TODO generate embeddedLangs from grammar
+  const children = grammar.embeddedLangs
+
+  return [
+    grammar,
+    ...children.flatMap((child) =>
+      getGrammarsByLang(child, [...included, lang])
+    ),
+  ]
+}
+
+async function getGrammar(lang) {
+  const language = languages.find(
+    (l) => l.id === lang || (l.aliases || []).includes(lang)
+  )
+
+  if (!language) {
+    return null
+  }
+
+  // const grammar = JSON.parse(
+  //   await fs.readFile("./data/grammars/" + l.path, "utf-8")
+  // )
+  const grammar = grammars.find((g) => g.scopeName === language.scopeName)
+  grammar.names = [language.id, ...language.aliases]
+  grammar.embeddedLangs = language.embeddedLangs || []
+
+  return grammar
+}
 
 // https://github.dev/shikijs/shiki/tree/main/packages/shiki/languages
 const languages = [
@@ -986,4 +1023,4 @@ const languages = [
     path: "zenscript.tmLanguage.json",
     samplePath: "zenscript.sample",
   },
-];
+]

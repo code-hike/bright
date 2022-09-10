@@ -20,6 +20,7 @@ export async function loadGrammars(registry, grammars) {
     registered.set(grammar.scopeName, grammar)
   })
   await Promise.all([...registered.keys()].map((d) => registry.loadGrammar(d)))
+  return grammars
 }
 
 export function toTokens(code, lang, theme, registry) {
