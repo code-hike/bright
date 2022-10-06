@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { useState } from "react"
+import React, { useState } from "react"
 
 export async function getStaticProps() {
   const { labels } = require("../data/themes.json")
@@ -10,19 +10,29 @@ export async function getStaticProps() {
   }
 }
 export default function Page({ labels }) {
-  const { code, changeCode, preview, tokens, css } = useThings()
+  const {
+    code,
+    lang,
+    theme,
+    changeCode,
+    changeLang,
+    changeTheme,
+    preview,
+    tokens,
+    css,
+  } = useThings()
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
       <Head>
         <title>Code to styled tokens</title>
       </Head>
-      <h1>Convert code to styled tokens</h1>
+      <h1 style={{ textAlign: "center" }}>Convert code to styled tokens</h1>
       <div style={{ display: "flex", gap: "2em", marginBottom: "2em" }}>
         <div
           style={{ display: "flex", flexFlow: "column", flex: 1, gap: "1em" }}
         >
           Choose the language:
-          <input value="js" />
+          <input value={lang} onChange={(e) => changeLang(e.target.value)} />
           Paste your code here:
           <textarea
             rows={16}
@@ -34,7 +44,7 @@ export default function Page({ labels }) {
           style={{ display: "flex", flexFlow: "column", flex: 1, gap: "1em" }}
         >
           Pick a theme:
-          <select>
+          <select onChange={(e) => changeTheme(e.target.value)} value={theme}>
             {labels.map((label) => (
               <option key={label}>{label}</option>
             ))}
@@ -44,10 +54,24 @@ export default function Page({ labels }) {
         </div>
       </div>
       <hr />
-      Here is your array, have fun:
-      <textarea readonly value={JSON.stringify(tokens, null, 1)}></textarea>
-      Oh, you may want to style your {`<pre>`} to:
-      <textarea readonly>{css}</textarea>
+      <div style={{ display: "flex", gap: "2em", marginBottom: "2em" }}>
+        <div
+          style={{ display: "flex", flexFlow: "column", flex: 1, gap: "1em" }}
+        >
+          Here is your array, have fun:
+          <textarea
+            readOnly
+            value={JSON.stringify(tokens, null, 1)}
+            rows={10}
+          ></textarea>
+        </div>
+        <div
+          style={{ display: "flex", flexFlow: "column", flex: 1, gap: "1em" }}
+        >
+          Oh, you may want to style your {`<pre>`} to:
+          <textarea readOnly rows={10} value={css}></textarea>
+        </div>
+      </div>
     </div>
   )
 }
@@ -59,33 +83,92 @@ let x = {
 
 function useThings() {
   const [code, setCode] = useState(defaultCode)
+  const [lang, setLang] = useState("js")
+  const [theme, setTheme] = useState("GitHub Dark")
+  const [result, setResult] = useState({ lines: [] })
+  const [loading, setLoading] = useState(false)
+
+  function reload(code, lang, theme) {
+    setLoading(true)
+    fetchTokens(code, lang, theme)
+      .then((result) => {
+        setLoading(false)
+        setResult(result)
+      })
+      .catch((err) => {
+        console.log("error", err)
+        setLoading(false)
+      })
+  }
+
+  React.useEffect(() => {
+    reload(code, lang, theme)
+  }, [])
 
   return {
-    code: code,
-    lang: "js",
-    theme: "default",
-    preview: (
-      <pre
-        style={{
-          background: "#222",
-          color: "#fafafa",
-          flex: 1,
-          margin: 0,
-          padding: 8,
-          maxHeight: 246,
-          maxWidth: 434,
-          boxSizing: "border-box",
-          overflow: "auto",
-        }}
-      >
-        <code>{code}</code>
-      </pre>
-    ),
-    loading: false,
-    changeCode: setCode,
-    changeLang: () => {},
-    chamgeTheme: () => {},
-    tokens: [],
-    css: "pre {}",
+    code,
+    lang,
+    theme,
+    preview: <Code result={result} />,
+    loading,
+    changeCode: (code) => {
+      setCode(code)
+      reload(code, lang, theme)
+    },
+    changeLang: (lang) => {
+      setLang(lang)
+      reload(code, lang, theme)
+    },
+    changeTheme: (theme) => {
+      setTheme(theme)
+      reload(code, lang, theme)
+    },
+    tokens: result.lines,
+    css: `pre {
+  background: ${result.background};
+  color: ${result.color};
+}`,
   }
+}
+
+function Code({ result }) {
+  return (
+    <pre
+      style={{
+        background: result.background,
+        color: result.color,
+        flex: 1,
+        margin: 0,
+        padding: 8,
+        maxHeight: 246,
+        maxWidth: 434,
+        boxSizing: "border-box",
+        overflow: "auto",
+      }}
+    >
+      <code>
+        {result.lines.map((line, lix) => (
+          <React.Fragment key={lix}>
+            {line.map((token, tix) => (
+              <span style={token.style} key={tix}>
+                {token.content}
+              </span>
+            ))}
+            <br />
+          </React.Fragment>
+        ))}
+      </code>
+    </pre>
+  )
+}
+
+function fetchTokens(code, lang, theme) {
+  return fetch(
+    `/api/tokens?code=${encodeURIComponent(code)}&lang=${lang}&theme=${theme}`
+  ).then((res) => {
+    if (res.ok) {
+      return res.json()
+    }
+    throw new Error("Error fetching tokens")
+  })
 }

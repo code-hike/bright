@@ -47,7 +47,7 @@ async function getGrammar(lang) {
   //   await fs.readFile("./data/grammars/" + l.path, "utf-8")
   // )
   const grammar = grammars.find((g) => g.scopeName === language.scopeName)
-  grammar.names = [language.id, ...language.aliases]
+  grammar.names = [language.id, ...(language.aliases || [])]
   grammar.embeddedLangs = language.embeddedLangs || []
 
   return grammar

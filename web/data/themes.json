@@ -112,17 +112,6 @@
       ]
     },
     {
-      "extensionId": "akamud.vscode-theme-onedark",
-      "lastUpdated": "2021-01-04T22:51:25.443Z",
-      "labels": [
-        {
-          "label": "Atom One Dark",
-          "uiTheme": "vs-dark",
-          "path": "./themes/OneDark.json"
-        }
-      ]
-    },
-    {
       "extensionId": "johnpapa.winteriscoming",
       "lastUpdated": "2021-03-08T15:25:01.897Z",
       "labels": [
@@ -3607,11 +3596,6 @@
       "parent": "vs-dark"
     },
     {
-      "extensionId": "akamud.vscode-theme-onedark",
-      "label": "Atom One Dark",
-      "parent": "vs-dark"
-    },
-    {
       "extensionId": "johnpapa.winteriscoming",
       "label": "Winter is Coming (Dark Blue)",
       "parent": "vs-dark"
@@ -4362,11 +4346,6 @@
       "extensionId": "felipe-mendes.slack-theme",
       "label": "Slack Theme Aubergine",
       "parent": "vs"
-    },
-    {
-      "extensionId": "felipe-mendes.slack-theme",
-      "label": "Slack Theme Aubergine",
-      "parent": "vs-dark"
     },
     {
       "extensionId": "felipe-mendes.slack-theme",
@@ -6514,11 +6493,6 @@
     {
       "extensionId": "marqu3s.aurora-x",
       "label": "Aurora X",
-      "parent": "vs-dark"
-    },
-    {
-      "extensionId": "andischerer.theme-atom-one-dark",
-      "label": "Atom One Dark",
       "parent": "vs-dark"
     },
     {
