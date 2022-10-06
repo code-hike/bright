@@ -68,7 +68,7 @@ export default function Page({ labels }) {
         <div
           style={{ display: "flex", flexFlow: "column", flex: 1, gap: "1em" }}
         >
-          Oh, you may want to style your {`<pre>`} to:
+          Oh, you may want to style your {`<pre>`} too:
           <textarea readOnly rows={10} value={css}></textarea>
         </div>
       </div>
