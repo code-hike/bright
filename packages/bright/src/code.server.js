@@ -44,4 +44,4 @@ function Code(props) {
   )
 }
 
-export { Code }
+export { Code, highlight }
