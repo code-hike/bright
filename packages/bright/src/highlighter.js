@@ -1,7 +1,7 @@
 import { Registry } from "vscode-textmate"
 import vscodeOniguruma from "vscode-oniguruma"
 import { tokenize } from "./tokenizer.js"
-import wasmBin from "vscode-oniguruma/release/onig.wasm"
+import onig from "vscode-oniguruma/release/onig.wasm"
 
 const registered = new Map()
 const names = new Map()
@@ -33,6 +33,6 @@ export function toTokens(code, lang, theme, registry) {
 }
 
 async function createOniguruma() {
-  await vscodeOniguruma.loadWASM(wasmBin)
+  await vscodeOniguruma.loadWASM(onig)
   return vscodeOniguruma
 }

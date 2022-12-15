@@ -1,6 +1,6 @@
 {
   "name": "bright",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": "https://github.com/code-hike/bright",
   "homepage": "https://bright.codehike.org",
   "funding": "https://github.com/code-hike/bright?sponsor=1",
@@ -18,12 +18,12 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.0.0",
+    "@rollup/pluginutils": "^5.0.2",
     "react": "experimental",
     "rollup": "^2.79.0",
-    "rollup-plugin-string": "^3.0.0",
     "unzipit": "^1.4.0",
-    "vscode-textmate": "^7.0.0",
-    "vscode-oniguruma": "^1.0.0"
+    "vscode-oniguruma": "^1.0.0",
+    "vscode-textmate": "^7.0.0"
   },
   "scripts": {
     "build": "rollup -c",

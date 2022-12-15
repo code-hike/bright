@@ -1,7 +1,7 @@
 import { babel } from "@rollup/plugin-babel"
 import nodeResolve from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
-import { string } from "rollup-plugin-string"
+import { arraybuffer } from "./load-buffer"
 
 export default {
   input: "src/code.server.js",
@@ -11,9 +11,9 @@ export default {
   },
   external: ["react"],
   plugins: [
-    string({ include: "**/*.wasm" }),
     nodeResolve(),
     babel({ presets: ["@babel/preset-react"] }),
+    arraybuffer({ include: "**/*.wasm" }),
     commonjs(),
   ],
 }

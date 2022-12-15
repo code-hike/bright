@@ -79,23 +79,15 @@
   dependencies:
     tslib "^2.4.0"
 
-bright@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/bright/-/bright-0.1.1.tgz#5f65e9381cba1ea804ac29f1d12b9ddc74e1f57c"
-  integrity sha512-SvO1fWk3pdQq9U5Q84HfKE5dGDG9vBpy8UvTXVe0VStN0FvAJurn+55p2sQ0fXj259hSyugP/yzoepEfcTHncA==
-  dependencies:
-    import-meta-resolve "^2.0.0"
-    vscode-oniguruma "^1.0.0"
+bright@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/bright/-/bright-0.2.2.tgz#7837d71f72a9ad44fea08c8293d34ddf21b57874"
+  integrity sha512-vRu3EyoxIjJc/ELciDYo2/sAhMNT8ns7AhU4plsujyMNiqEhU138AIdbWXu3EM2WoNBQfrOpFYbXrtHvOBJ4nA==
 
 caniuse-lite@^1.0.30001332:
   version "1.0.30001390"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001390.tgz#158a43011e7068ef7fc73590e9fd91a7cece5e7f"
   integrity sha512-sS4CaUM+/+vqQUlCvCJ2WtDlV81aWtHhqeEVkLokVJJa3ViN4zDxAGfq9R8i1m90uGHxo99cy10Od+lvn3hf0g==
-
-import-meta-resolve@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/import-meta-resolve/-/import-meta-resolve-2.1.0.tgz#c8952d331ed6e9bb6ad524a7549deb3d34af41ce"
-  integrity sha512-yG9pxkWJVTy4cmRsNWE3ztFdtFuYIV8G4N+cbCkO8b+qngkLyIUhxQFuZ0qJm67+0nUOxjMPT7nfksPKza1v2g==
 
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
@@ -212,8 +204,3 @@ uzip-module@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/uzip-module/-/uzip-module-1.0.3.tgz#6bbabe2a3efea5d5a4a47479f523a571de3427ce"
   integrity sha512-AMqwWZaknLM77G+VPYNZLEruMGWGzyigPK3/Whg99B3S6vGHuqsyl5ZrOv1UUF3paGK1U6PM0cnayioaryg/fA==
-
-vscode-oniguruma@^1.0.0:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/vscode-oniguruma/-/vscode-oniguruma-1.6.2.tgz#aeb9771a2f1dbfc9083c8a7fdd9cccaa3f386607"
-  integrity sha512-KH8+KKov5eS/9WhofZR8M8dMHWN2gTxjMsG4jd04YhpbPR91fUj7rYQ2/XjeHCJWbg7X++ApRIU9NUwM2vTvLA==
