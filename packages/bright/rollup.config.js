@@ -9,12 +9,7 @@ export default {
     file: "dist/code.server.js",
     format: "esm",
   },
-  external: [
-    "react",
-    "node:fs/promises",
-    "import-meta-resolve",
-    "vscode-oniguruma",
-  ],
+  external: ["react"],
   plugins: [
     string({ include: "**/*.wasm" }),
     nodeResolve(),
