@@ -1,0 +1,51 @@
+html {
+  font-feature-settings: "rlig" 1, "calt" 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2 {
+  font-weight: 800;
+}
+
+body {
+  background-color: #010409;
+  color: #eaeaea;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--hover-color, #eaeaea) !important;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+}
+
+li {
+  list-style: none;
+  line-height: 2.7rem;
+  text-align: center;
+}
+
+/* if mobile */
+@media (max-width: 600px) {
+  body {
+    --description-font-size: 2.6rem;
+  }
+}

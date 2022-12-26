@@ -2,9 +2,11 @@
   "name": "bright-web",
   "private": true,
   "dependencies": {
+    "@code-hike/lighter": "^0.0.7",
+    "@next/font": "^13.1.0",
     "bright": "0.2.2",
     "jsonc-parser": "^3.2.0",
-    "next": "^12.2.5",
+    "next": "^13.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "unzipit": "^1.4.0"
