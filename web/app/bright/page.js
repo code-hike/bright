@@ -59,7 +59,7 @@ export default async function Page() {
       >
         print("hello brightness")
       </Code>
-      <div style={{ height: "3rem" }} />
+      <div style={{ height: "5rem" }} />
       <WithBackground fg={{ color: "#ccc" }} bg={{ color: "#ccc2" }} blur={34}>
         <ul
           style={{
