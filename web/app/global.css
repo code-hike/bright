@@ -39,8 +39,11 @@ ul {
 
 li {
   list-style: none;
-  line-height: 2.7rem;
+  line-height: 3.2rem;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5ch;
 }
 
 /* if mobile */

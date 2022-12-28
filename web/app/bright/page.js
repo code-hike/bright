@@ -1,6 +1,6 @@
 import { Code } from "./code"
 
-export default function Page() {
+export default async function Page() {
   return (
     <div>
       <div style={{ height: "5rem" }} />
@@ -61,21 +61,28 @@ export default function Page() {
       </Code>
       <div style={{ height: "3rem" }} />
       <WithBackground fg={{ color: "#ccc" }} bg={{ color: "#ccc2" }} blur={34}>
-        <ul style={{ fontSize: "1.45em", fontWeight: "700" }}>
+        <ul
+          style={{
+            fontSize: "1.45em",
+            fontWeight: "600",
+            width: "max-content",
+            margin: "0 auto",
+          }}
+        >
           <li>
-            Runs on the server.{" "}
+            <span>Runs on the server. </span>
             <span style={{ color: "rgb(195, 232, 141)" }}>
-              Zero impact on bundle-size.
+              No impact on bundle-size.
             </span>
           </li>
           <li>
             <span style={{ color: "rgb(255, 203, 107)" }}>
-              No extra config.
-            </span>{" "}
-            Install it, import it, use it.
+              No extra configs.
+            </span>
+            <span> Install it, import it, and use it.</span>
           </li>
           <li>
-            Same highlighter as VS Code.{" "}
+            <span>VS Code's syntax highlighting. </span>
             <span style={{ color: "#fb7fec" }}>All the themes.</span>
           </li>
         </ul>
