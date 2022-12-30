@@ -2,7 +2,7 @@
   "name": "bright-web",
   "private": true,
   "dependencies": {
-    "@code-hike/lighter": "^0.0.10",
+    "@code-hike/lighter": "0.1.2",
     "@next/font": "^13.1.0",
     "bright": "0.2.2",
     "jsonc-parser": "^3.2.0",

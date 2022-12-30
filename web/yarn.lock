@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@code-hike/lighter@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.0.10.tgz#4385b535f4a12a26b52fcb0789ccc2dc92953c18"
-  integrity sha512-3gCvLTtEEY4Byxf+pYPVnNq7lBeKA0v9BmMlNizl5gY7Y7LFNmq8ggZ5fBhm8MmcoKvhmqekhuPHTpVmflXhwA==
+"@code-hike/lighter@0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.1.2.tgz#b7f3e9059874d8a439093ce3963503f96244d313"
+  integrity sha512-7JMKrQgs8z+1w+UQdalhziDf3dJqDZ2U1e0t3cIm7GuWSw+bQUUTjz9bUAl8hcc+0eNBbppSMhy5/QwzqhFLSw==
 
 "@next/env@13.1.0":
   version "13.1.0"

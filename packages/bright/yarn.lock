@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@code-hike/lighter@0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmjs.org/@code-hike/lighter/-/lighter-0.0.7.tgz"
-  integrity sha512-YHiQO81IQUbcnM+x/9ZUS845bCt0yGFcobYM+4WN17rCcyb7VNDGNUpNCWr4k9Uy8h864k7oaoA3LZvLZvlQ+Q==
+"@code-hike/lighter@0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.1.2.tgz#b7f3e9059874d8a439093ce3963503f96244d313"
+  integrity sha512-7JMKrQgs8z+1w+UQdalhziDf3dJqDZ2U1e0t3cIm7GuWSw+bQUUTjz9bUAl8hcc+0eNBbppSMhy5/QwzqhFLSw==
 
 "@esbuild/android-arm@0.15.18":
   version "0.15.18"

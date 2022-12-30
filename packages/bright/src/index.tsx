@@ -1,5 +1,5 @@
 import React from "react"
-import { highlight, Theme } from "@code-hike/lighter"
+import { highlight, Theme, Lang } from "@code-hike/lighter"
 
 export async function Code({
   children,
@@ -10,7 +10,7 @@ export async function Code({
   unstyled,
   theme,
 }: {
-  lang: string
+  lang: Lang
   children: string
   style?: React.CSSProperties
   className?: string

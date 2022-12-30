@@ -31,10 +31,7 @@ export default async function Page() {
           background: "#2222",
         }}
         bg={{ color: "rgba(137, 221, 255, 0.2)", "--text-color": "#ccc2" }}
-        fg={{
-          color: "rgba(137, 221, 255, 0.8)",
-          "--text-color": "#ccc",
-        }}
+        fg={{ color: "rgb(137, 221, 255)", "--text-color": "#ccc" }}
       >
         <pre
           style={{
@@ -60,7 +57,7 @@ export default async function Page() {
         print("hello brightness")
       </Code>
       <div style={{ height: "5rem" }} />
-      <WithBackground fg={{ color: "#ccc" }} bg={{ color: "#ccc2" }} blur={34}>
+      <WithBackground fg={{ color: "#ccc" }} bg={{ color: "#ccc2" }} blur={60}>
         <ul
           style={{
             fontSize: "1.45em",
