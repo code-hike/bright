@@ -1,4 +1,4 @@
-import { Code } from "./code"
+import { Code } from "bright"
 
 export default async function Page() {
   return (
@@ -45,6 +45,7 @@ export default async function Page() {
         </pre>
       </WithBackground>
       <Code
+        theme="material-darker"
         lang="py"
         style={{
           fontSize: "1.4em",
@@ -116,6 +117,7 @@ export default async function Page() {
         </pre>
       </WithBackground>
       <Code
+        theme="material-darker"
         lang="js"
         style={{
           fontSize: "1.4em",
