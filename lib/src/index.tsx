@@ -1,7 +1,21 @@
 import React from "react"
 import { highlight, Theme, Lang } from "@code-hike/lighter"
 
-export async function Code({
+type CodeProps = {
+  lang: Lang
+  children: string
+  style?: React.CSSProperties
+  className?: string
+  lineNumbers?: boolean
+  unstyled?: boolean
+  theme?: Theme
+}
+
+type CodeComponent = ((props: CodeProps) => Promise<JSX.Element>) & {
+  theme?: Theme
+}
+
+export const Code: CodeComponent = async ({
   children,
   lang,
   style,
@@ -9,15 +23,7 @@ export async function Code({
   lineNumbers,
   unstyled,
   theme,
-}: {
-  lang: Lang
-  children: string
-  style?: React.CSSProperties
-  className?: string
-  lineNumbers?: boolean
-  unstyled?: boolean
-  theme: Theme
-}) {
+}) => {
   const {
     lines,
     foreground,
@@ -25,7 +31,7 @@ export async function Code({
     colorScheme,
     selectionBackground,
     lineNumberForeground,
-  } = await highlight(children, lang, theme)
+  } = await highlight(children, lang || "js", theme || Code.theme)
 
   const lineCount = lines.length
   const digits = lineCount.toString().length
