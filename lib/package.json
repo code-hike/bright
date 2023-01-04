@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.tsx --format esm,cjs --dts",
-    "dev": "tsup src/index.tsx --format esm,cjs --watch --dts"
+    "watch": "tsup src/index.tsx --format esm,cjs --watch --dts"
   },
   "dependencies": {
     "@code-hike/lighter": "0.1.2"

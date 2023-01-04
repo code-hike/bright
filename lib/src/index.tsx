@@ -1,5 +1,14 @@
 import React from "react"
-import { highlight, Theme, Lang } from "@code-hike/lighter"
+import { Theme, Lang } from "@code-hike/lighter"
+import { Code as InnerCode } from "./code"
+
+type DoubleTheme = {
+  dark: Theme
+  light: Theme
+  selector?: (scheme: "dark" | "light") => string
+}
+
+type BrightTheme = Theme | DoubleTheme
 
 type CodeProps = {
   lang: Lang
@@ -8,11 +17,11 @@ type CodeProps = {
   className?: string
   lineNumbers?: boolean
   unstyled?: boolean
-  theme?: Theme
+  theme?: BrightTheme
 }
 
 type CodeComponent = ((props: CodeProps) => Promise<JSX.Element>) & {
-  theme?: Theme
+  theme?: BrightTheme
 }
 
 export const Code: CodeComponent = async ({
@@ -24,61 +33,48 @@ export const Code: CodeComponent = async ({
   unstyled,
   theme,
 }) => {
-  const {
-    lines,
-    foreground,
-    background,
-    colorScheme,
-    selectionBackground,
-    lineNumberForeground,
-  } = await highlight(children, lang || "js", theme || Code.theme)
-
-  const lineCount = lines.length
-  const digits = lineCount.toString().length
-
-  const kids = lines.map((tokens, i) => {
+  const finalTheme = theme || Code.theme
+  if (finalTheme && (finalTheme as any).dark && (finalTheme as any).light) {
+    const doubleTheme = finalTheme as DoubleTheme
+    const darkTheme = doubleTheme.dark
+    const lightTheme = doubleTheme.light
     return (
-      <span key={i}>
-        {lineNumbers && (
-          <span className="bright-ln" style={{ width: `${digits}ch` }}>
-            {i + 1}
-          </span>
-        )}
-        {tokens.map((t, j) => (
-          <span key={j} style={t.style}>
-            {t.content}
-          </span>
-        ))}
-        <br />
-      </span>
+      <>
+        {/* @ts-expect-error Server Component */}
+        <InnerCode
+          code={children}
+          lang={lang || "js"}
+          style={style}
+          className={className}
+          lineNumbers={lineNumbers}
+          unstyled={unstyled}
+          theme={darkTheme}
+          scheme="dark"
+        />
+        {/* @ts-expect-error Server Component */}
+        <InnerCode
+          code={children}
+          lang={lang || "js"}
+          style={style}
+          className={className}
+          lineNumbers={lineNumbers}
+          unstyled={unstyled}
+          theme={lightTheme}
+          scheme="light"
+        />
+      </>
     )
-  })
-
+  }
   return (
-    <pre
+    /* @ts-expect-error Server Component */
+    <InnerCode
+      code={children}
+      lang={lang || "js"}
+      style={style}
       className={className}
-      style={{
-        color: foreground,
-        background,
-        // border: "1px solid " + background,
-        padding: "1em",
-        borderRadius: "4px",
-        colorScheme,
-        ...style,
-      }}
-    >
-      <style>{`
-      code ::selection {
-        background-color: ${selectionBackground}
-      }
-      .bright-ln { 
-        color: ${lineNumberForeground}; 
-        padding-right: 2ch; 
-        display: inline-block;
-        text-align: right;
-        user-select: none;
-      }`}</style>
-      <code>{kids}</code>
-    </pre>
+      lineNumbers={lineNumbers}
+      unstyled={unstyled}
+      theme={finalTheme}
+    />
   )
 }
