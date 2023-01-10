@@ -1,27 +1,10 @@
 # Hello
 
-```tsx filename focus=1[1:2]
-//
-export default function Gallery() {
-  return (
-    <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-      <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-        {/* Images will go here */}
-      </div>
-    </div>
-  )
-}
-```
-
-We're using [group modifiers](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-parent-state) to make the hover area the _entire_ component, including the text, making the image's opacity dimmed. We're also ensuring the image maintains a 1:1 aspect ratio (square), which requires a Tailwind CSS plugin. Let's install that.
-
 ```bash
 npm i -D @tailwindcss/aspect-ratio
 ```
 
-Then, we can update our `tailwind.config.js` file:
-
-tailwind.config.js
+The `tailwind.config.js` file:
 
 ```js
 // tailwind.config.js
@@ -36,39 +19,3 @@ module.exports = {
   plugins: [require("@tailwindcss/aspect-ratio")],
 }
 ```
-
-## [](https://leerob.io/blog/image-gallery-supabase-tailwind-nextjs#optimizing-images)Optimizing Images
-
-To help achieve good [Core Web Vitals](https://nextjs.org/learn/seo/web-performance), we want to optimize images. Next.js provides an [Image component](https://nextjs.org/docs/basic-features/image-optimization) that gives us:
-
-- **Faster Page Loads:** Images are only loaded when they enter the viewport
-- **Visual Stability:** Prevents [Cumulative Layout Shift](https://nextjs.org/learn/seo/web-performance/cls) automatically
-- **Improved Performance:** Images use modern image formats (like WebP) for smaller file sizes and serve smaller images based on the device size
-
-Let's update our `Image` component to use `next/image`, and rename it to `BlurImage` to prevent a naming collison with the `Image` component we imported:
-
-```jsx
-import Image from "next/image"
-
-function BlurImage() {
-  return (
-    <a href="#" className="group">
-      <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-        <Image
-          alt=""
-          src="https://bit.ly/placeholder-img"
-          layout="fill"
-          objectFit="cover"
-          className="group-hover:opacity-75"
-        />
-      </div>
-      <h3 className="mt-4 text-sm text-gray-700">Lee Robinson</h3>
-      <p className="mt-1 text-lg font-medium text-gray-900">@leeerob</p>
-    </a>
-  )
-}
-```
-
-We'll use the [fill layout](https://nextjs.org/docs/api-reference/next/image#layout) and `object-fit` [CSS property](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) to properly scale the image.
-
-The Next.js Image component requires an allowlist to specify which domains we can optimize images from. While we're using `bit.ly` as a placeholder, we can add any domain we want to the allowlist inside `next.config.js`:
