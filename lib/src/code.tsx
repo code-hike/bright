@@ -1,5 +1,12 @@
 import { highlight, Lang, Theme } from "@code-hike/lighter"
 
+// children when it comes from the Markdown pre element
+type MdCodeText = {
+  type: "code"
+  props: { className: string; children: string }
+}
+export type CodeText = string | MdCodeText
+
 export async function Code({
   code,
   lang,
@@ -10,7 +17,7 @@ export async function Code({
   theme,
   scheme,
 }: {
-  code: string
+  code: CodeText
   lang: Lang
   style?: React.CSSProperties
   className?: string
@@ -19,6 +26,15 @@ export async function Code({
   theme?: Theme
   scheme?: "dark" | "light"
 }) {
+  let language = lang
+  let text: string
+  if (typeof code === "object") {
+    text = code.props?.children
+    language = code.props?.className.replace("language-", "") as Lang
+  } else {
+    text = code
+  }
+
   const {
     lines,
     foreground,
@@ -26,7 +42,7 @@ export async function Code({
     colorScheme,
     selectionBackground,
     lineNumberForeground,
-  } = await highlight(code, lang, theme)
+  } = await highlight(text.trim(), language, theme)
 
   const lineCount = lines.length
   const digits = lineCount.toString().length
@@ -74,6 +90,7 @@ export async function Code({
         padding: "1em",
         borderRadius: "4px",
         colorScheme,
+        overflow: "auto",
         ...style,
       }}
     >

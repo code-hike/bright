@@ -1,6 +1,6 @@
 import React from "react"
 import { Theme, Lang } from "@code-hike/lighter"
-import { Code as InnerCode } from "./code"
+import { Code as InnerCode, CodeText } from "./code"
 
 type DoubleTheme = {
   dark: Theme
@@ -12,7 +12,7 @@ type BrightTheme = Theme | DoubleTheme
 
 type CodeProps = {
   lang: Lang
-  children: string
+  children: CodeText
   style?: React.CSSProperties
   className?: string
   lineNumbers?: boolean
