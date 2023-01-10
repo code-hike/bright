@@ -1,5 +1,11 @@
 # bright
 
+## 0.5.1
+
+### Patch Changes
+
+- d8044e8: Markdown API
+
 ## 0.5.0
 
 ### Minor Changes
