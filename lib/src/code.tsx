@@ -12,6 +12,7 @@ export async function Code({
   lang,
   style,
   className,
+  codeClassName,
   lineNumbers,
   unstyled,
   theme,
@@ -21,6 +22,7 @@ export async function Code({
   lang: Lang
   style?: React.CSSProperties
   className?: string
+  codeClassName?: string
   lineNumbers?: boolean
   unstyled?: boolean
   theme?: Theme
@@ -95,7 +97,7 @@ export async function Code({
       }}
     >
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <code>{kids}</code>
+      <code className={codeClassName}>{kids}</code>
     </pre>
   )
 }

@@ -15,6 +15,7 @@ type CodeProps = {
   children: CodeText
   style?: React.CSSProperties
   className?: string
+  codeClassName?: string
   lineNumbers?: boolean
   unstyled?: boolean
   theme?: BrightTheme
@@ -22,6 +23,7 @@ type CodeProps = {
 
 type CodeComponent = ((props: CodeProps) => Promise<JSX.Element>) & {
   theme?: BrightTheme
+  replace?: { [x: string]: string }
 }
 
 export const Code: CodeComponent = async ({
@@ -29,6 +31,7 @@ export const Code: CodeComponent = async ({
   lang,
   style,
   className,
+  codeClassName,
   lineNumbers,
   unstyled,
   theme,
@@ -46,6 +49,7 @@ export const Code: CodeComponent = async ({
           lang={lang || "js"}
           style={style}
           className={className}
+          codeClassName={codeClassName}
           lineNumbers={lineNumbers}
           unstyled={unstyled}
           theme={darkTheme}
@@ -57,6 +61,7 @@ export const Code: CodeComponent = async ({
           lang={lang || "js"}
           style={style}
           className={className}
+          codeClassName={codeClassName}
           lineNumbers={lineNumbers}
           unstyled={unstyled}
           theme={lightTheme}
@@ -72,6 +77,7 @@ export const Code: CodeComponent = async ({
       lang={lang || "js"}
       style={style}
       className={className}
+      codeClassName={codeClassName}
       lineNumbers={lineNumbers}
       unstyled={unstyled}
       theme={finalTheme}
