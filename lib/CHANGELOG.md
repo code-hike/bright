@@ -1,5 +1,11 @@
 # bright
 
+## 0.5.2
+
+### Patch Changes
+
+- bcfcaa3: Add codeClassName prop
+
 ## 0.5.1
 
 ### Patch Changes
