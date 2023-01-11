@@ -7,12 +7,14 @@ npm i -D @tailwindcss/aspect-ratio
 The `tailwind.config.js` file:
 
 ```js
-// tailwind.config.js
+// filename tailwind.config.js
 module.exports = {
+  // mark[7:11]
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  // withClass[7:16] my-class
   theme: {
     extend: {},
   },
@@ -24,8 +26,9 @@ module.exports = {
 async redirects() {
   return [
     {
+      // link[7:14] https://codehike.org
       source: '/:path/index.xml',
-      destination: '/:path/feed.xml',
+      destination: '/:path/feed.xml/:path/feed.xml/:path/feed.xml/:path/feed.xml/:path/feed.xml/:path/feed.xml',
       permanent: true,
     }
   ]

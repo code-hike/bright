@@ -12,9 +12,11 @@ export async function Code({
   lang,
   style,
   className,
+  titleClassName,
   codeClassName,
   lineNumbers,
   unstyled,
+  title,
   theme,
   scheme,
 }: {
@@ -23,8 +25,10 @@ export async function Code({
   style?: React.CSSProperties
   className?: string
   codeClassName?: string
+  titleClassName?: string
   lineNumbers?: boolean
   unstyled?: boolean
+  title?: string
   theme?: Theme
   scheme?: "dark" | "light"
 }) {
@@ -35,6 +39,16 @@ export async function Code({
     language = code.props?.className.replace("language-", "") as Lang
   } else {
     text = code
+  }
+
+  let filename = title
+  if (text.startsWith("// filename ")) {
+    // get first line
+    const [firstLine, ...rest] = text.split("\n")
+    // remove filename
+    text = rest.join("\n")
+    // get filename
+    filename = firstLine.replace("// filename ", "")
   }
 
   const {
@@ -68,7 +82,7 @@ export async function Code({
   })
 
   const themeName = getThemeName(theme)
-  const codeSelector = `pre[data-bright-theme="${themeName}"]`
+  const codeSelector = `div[data-bright-theme="${themeName}"]`
   const css = `
   ${displayStyle(scheme, codeSelector)}
   ${codeSelector} ::selection {
@@ -76,29 +90,51 @@ export async function Code({
   }
   ${codeSelector} .bright-ln { 
     color: ${lineNumberForeground}; 
-    padding-right: 2ch; 
+    margin-right: 1.5ch; 
     display: inline-block;
     text-align: right;
     user-select: none;
   }`
 
   return (
-    <pre
-      className={className}
+    <div
       data-bright-theme={themeName}
+      className={className}
       style={{
         color: foreground,
-        background,
-        padding: "1em",
         borderRadius: "4px",
+        overflow: "hidden",
+        margin: "1em 0",
         colorScheme,
-        overflow: "auto",
         ...style,
       }}
     >
-      <style dangerouslySetInnerHTML={{ __html: css }} />
-      <code className={codeClassName}>{kids}</code>
-    </pre>
+      {filename && (
+        <div
+          className={titleClassName}
+          style={{
+            background: "#555",
+            padding: "0.5em 1em",
+            fontSize: "0.8em",
+          }}
+        >
+          {filename}
+        </div>
+      )}
+      <pre
+        style={{
+          margin: 0,
+          color: foreground,
+          background,
+          padding: "1em",
+          overflow: "auto",
+          ...style,
+        }}
+      >
+        <style dangerouslySetInnerHTML={{ __html: css }} />
+        <code className={codeClassName}>{kids}</code>
+      </pre>
+    </div>
   )
 }
 

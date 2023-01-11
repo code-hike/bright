@@ -16,6 +16,7 @@ type CodeProps = {
   style?: React.CSSProperties
   className?: string
   codeClassName?: string
+  titleClassName?: string
   lineNumbers?: boolean
   unstyled?: boolean
   theme?: BrightTheme
@@ -32,6 +33,7 @@ export const Code: CodeComponent = async ({
   style,
   className,
   codeClassName,
+  titleClassName,
   lineNumbers,
   unstyled,
   theme,
@@ -50,6 +52,7 @@ export const Code: CodeComponent = async ({
           style={style}
           className={className}
           codeClassName={codeClassName}
+          titleClassName={titleClassName}
           lineNumbers={lineNumbers}
           unstyled={unstyled}
           theme={darkTheme}
@@ -62,6 +65,7 @@ export const Code: CodeComponent = async ({
           style={style}
           className={className}
           codeClassName={codeClassName}
+          titleClassName={titleClassName}
           lineNumbers={lineNumbers}
           unstyled={unstyled}
           theme={lightTheme}
@@ -78,6 +82,7 @@ export const Code: CodeComponent = async ({
       style={style}
       className={className}
       codeClassName={codeClassName}
+      titleClassName={titleClassName}
       lineNumbers={lineNumbers}
       unstyled={unstyled}
       theme={finalTheme}
