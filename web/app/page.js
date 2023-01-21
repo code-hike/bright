@@ -1,4 +1,5 @@
 import { Demo } from "./demo"
+import { SocialLinks } from "./icons"
 import { WithBackground } from "./with-background"
 
 export default async function Page() {
@@ -8,8 +9,29 @@ export default async function Page() {
       <Title />
       <div style={{ height: "4rem" }} />
       <Demo demo={demo} code='print("hello brightness")' />
-      <div style={{ height: "5rem" }} />
+      <div style={{ height: "3rem" }} />
       <Details />
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Markdown / MDX</h2>
+      <div style={{ height: "1rem" }} />
+      <Demo
+        demo={demo}
+        code={`let hello = "hello brightness"
+console.log(hello, "my old friend")`}
+        codeProps={{ lineNumbers: true, lang: "js" }}
+      />
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Themes</h2>
+      <div style={{ height: "1rem" }} />
+      <Demo
+        demo={demo}
+        code={`let hello = "hello brightness"
+console.log(hello, "my old friend")`}
+        codeProps={{ lineNumbers: true, lang: "js" }}
+      />
+
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Line Numbers</h2>
       <div style={{ height: "1rem" }} />
@@ -71,6 +93,8 @@ function Details() {
           <span style={{ color: "#fb7fec" }}>All the themes.</span>
         </li>
       </ul>
+      <div style={{ height: "2rem" }} />
+      <SocialLinks />
     </WithBackground>
   )
 }
