@@ -44,3 +44,71 @@ export function Demo({ demo, codeProps, code }) {
     </>
   )
 }
+
+export function demo({ middle, children, props }) {
+  return (
+    <code>
+      <span>
+        <span style={{ fontStyle: "italic" }}>import</span>
+        <span style={{ color: "rgb(238, 255, 255)" }}> </span>
+        <span style={{}}>{"{"}</span>
+        <span style={{ color: "rgb(240, 113, 120)" }}> </span>
+        <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+        <span style={{ color: "rgb(240, 113, 120)" }}> </span>
+        <span style={{}}>{"}"}</span>
+        <span style={{ color: "rgb(238, 255, 255)" }}> </span>
+        <span style={{ fontStyle: "italic" }}>from</span>
+        <span style={{ color: "rgb(238, 255, 255)" }}> </span>
+        <span style={{}}>"</span>
+        <span style={{ color: "rgb(195, 232, 141)" }}>bright</span>
+        <span style={{}}>"</span>
+        <br />
+      </span>
+      <span>
+        <span style={{ color: "rgb(238, 255, 255)" }} />
+        <br />
+      </span>
+      {middle}
+      <span>
+        <span style={{ fontStyle: "italic" }}>export</span>
+        <span style={{ color: "rgb(238, 255, 255)" }}> </span>
+        <span style={{ fontStyle: "italic" }}>default</span>
+        <span style={{}}> </span>
+        <span style={{}}>function</span>
+        <span style={{}}> </span>
+        <span style={{}}>Page</span>
+        <span style={{}}>()</span>
+        <span style={{}}> </span>
+        <span style={{}}>{"{"}</span>
+        <br />
+      </span>
+      <span>
+        <span style={{}}>{"  "}</span>
+        <span style={{ fontStyle: "italic" }}>return</span>
+        <span style={{}}> (</span>
+        <br />
+      </span>
+      <span>
+        <span style={{ color: "rgb(240, 113, 120)" }}>{"    "}</span>
+        <span style={{}}>&lt;</span>
+        <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+        <span style={{}}> </span>
+        {props}
+        <span style={{}}>&gt;</span>
+        {children}
+        <span style={{}}>&lt;/</span>
+        <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+        <span style={{}}>&gt;</span>
+        <br />
+      </span>
+      <span>
+        <span style={{}}>{"  "})</span>
+        <br />
+      </span>
+      <span>
+        <span style={{}}>{"}"}</span>
+        <br />
+      </span>
+    </code>
+  )
+}

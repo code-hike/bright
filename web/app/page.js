@@ -1,4 +1,4 @@
-import { Demo } from "./demo"
+import { demo, Demo } from "./demo"
 import { SocialLinks } from "./icons"
 import { WithBackground } from "./with-background"
 
@@ -7,26 +7,120 @@ export default async function Page() {
     <div>
       <div style={{ height: "5rem" }} />
       <Title />
+
       <div style={{ height: "4rem" }} />
-      <Demo demo={demo} code='print("hello brightness")' />
+      <Demo
+        demo={demo({
+          children: (
+            <span style={{ color: "var(--text-color)" }}>
+              print("hello brightness")
+            </span>
+          ),
+          props: (
+            <>
+              <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+              <span style={{}}>=</span>
+              <span style={{}}>"</span>
+              <span style={{ color: "rgb(195, 232, 141)" }}>py</span>
+              <span style={{}}>"</span>
+            </>
+          ),
+        })}
+        code='print("hello brightness")'
+      />
       <div style={{ height: "3rem" }} />
       <Details />
 
       <div style={{ height: "3rem" }} />
-      <h2 style={{ textAlign: "center" }}>Markdown / MDX</h2>
+      <h2 style={{ textAlign: "center" }}>Line Numbers</h2>
       <div style={{ height: "1rem" }} />
       <Demo
-        demo={demo}
+        demo={demo({
+          middle: (
+            <>
+              <span>const myCode = `</span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                let hello = "hello brightness"
+              </span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                console.log(hello, "my old friend")
+              </span>
+              <br />
+              <span>`.trim()</span>
+              <br />
+              <br />
+            </>
+          ),
+          props: (
+            <>
+              <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+              <span>="</span>
+              <span style={{ color: "rgb(195, 232, 141)" }}>js</span>
+              <span>" </span>
+              <span style={{ color: "rgb(199, 146, 234)" }}>lineNumbers</span>
+            </>
+          ),
+          children: <span style={{}}>{`{myCode}`}</span>,
+        })}
         code={`let hello = "hello brightness"
 console.log(hello, "my old friend")`}
         codeProps={{ lineNumbers: true, lang: "js" }}
       />
 
       <div style={{ height: "3rem" }} />
-      <h2 style={{ textAlign: "center" }}>Themes</h2>
+      <h2 style={{ textAlign: "center" }}>Global Props</h2>
       <div style={{ height: "1rem" }} />
       <Demo
-        demo={demo}
+        demo={demo({
+          middle: (
+            <>
+              <span>const myCode = `</span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                let hello = "hello brightness"
+              </span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                console.log(hello, "my old friend")
+              </span>
+              <br />
+              <span>`.trim()</span>
+              <br />
+              <br />
+              <span style={{ color: "rgb(195, 232, 141)" }}>
+                // set any prop globally
+              </span>
+              <br />
+              <span>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+                .lineNumbers = true
+              </span>
+              <br />
+              <br />
+            </>
+          ),
+          props: (
+            <>
+              <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+              <span>="</span>
+              <span style={{ color: "rgb(195, 232, 141)" }}>js</span>
+              <span>"</span>
+            </>
+          ),
+          children: <span style={{}}>{`{myCode}`}</span>,
+        })}
+        code={`let hello = "hello brightness"
+console.log(hello, "my old friend")`}
+        codeProps={{ lineNumbers: true, lang: "js" }}
+      />
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Markdown / MDX</h2>
+      <div style={{ height: "1rem" }} />
+      <Demo
+        demo={demo({})}
         code={`let hello = "hello brightness"
 console.log(hello, "my old friend")`}
         codeProps={{ lineNumbers: true, lang: "js" }}
@@ -36,7 +130,7 @@ console.log(hello, "my old friend")`}
       <h2 style={{ textAlign: "center" }}>Line Numbers</h2>
       <div style={{ height: "1rem" }} />
       <Demo
-        demo={demo}
+        demo={demo({})}
         code={`let hello = "hello brightness"
 console.log(hello, "my old friend")`}
         codeProps={{ lineNumbers: true, lang: "js" }}
@@ -98,74 +192,3 @@ function Details() {
     </WithBackground>
   )
 }
-
-const demo = (
-  <code>
-    <span>
-      <span style={{ fontStyle: "italic" }}>import</span>
-      <span style={{ color: "rgb(238, 255, 255)" }}> </span>
-      <span style={{}}>{"{"}</span>
-      <span style={{ color: "rgb(240, 113, 120)" }}> </span>
-      <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
-      <span style={{ color: "rgb(240, 113, 120)" }}> </span>
-      <span style={{}}>{"}"}</span>
-      <span style={{ color: "rgb(238, 255, 255)" }}> </span>
-      <span style={{ fontStyle: "italic" }}>from</span>
-      <span style={{ color: "rgb(238, 255, 255)" }}> </span>
-      <span style={{}}>"</span>
-      <span style={{ color: "rgb(195, 232, 141)" }}>bright</span>
-      <span style={{}}>"</span>
-      <br />
-    </span>
-    <span>
-      <span style={{ color: "rgb(238, 255, 255)" }} />
-      <br />
-    </span>
-    <span>
-      <span style={{ fontStyle: "italic" }}>export</span>
-      <span style={{ color: "rgb(238, 255, 255)" }}> </span>
-      <span style={{ fontStyle: "italic" }}>default</span>
-      <span style={{}}> </span>
-      <span style={{}}>function</span>
-      <span style={{}}> </span>
-      <span style={{}}>Page</span>
-      <span style={{}}>()</span>
-      <span style={{}}> </span>
-      <span style={{}}>{"{"}</span>
-      <br />
-    </span>
-    <span>
-      <span style={{}}>{"  "}</span>
-      <span style={{ fontStyle: "italic" }}>return</span>
-      <span style={{}}> (</span>
-      <br />
-    </span>
-    <span>
-      <span style={{ color: "rgb(240, 113, 120)" }}>{"    "}</span>
-      <span style={{}}>&lt;</span>
-      <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
-      <span style={{}}> </span>
-      <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
-      <span style={{}}>=</span>
-      <span style={{}}>"</span>
-      <span style={{ color: "rgb(195, 232, 141)" }}>py</span>
-      <span style={{}}>"</span>
-      <span style={{}}>&gt;</span>
-      <span style={{ color: "var(--text-color)" }}>
-        print("hello brightness")
-      </span>
-      <span style={{}}>&lt;/</span>
-      <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
-      <span style={{}}>&gt;</span>
-      <br />
-    </span>
-    <span>
-      <span style={{}}>{"  "})</span>
-      <br />
-    </span>
-    <span>
-      <span style={{}}>{"}"}</span>
-      <br />
-    </span>
-  </code>
-)
