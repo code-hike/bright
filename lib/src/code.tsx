@@ -1,4 +1,4 @@
-import { highlight, Lang, Theme } from "@code-hike/lighter"
+import { highlight, LanguageAlias, Theme } from "@code-hike/lighter"
 
 // children when it comes from the Markdown pre element
 type MdCodeText = {
@@ -21,7 +21,7 @@ export async function Code({
   scheme,
 }: {
   code: CodeText
-  lang: Lang
+  lang: LanguageAlias
   style?: React.CSSProperties
   className?: string
   codeClassName?: string
@@ -36,7 +36,7 @@ export async function Code({
   let text: string
   if (typeof code === "object") {
     text = code.props?.children
-    language = code.props?.className.replace("language-", "") as Lang
+    language = code.props?.className.replace("language-", "") as LanguageAlias
   } else {
     text = code
   }
@@ -58,6 +58,10 @@ export async function Code({
     colorScheme,
     selectionBackground,
     lineNumberForeground,
+    activeTabBackground,
+    activeTabBorder,
+    activeTabForeground,
+    editorGroupHeaderBackground,
   } = await highlight(text.trim(), language, theme)
 
   const lineCount = lines.length
@@ -113,12 +117,22 @@ export async function Code({
         <div
           className={titleClassName}
           style={{
-            background: "#555",
-            padding: "0.5em 1em",
-            fontSize: "0.8em",
+            background: editorGroupHeaderBackground,
+            color: activeTabForeground,
           }}
         >
-          {filename}
+          <span
+            style={{
+              background: activeTabBackground,
+              color: activeTabForeground,
+              borderBottom: `1px solid ${activeTabBorder}`,
+              display: "inline-block",
+              padding: "0.5em 1em",
+              fontSize: "0.8em",
+            }}
+          >
+            {filename}
+          </span>
         </div>
       )}
       <pre
@@ -128,7 +142,6 @@ export async function Code({
           background,
           padding: "1em",
           overflow: "auto",
-          ...style,
         }}
       >
         <style dangerouslySetInnerHTML={{ __html: css }} />

@@ -3,7 +3,7 @@ import { Fira_Code } from "@next/font/google"
 
 const font = Fira_Code({ subsets: ["latin"] })
 
-Code.theme = "dark-plus"
+Code.theme = "min-light"
 Code.codeClassName = font.className
 Code.titleClassName = font.className
 Code.replace = {

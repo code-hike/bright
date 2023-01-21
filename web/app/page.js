@@ -1,4 +1,5 @@
-import { Code } from "bright"
+import { Demo } from "./demo"
+import { WithBackground } from "./with-background"
 
 export default async function Page() {
   return (
@@ -6,82 +7,20 @@ export default async function Page() {
       <div style={{ height: "5rem" }} />
       <Title />
       <div style={{ height: "4rem" }} />
-      <IntroDemo />
+      <Demo demo={demo} code='print("hello brightness")' />
       <div style={{ height: "5rem" }} />
       <Details />
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Line Numbers</h2>
       <div style={{ height: "1rem" }} />
-      <WithBackground
-        blur={24}
-        opacity={0.9}
-        style={{
-          overflow: "hidden",
-          borderRadius: "4px",
-          border: "1px solid #222",
-          background: "#2222",
-        }}
-        bg={{ color: "rgba(137, 221, 255, 0.2)", "--text-color": "#ccc2" }}
-        fg={{
-          color: "rgba(137, 221, 255, 0.8)",
-          "--text-color": "#ccc",
-        }}
-      >
-        <pre
-          style={{
-            fontSize: "1.4em",
-            lineHeight: "1.4em",
-            padding: "1em",
-            margin: "0",
-          }}
-        >
-          {demo}
-        </pre>
-      </WithBackground>
-      <Code
-        theme="material-darker"
-        lang="js"
-        style={{
-          fontSize: "1.4em",
-          margin: "-1.6em auto 0",
-          position: "relative",
-          border: "1px solid #222",
-          width: "450px",
-        }}
-        lineNumbers
-      >{`let hello = "hello brightness"
-console.log(hello, "my old friend")`}</Code>
-      <div style={{ height: "3rem" }} />
-    </div>
-  )
-}
+      <Demo
+        demo={demo}
+        code={`let hello = "hello brightness"
+console.log(hello, "my old friend")`}
+        codeProps={{ lineNumbers: true, lang: "js" }}
+      />
 
-function WithBackground({
-  children,
-  bg,
-  fg,
-  style,
-  blur = 50,
-  opacity = 0.66,
-}) {
-  return (
-    <div style={{ position: "relative", ...style }}>
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          filter: `blur(${blur}px)`,
-          zIndex: -1,
-          opacity,
-          userSelect: "none",
-          pointerEvents: "none",
-          ...bg,
-        }}
-      >
-        {children}
-      </div>
-      <div style={fg}>{children}</div>
+      <div style={{ height: "3rem" }} />
     </div>
   )
 }
@@ -103,49 +42,6 @@ function Title() {
       <br /> for{" "}
       <span style={{ color: "rgb(255, 203, 107)" }}>syntax highlighting</span>
     </WithBackground>
-  )
-}
-
-function IntroDemo() {
-  return (
-    <>
-      <WithBackground
-        blur={12}
-        opacity={0.9}
-        style={{
-          overflow: "hidden",
-          borderRadius: "4px",
-          border: "1px solid #222",
-          background: "#2225",
-        }}
-        bg={{ color: "rgba(137, 221, 255, 0.2)", "--text-color": "#ccc2" }}
-        fg={{ color: "rgb(137, 221, 255)", "--text-color": "#ccc" }}
-      >
-        <pre
-          style={{
-            fontSize: "1.4em",
-            lineHeight: "1.4em",
-            padding: "1em",
-            margin: "0",
-          }}
-        >
-          {demo}
-        </pre>
-      </WithBackground>
-      <Code
-        theme="material-darker"
-        lang="py"
-        style={{
-          fontSize: "1.4em",
-          margin: "-1.6em auto 0",
-          position: "relative",
-          border: "1px solid #222",
-          width: "450px",
-        }}
-      >
-        print("hello brightness")
-      </Code>
-    </>
   )
 }
 
