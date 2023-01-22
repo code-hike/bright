@@ -1,0 +1,5 @@
+---
+"bright": patch
+---
+
+Update lighter
