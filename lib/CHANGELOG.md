@@ -1,5 +1,11 @@
 # bright
 
+## 0.5.3
+
+### Patch Changes
+
+- 3aa2ee7: Update lighter
+
 ## 0.5.2
 
 ### Patch Changes
