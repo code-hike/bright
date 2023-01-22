@@ -420,13 +420,85 @@ print(theFuture is bright)`}</Code>
       />
 
       <div style={{ height: "3rem" }} />
-      <h2 style={{ textAlign: "center" }}>Styles</h2>
-
-      <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Markdown / MDX</h2>
+      <div style={{ height: "1rem" }} />
+      <Demo
+        filename="mdx-components.js"
+        preview={<div />}
+        demo={
+          <code>
+            <span>
+              <span style={{ fontStyle: "italic" }}>import</span>
+              <span style={{ color: "rgb(238, 255, 255)" }}> </span>
+              <span>{"{"}</span>
+              <span style={{ color: "rgb(240, 113, 120)" }}> </span>
+              <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+              <span style={{ color: "rgb(240, 113, 120)" }}> </span>
+              <span>{"}"}</span>
+              <span style={{ color: "rgb(238, 255, 255)" }}> </span>
+              <span style={{ fontStyle: "italic" }}>from</span>
+              <span style={{ color: "rgb(238, 255, 255)" }}> </span>
+              <span>"</span>
+              <span style={{ color: "rgb(195, 232, 141)" }}>bright</span>
+              <span>"</span>
+              <br />
+            </span>
+            <br />
+            <span style={{ color: "rgb(195, 232, 141)" }}>
+              <span>// You need this file to use MDX in server components</span>
+              <br />
+              <span>
+                // Learn more from{" "}
+                <a
+                  style={{
+                    color: "rgb(195, 232, 141)",
+                    textDecoration: "underline",
+                  }}
+                  href="https://github.com/vercel/next.js/tree/canary/examples/app-dir-mdx"
+                >
+                  the Next.js example
+                </a>{" "}
+                or{" "}
+                <a
+                  style={{
+                    color: "rgb(195, 232, 141)",
+                    textDecoration: "underline",
+                  }}
+                  href="https://github.com/vercel/next.js/pull/44651"
+                >
+                  the PR
+                </a>
+              </span>
+            </span>
+            <br />
+            <br />
+            <span>
+              <span style={{ fontStyle: "italic" }}>export</span> function
+              useMDXComponents(components) {"{"}
+              <br />
+            </span>
+            <span>
+              {"  "}
+              <span style={{ fontStyle: "italic" }}>return</span>
+              {" { ...components, "}
+              <span style={{ color: "rgb(199, 146, 234)" }}>pre</span>:
+              <span style={{ color: "rgb(255, 203, 107)" }}> Code</span>
+              <span>{" }"}</span>
+              <br />
+            </span>
+            <span>{"}"}</span>
+          </code>
+        }
+      />
 
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Annotations</h2>
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Replace</h2>
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Styles</h2>
 
       <div style={{ height: "3rem" }} />
     </div>

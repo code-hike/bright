@@ -1,7 +1,13 @@
 import { Code } from "bright"
 import { WithBackground } from "./with-background"
 
-export function Demo({ demo, codeProps, code, preview }) {
+export function Demo({
+  demo,
+  codeProps,
+  code,
+  preview,
+  filename = "app/page.js",
+}) {
   return (
     <>
       <WithBackground
@@ -25,6 +31,17 @@ export function Demo({ demo, codeProps, code, preview }) {
             margin: "0",
           }}
         >
+          <div
+            style={{
+              color: "#888",
+              fontSize: "1rem",
+              textAlign: "center",
+              marginTop: "-0.7rem",
+              marginBottom: "1rem",
+            }}
+          >
+            {filename}
+          </div>
           {demo}
         </pre>
       </WithBackground>
@@ -51,16 +68,15 @@ export function Demo({ demo, codeProps, code, preview }) {
 export function CodeLine({ props, children, mark }) {
   return (
     <span style={{ filter: mark ? "unset" : undefined }}>
-      <span style={{ color: "rgb(240, 113, 120)" }}>{"    "}</span>
-      <span style={{}}>&lt;</span>
+      <span>{"    "}&lt;</span>
       <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
-      <span style={{}}> </span>
+      <span> </span>
       {props}
-      <span style={{}}>&gt;</span>
+      <span>&gt;</span>
       {children}
-      <span style={{}}>&lt;/</span>
+      <span>&lt;/</span>
       <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
-      <span style={{}}>&gt;</span>
+      <span>&gt;</span>
       <br />
     </span>
   )
@@ -72,17 +88,17 @@ export function demo({ middle, codeLine, focus }) {
       <span>
         <span style={{ fontStyle: "italic" }}>import</span>
         <span style={{ color: "rgb(238, 255, 255)" }}> </span>
-        <span style={{}}>{"{"}</span>
+        <span>{"{"}</span>
         <span style={{ color: "rgb(240, 113, 120)" }}> </span>
         <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
         <span style={{ color: "rgb(240, 113, 120)" }}> </span>
-        <span style={{}}>{"}"}</span>
+        <span>{"}"}</span>
         <span style={{ color: "rgb(238, 255, 255)" }}> </span>
         <span style={{ fontStyle: "italic" }}>from</span>
         <span style={{ color: "rgb(238, 255, 255)" }}> </span>
-        <span style={{}}>"</span>
+        <span>"</span>
         <span style={{ color: "rgb(195, 232, 141)" }}>bright</span>
-        <span style={{}}>"</span>
+        <span>"</span>
         <br />
       </span>
       <span>
@@ -92,30 +108,30 @@ export function demo({ middle, codeLine, focus }) {
       {middle}
       <span>
         <span style={{ fontStyle: "italic" }}>export</span>
-        <span style={{ color: "rgb(238, 255, 255)" }}> </span>
+        <span> </span>
         <span style={{ fontStyle: "italic" }}>default</span>
-        <span style={{}}> </span>
-        <span style={{}}>function</span>
-        <span style={{}}> </span>
-        <span style={{}}>Page</span>
-        <span style={{}}>()</span>
-        <span style={{}}> </span>
-        <span style={{}}>{"{"}</span>
+        <span> </span>
+        <span>function</span>
+        <span> </span>
+        <span>Page</span>
+        <span>()</span>
+        <span> </span>
+        <span>{"{"}</span>
         <br />
       </span>
       <span>
-        <span style={{}}>{"  "}</span>
+        <span>{"  "}</span>
         <span style={{ fontStyle: "italic" }}>return</span>
-        <span style={{}}> (</span>
+        <span> (</span>
         <br />
       </span>
       {codeLine}
       <span>
-        <span style={{}}>{"  "})</span>
+        <span>{"  "})</span>
         <br />
       </span>
       <span>
-        <span style={{}}>{"}"}</span>
+        <span>{"}"}</span>
         <br />
       </span>
     </code>
