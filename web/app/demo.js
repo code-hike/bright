@@ -17,6 +17,7 @@ export function Demo({ demo, codeProps, code }) {
         fg={{ color: "rgb(137, 221, 255)", "--text-color": "#ccc" }}
       >
         <pre
+          className="demo-pre"
           style={{
             fontSize: "1.15rem",
             lineHeight: "1.5rem",
@@ -45,9 +46,27 @@ export function Demo({ demo, codeProps, code }) {
   )
 }
 
-export function demo({ middle, children, props }) {
+export function CodeLine({ props, children, mark }) {
   return (
-    <code>
+    <span style={{ filter: mark ? "unset" : undefined }}>
+      <span style={{ color: "rgb(240, 113, 120)" }}>{"    "}</span>
+      <span style={{}}>&lt;</span>
+      <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+      <span style={{}}> </span>
+      {props}
+      <span style={{}}>&gt;</span>
+      {children}
+      <span style={{}}>&lt;/</span>
+      <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+      <span style={{}}>&gt;</span>
+      <br />
+    </span>
+  )
+}
+
+export function demo({ middle, codeLine, focus }) {
+  return (
+    <code className={`${focus ? "focused" : ""}`}>
       <span>
         <span style={{ fontStyle: "italic" }}>import</span>
         <span style={{ color: "rgb(238, 255, 255)" }}> </span>
@@ -88,19 +107,7 @@ export function demo({ middle, children, props }) {
         <span style={{}}> (</span>
         <br />
       </span>
-      <span>
-        <span style={{ color: "rgb(240, 113, 120)" }}>{"    "}</span>
-        <span style={{}}>&lt;</span>
-        <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
-        <span style={{}}> </span>
-        {props}
-        <span style={{}}>&gt;</span>
-        {children}
-        <span style={{}}>&lt;/</span>
-        <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
-        <span style={{}}>&gt;</span>
-        <br />
-      </span>
+      {codeLine}
       <span>
         <span style={{}}>{"  "})</span>
         <br />

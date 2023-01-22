@@ -54,3 +54,16 @@ li {
     --description-font-size: 2.6rem;
   }
 }
+
+.demo-pre ::selection {
+  background-color: #61616150;
+}
+
+.demo-pre code.focused > span {
+  /* filter: brightness(0.5); */
+  filter: contrast(0.3);
+  transition: filter 0.5s;
+}
+/* .demo-pre:hover code.focused > span {
+  filter: unset;
+} */

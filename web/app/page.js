@@ -1,4 +1,4 @@
-import { demo, Demo } from "./demo"
+import { CodeLine, demo, Demo } from "./demo"
 import { SocialLinks } from "./icons"
 import { WithBackground } from "./with-background"
 
@@ -11,19 +11,23 @@ export default async function Page() {
       <div style={{ height: "4rem" }} />
       <Demo
         demo={demo({
-          children: (
-            <span style={{ color: "var(--text-color)" }}>
-              print("hello brightness")
-            </span>
-          ),
-          props: (
-            <>
-              <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
-              <span style={{}}>=</span>
-              <span style={{}}>"</span>
-              <span style={{ color: "rgb(195, 232, 141)" }}>py</span>
-              <span style={{}}>"</span>
-            </>
+          codeLine: (
+            <CodeLine
+              props={
+                <>
+                  <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+                  <span style={{}}>=</span>
+                  <span style={{}}>"</span>
+                  <span style={{ color: "rgb(195, 232, 141)" }}>py</span>
+                  <span style={{}}>"</span>
+                </>
+              }
+              children={
+                <span style={{ color: "var(--text-color)" }}>
+                  print("hello brightness")
+                </span>
+              }
+            />
           ),
         })}
         code='print("hello brightness")'
@@ -36,6 +40,7 @@ export default async function Page() {
       <div style={{ height: "1rem" }} />
       <Demo
         demo={demo({
+          focus: true,
           middle: (
             <>
               <span>const myCode = `</span>
@@ -53,16 +58,23 @@ export default async function Page() {
               <br />
             </>
           ),
-          props: (
-            <>
-              <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
-              <span>="</span>
-              <span style={{ color: "rgb(195, 232, 141)" }}>js</span>
-              <span>" </span>
-              <span style={{ color: "rgb(199, 146, 234)" }}>lineNumbers</span>
-            </>
+          codeLine: (
+            <CodeLine
+              mark
+              children={<span style={{}}>{`{myCode}`}</span>}
+              props={
+                <>
+                  <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+                  <span>="</span>
+                  <span style={{ color: "rgb(195, 232, 141)" }}>js</span>
+                  <span>" </span>
+                  <span style={{ color: "rgb(199, 146, 234)" }}>
+                    lineNumbers
+                  </span>
+                </>
+              }
+            />
           ),
-          children: <span style={{}}>{`{myCode}`}</span>,
         })}
         code={`let hello = "hello brightness"
 console.log(hello, "my old friend")`}
@@ -74,6 +86,7 @@ console.log(hello, "my old friend")`}
       <div style={{ height: "1rem" }} />
       <Demo
         demo={demo({
+          focus: true,
           middle: (
             <>
               <span>const myCode = `</span>
@@ -89,27 +102,35 @@ console.log(hello, "my old friend")`}
               <span>`.trim()</span>
               <br />
               <br />
-              <span style={{ color: "rgb(195, 232, 141)" }}>
+              <span style={{ color: "rgb(195, 232, 141)", filter: "unset" }}>
                 // set any prop globally
               </span>
               <br />
-              <span>
-                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
-                .lineNumbers = true
+              <span style={{ filter: "unset" }}>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>.
+                <span style={{ color: "rgb(199, 146, 234)" }}>lineNumbers</span>{" "}
+                = true
               </span>
               <br />
               <br />
             </>
           ),
-          props: (
-            <>
-              <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
-              <span>="</span>
-              <span style={{ color: "rgb(195, 232, 141)" }}>js</span>
-              <span>"</span>
-            </>
+          codeLine: (
+            <CodeLine
+              children={<span style={{}}>{`{myCode}`}</span>}
+              props={
+                <>
+                  <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+                  <span>="</span>
+                  <span style={{ color: "rgb(195, 232, 141)" }}>js</span>
+                  <span>" </span>
+                  <span style={{ color: "rgb(199, 146, 234)" }}>
+                    lineNumbers
+                  </span>
+                </>
+              }
+            />
           ),
-          children: <span style={{}}>{`{myCode}`}</span>,
         })}
         code={`let hello = "hello brightness"
 console.log(hello, "my old friend")`}
@@ -117,24 +138,75 @@ console.log(hello, "my old friend")`}
       />
 
       <div style={{ height: "3rem" }} />
-      <h2 style={{ textAlign: "center" }}>Markdown / MDX</h2>
+      <h2 style={{ textAlign: "center" }}>Theme</h2>
       <div style={{ height: "1rem" }} />
       <Demo
-        demo={demo({})}
-        code={`let hello = "hello brightness"
-console.log(hello, "my old friend")`}
-        codeProps={{ lineNumbers: true, lang: "js" }}
+        demo={demo({
+          focus: true,
+          middle: (
+            <>
+              <span>const myCode = `</span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                theFuture, bright = 10, 10
+                <br />
+                print(theFuture is bright)
+              </span>
+              <br />
+              <span>`.trim()</span>
+              <br />
+              <br />
+              <span style={{ color: "rgb(195, 232, 141)", filter: "unset" }}>
+                // there are several themes built in
+                <br />
+                // typescript should autocomplete the options
+              </span>
+              <br />
+              <span style={{ filter: "unset" }}>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>.
+                <span style={{ color: "rgb(199, 146, 234)" }}>theme</span> = "
+                <span style={{ color: "rgb(195, 232, 141)" }}>
+                  github-light
+                </span>
+                "
+              </span>
+              <br />
+              <br />
+            </>
+          ),
+          codeLine: (
+            <CodeLine
+              props={
+                <>
+                  <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+                  <span>="</span>
+                  <span style={{ color: "rgb(195, 232, 141)" }}>py</span>
+                  <span>"</span>
+                </>
+              }
+              children={<span style={{}}>{`{myCode}`}</span>}
+            />
+          ),
+        })}
+        code={`theFuture, bright = 10, 10
+print(theFuture is bright)`}
+        codeProps={{ lang: "py", theme: "github-light" }}
       />
 
       <div style={{ height: "3rem" }} />
-      <h2 style={{ textAlign: "center" }}>Line Numbers</h2>
-      <div style={{ height: "1rem" }} />
-      <Demo
-        demo={demo({})}
-        code={`let hello = "hello brightness"
-console.log(hello, "my old friend")`}
-        codeProps={{ lineNumbers: true, lang: "js" }}
-      />
+      <h2 style={{ textAlign: "center" }}>Dark Mode</h2>
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Custom Theme</h2>
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Styles</h2>
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Markdown / MDX</h2>
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Annotations</h2>
 
       <div style={{ height: "3rem" }} />
     </div>
