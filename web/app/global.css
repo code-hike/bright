@@ -4,6 +4,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color-scheme: dark;
+  font-size: clamp(0.5rem, 0.0429rem + 2.2857vw, 1rem);
 }
 
 h2 {
@@ -13,7 +14,7 @@ h2 {
 body {
   background-color: #010409;
   color: #eaeaea;
-  max-width: 40rem;
+  max-width: 640px;
   margin: 0 auto;
   padding: 0 2rem;
 }

@@ -9,8 +9,7 @@ export function TwitterLink(props) {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        width={42}
-        height={42}
+        style={{ width: 2.625 + "rem", height: 2.625 + "rem" }}
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 24 24"
       >
@@ -32,7 +31,11 @@ export function GitHubLink(props) {
       href="https://github.com/code-hike/bright"
       {...props}
     >
-      <svg width={38} height={38} viewBox="0 0 16 16" fill="currentColor">
+      <svg
+        style={{ width: 2.375 + "rem", height: 2.375 + "rem" }}
+        viewBox="0 0 16 16"
+        fill="currentColor"
+      >
         <title>GitHub</title>
         <path
           fillRule="evenodd"
@@ -52,8 +55,7 @@ export function DiscordLink(props) {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={40}
-        height={40}
+        style={{ width: 2.5 + "rem", height: 2.5 + "rem" }}
         viewBox="0 0 71 55"
         fill="currentColor"
       >

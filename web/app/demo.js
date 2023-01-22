@@ -10,7 +10,7 @@ export function Demo({ demo, codeProps, code }) {
         style={{
           overflow: "hidden",
           borderRadius: "4px",
-          border: "1px solid #222",
+          border: "1px solid #444",
           background: "#2225",
         }}
         bg={{ color: "rgba(137, 221, 255, 0.2)", "--text-color": "#ccc2" }}
@@ -18,9 +18,9 @@ export function Demo({ demo, codeProps, code }) {
       >
         <pre
           style={{
-            fontSize: "1.4em",
-            lineHeight: "1.4em",
-            padding: "1em",
+            fontSize: "1.15rem",
+            lineHeight: "1.5rem",
+            padding: "1rem",
             margin: "0",
           }}
         >
@@ -31,11 +31,11 @@ export function Demo({ demo, codeProps, code }) {
         theme="material-darker"
         lang="py"
         style={{
-          fontSize: "1.4em",
-          margin: "-1.5em auto 0",
+          fontSize: "1.2rem",
+          margin: "-2rem auto 0",
           position: "relative",
-          border: "1px solid #222",
-          width: "450px",
+          border: "1px solid #444",
+          width: "80%",
         }}
         {...codeProps}
       >
