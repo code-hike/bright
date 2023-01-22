@@ -355,6 +355,69 @@ print(theFuture is bright)`}</Code>
 
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Custom Theme</h2>
+      <div style={{ height: "1rem" }} />
+      <Demo
+        demo={demo({
+          focus: true,
+          middle: (
+            <>
+              <span>const myCode = `</span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                theFuture, bright = 10, 10
+                <br />
+                print(theFuture is bright)
+              </span>
+              <br />
+              <span>`.trim()</span>
+              <br />
+              <br />
+              <span style={{ color: "rgb(195, 232, 141)", filter: "unset" }}>
+                // you can make your own theme
+                <br />
+                // or extend any VS Code theme
+                <br />
+                // with{" "}
+                <a
+                  href="https://themes.codehike.org/bright"
+                  style={{
+                    color: "rgb(195, 232, 141)",
+                    textDecoration: "underline",
+                  }}
+                >
+                  https://themes.codehike.org/bright
+                </a>
+              </span>
+              <br />
+              <span style={{ filter: "unset" }}>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>.
+                <span style={{ color: "rgb(199, 146, 234)" }}>theme</span>
+                {` = {`}
+                <br />
+                <span>{`  `}name: "myTheme"</span>
+                <br />
+                {`}`}
+              </span>
+              <br />
+              <br />
+            </>
+          ),
+          codeLine: (
+            <CodeLine
+              props={
+                <>
+                  <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+                  <span>="</span>
+                  <span style={{ color: "rgb(195, 232, 141)" }}>py</span>
+                  <span>"</span>
+                </>
+              }
+              children={<span style={{}}>{`{myCode}`}</span>}
+            />
+          ),
+        })}
+        preview={<div />}
+      />
 
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Styles</h2>
