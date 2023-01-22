@@ -1,5 +1,12 @@
 # bright-web
 
+## 0.3.6
+
+### Patch Changes
+
+- Updated dependencies [bf30e17]
+  - bright@0.5.4
+
 ## 0.3.5
 
 ### Patch Changes

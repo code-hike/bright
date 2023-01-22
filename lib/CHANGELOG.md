@@ -1,5 +1,11 @@
 # bright
 
+## 0.5.4
+
+### Patch Changes
+
+- bf30e17: Update lighter
+
 ## 0.5.3
 
 ### Patch Changes
