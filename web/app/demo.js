@@ -54,7 +54,7 @@ export function Demo({
             margin: "-2rem auto 0",
             position: "relative",
             border: "1px solid #444",
-            width: "80%",
+            width: "85%",
           }}
           {...codeProps}
         >

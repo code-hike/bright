@@ -4,7 +4,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color-scheme: dark;
-  font-size: clamp(0.5rem, 0.0429rem + 2.2857vw, 1rem);
+  font-size: clamp(0.5rem, 0.04rem + 2.2857vw, 0.95rem);
 }
 
 h2 {

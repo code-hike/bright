@@ -10,20 +10,6 @@ Code.replace = {
   APIKEY: "sk_test_CGGvfNiIPwLXiDwaOfZ3oX6Y",
 }
 
-// This file is required to use MDX in `app` directory.
 export function useMDXComponents(components) {
-  return {
-    // Allows customizing built-in components, e.g. to add styling.
-    pre: (props) => {
-      return (
-        <Code
-          lineNumbers
-          codeClassName={font.className}
-          titleClassName={font.className}
-          {...props}
-        />
-      )
-    },
-    ...components,
-  }
+  return { ...components, pre: Code }
 }

@@ -8,7 +8,6 @@ export default async function Page() {
     <div>
       <div style={{ height: "5rem" }} />
       <Title />
-
       <div style={{ height: "4rem" }} />
       <Demo
         demo={demo({
@@ -35,7 +34,6 @@ export default async function Page() {
       />
       <div style={{ height: "3rem" }} />
       <Details />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Line Numbers</h2>
       <div style={{ height: "1rem" }} />
@@ -81,7 +79,6 @@ export default async function Page() {
 console.log(hello, "my old friend")`}
         codeProps={{ lineNumbers: true, lang: "js" }}
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Global Props</h2>
       <div style={{ height: "1rem" }} />
@@ -137,7 +134,6 @@ console.log(hello, "my old friend")`}
 console.log(hello, "my old friend")`}
         codeProps={{ lineNumbers: true, lang: "js" }}
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Theme</h2>
       <div style={{ height: "1rem" }} />
@@ -193,7 +189,6 @@ console.log(hello, "my old friend")`}
 print(theFuture is bright)`}
         codeProps={{ lang: "py", theme: "material-lighter" }}
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Dark Mode</h2>
       <div style={{ height: "1rem" }} />
@@ -352,7 +347,6 @@ print(theFuture is bright)`}</Code>
           </>
         }
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Custom Theme</h2>
       <div style={{ height: "1rem" }} />
@@ -418,7 +412,6 @@ print(theFuture is bright)`}</Code>
         })}
         preview={<div />}
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Markdown / MDX</h2>
       <div style={{ height: "1rem" }} />
@@ -490,16 +483,12 @@ print(theFuture is bright)`}</Code>
           </code>
         }
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Annotations</h2>
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Replace</h2>
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Styles</h2>
-
       <div style={{ height: "3rem" }} />
     </div>
   )
