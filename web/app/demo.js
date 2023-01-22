@@ -1,7 +1,7 @@
 import { Code } from "bright"
 import { WithBackground } from "./with-background"
 
-export function Demo({ demo, codeProps, code }) {
+export function Demo({ demo, codeProps, code, preview }) {
   return (
     <>
       <WithBackground
@@ -28,20 +28,22 @@ export function Demo({ demo, codeProps, code }) {
           {demo}
         </pre>
       </WithBackground>
-      <Code
-        theme="material-darker"
-        lang="py"
-        style={{
-          fontSize: "1.2rem",
-          margin: "-2rem auto 0",
-          position: "relative",
-          border: "1px solid #444",
-          width: "80%",
-        }}
-        {...codeProps}
-      >
-        {code}
-      </Code>
+      {preview || (
+        <Code
+          theme="material-darker"
+          lang="py"
+          style={{
+            fontSize: "1.2rem",
+            margin: "-2rem auto 0",
+            position: "relative",
+            border: "1px solid #444",
+            width: "80%",
+          }}
+          {...codeProps}
+        >
+          {code}
+        </Code>
+      )}
     </>
   )
 }

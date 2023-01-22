@@ -1,3 +1,4 @@
+import { Code } from "bright"
 import { CodeLine, demo, Demo } from "./demo"
 import { SocialLinks } from "./icons"
 import { WithBackground } from "./with-background"
@@ -166,7 +167,7 @@ console.log(hello, "my old friend")`}
                 <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>.
                 <span style={{ color: "rgb(199, 146, 234)" }}>theme</span> = "
                 <span style={{ color: "rgb(195, 232, 141)" }}>
-                  github-light
+                  material-lighter
                 </span>
                 "
               </span>
@@ -190,11 +191,167 @@ console.log(hello, "my old friend")`}
         })}
         code={`theFuture, bright = 10, 10
 print(theFuture is bright)`}
-        codeProps={{ lang: "py", theme: "github-light" }}
+        codeProps={{ lang: "py", theme: "material-lighter" }}
       />
 
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Dark Mode</h2>
+      <div style={{ height: "1rem" }} />
+      <Demo
+        demo={demo({
+          focus: true,
+          middle: (
+            <>
+              <span>const myCode = `</span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                theFuture, bright = 10, 10
+                <br />
+                print(theFuture is bright)
+              </span>
+              <br />
+              <span>`.trim()</span>
+              <br />
+              <br />
+              <span style={{ filter: "unset" }}>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>.
+                <span style={{ color: "rgb(199, 146, 234)" }}>theme</span>
+                {` = {`}
+                <br />
+                {`  dark: "`}
+                <span style={{ color: "rgb(195, 232, 141)" }}>github-dark</span>
+                ",
+                <br />
+                {`  light: "`}
+                <span style={{ color: "rgb(195, 232, 141)" }}>
+                  github-light
+                </span>
+                "<br />
+                {`}`}
+              </span>
+              <br />
+              <br />
+            </>
+          ),
+          codeLine: (
+            <>
+              <span>
+                {`    <>`}
+                <br />
+              </span>
+              <span style={{ filter: "unset" }}>
+                {`      <div`}
+                <span style={{}}> </span>
+                <span style={{ color: "rgb(199, 146, 234)" }}>data-theme</span>
+                <span>="</span>
+                <span style={{ color: "rgb(195, 232, 141)" }}>dark</span>
+                <span>"</span>
+                <span style={{}}>&gt;</span>
+                <br />
+              </span>
+              <span>
+                <span style={{ color: "rgb(240, 113, 120)" }}>
+                  {"        "}
+                </span>
+                <span style={{}}>&lt;</span>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+                <span style={{}}> </span>
+                <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+                <span>="</span>
+                <span style={{ color: "rgb(195, 232, 141)" }}>py</span>
+                <span>"</span>
+                <span style={{}}>&gt;</span>
+                <span style={{}}>{`{myCode}`}</span>
+                <span style={{}}>&lt;/</span>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+                <span style={{}}>&gt;</span>
+                <br />
+              </span>
+              <span style={{ filter: "unset" }}>
+                {`      </div>`}
+                <br />
+              </span>
+              <span style={{ filter: "unset" }}>
+                {`      <div`}
+                <span style={{}}> </span>
+                <span style={{ color: "rgb(199, 146, 234)" }}>data-theme</span>
+                <span>="</span>
+                <span style={{ color: "rgb(195, 232, 141)" }}>light</span>
+                <span>"</span>
+                <span style={{}}>&gt;</span>
+                <br />
+              </span>
+              <span>
+                <span style={{ color: "rgb(240, 113, 120)" }}>
+                  {"        "}
+                </span>
+                <span style={{}}>&lt;</span>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+                <span style={{}}> </span>
+                <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+                <span>="</span>
+                <span style={{ color: "rgb(195, 232, 141)" }}>py</span>
+                <span>"</span>
+                <span style={{}}>&gt;</span>
+                <span style={{}}>{`{myCode}`}</span>
+                <span style={{}}>&lt;/</span>
+                <span style={{ color: "rgb(255, 203, 107)" }}>Code</span>
+                <span style={{}}>&gt;</span>
+                <br />
+              </span>
+              <span style={{ filter: "unset" }}>
+                {`      </div>`}
+                <br />
+              </span>
+              <span>
+                {`    </>`}
+                <br />
+              </span>
+            </>
+          ),
+        })}
+        code={`theFuture, bright = 10, 10
+print(theFuture is bright)`}
+        codeProps={{ lang: "py", theme: "github-light" }}
+        preview={
+          <>
+            <div>
+              <Code
+                lang="py"
+                theme={{
+                  dark: "github-dark",
+                  light: "github-light",
+                }}
+                style={{
+                  fontSize: "1.2rem",
+                  margin: "-2rem auto 0",
+                  position: "relative",
+                  border: "1px solid #444",
+                  width: "80%",
+                }}
+              >{`theFuture, bright = 10, 10
+print(theFuture is bright)`}</Code>
+            </div>
+            <div data-theme="light">
+              <Code
+                lang="py"
+                theme={{
+                  dark: "github-dark",
+                  light: "github-light",
+                }}
+                style={{
+                  fontSize: "1.2rem",
+                  margin: "0.5rem auto 0",
+                  position: "relative",
+                  border: "1px solid #444",
+                  width: "80%",
+                }}
+              >{`theFuture, bright = 10, 10
+print(theFuture is bright)`}</Code>
+            </div>
+          </>
+        }
+      />
 
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Custom Theme</h2>
