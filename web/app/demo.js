@@ -47,7 +47,7 @@ export function Demo({
       </WithBackground>
       {preview || (
         <Code
-          theme="material-darker"
+          theme="dracula"
           lang="py"
           style={{
             fontSize: "1.2rem",

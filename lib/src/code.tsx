@@ -121,7 +121,7 @@ export async function Code({
             color: activeTabForeground,
           }}
         >
-          <span
+          <code
             style={{
               background: activeTabBackground,
               color: activeTabForeground,
@@ -132,7 +132,7 @@ export async function Code({
             }}
           >
             {filename}
-          </span>
+          </code>
         </div>
       )}
       <pre

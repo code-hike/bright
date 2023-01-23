@@ -34,6 +34,55 @@ export default async function Page() {
       />
       <div style={{ height: "3rem" }} />
       <Details />
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Title</h2>
+      <div style={{ height: "1rem" }} />
+      <Demo
+        demo={demo({
+          focus: true,
+          middle: (
+            <>
+              <span>const myCode = `</span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                let hello = "hello brightness"
+              </span>
+              <br />
+              <span style={{ color: "var(--text-color)" }}>
+                console.log(hello, "my old friend")
+              </span>
+              <br />
+              <span>`.trim()</span>
+              <br />
+              <br />
+            </>
+          ),
+          codeLine: (
+            <CodeLine
+              mark
+              children={<span style={{}}>{`{myCode}`}</span>}
+              props={
+                <>
+                  <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
+                  <span>="</span>
+                  <span style={{ color: "rgb(195, 232, 141)" }}>js</span>
+                  <span>" </span>
+
+                  <span style={{ color: "rgb(199, 146, 234)" }}>title</span>
+                  <span>="</span>
+                  <span style={{ color: "rgb(195, 232, 141)" }}>shiny.js</span>
+                  <span>"</span>
+                </>
+              }
+            />
+          ),
+        })}
+        code={`let hello = "hello brightness"
+console.log(hello, "my old friend")`}
+        codeProps={{ title: "shiny.js", lang: "js" }}
+      />
+
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Line Numbers</h2>
       <div style={{ height: "1rem" }} />
@@ -79,6 +128,7 @@ export default async function Page() {
 console.log(hello, "my old friend")`}
         codeProps={{ lineNumbers: true, lang: "js" }}
       />
+
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Global Props</h2>
       <div style={{ height: "1rem" }} />
@@ -190,6 +240,7 @@ print(theFuture is bright)`}
         codeProps={{ lang: "py", theme: "material-lighter" }}
       />
       <div style={{ height: "3rem" }} />
+
       <h2 style={{ textAlign: "center" }}>Dark Mode</h2>
       <div style={{ height: "1rem" }} />
       <Demo

@@ -20,6 +20,7 @@ type CodeProps = {
   lineNumbers?: boolean
   unstyled?: boolean
   theme?: BrightTheme
+  title?: string
 }
 
 type CodeComponent = ((props: CodeProps) => Promise<JSX.Element>) & {
@@ -36,6 +37,7 @@ export const Code: CodeComponent = async ({
   titleClassName,
   lineNumbers,
   unstyled,
+  title,
   theme,
 }) => {
   const finalTheme = theme || Code.theme
@@ -57,6 +59,7 @@ export const Code: CodeComponent = async ({
           unstyled={unstyled}
           theme={darkTheme}
           scheme="dark"
+          title={title}
         />
         {/* @ts-expect-error Server Component */}
         <InnerCode
@@ -70,6 +73,7 @@ export const Code: CodeComponent = async ({
           unstyled={unstyled}
           theme={lightTheme}
           scheme="light"
+          title={title}
         />
       </>
     )
@@ -86,6 +90,7 @@ export const Code: CodeComponent = async ({
       lineNumbers={lineNumbers}
       unstyled={unstyled}
       theme={finalTheme}
+      title={title}
     />
   )
 }

@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <title>Bright - Syntax Highlighting React Server Comopnent</title>
+      <title>Bright - Syntax Highlighting React Server Component</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link
         rel="icon"
