@@ -1,5 +1,11 @@
 # bright
 
+## 0.5.5
+
+### Patch Changes
+
+- e0daac1: Add title prop
+
 ## 0.5.4
 
 ### Patch Changes

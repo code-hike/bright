@@ -1,5 +1,12 @@
 # bright-web
 
+## 0.3.7
+
+### Patch Changes
+
+- Updated dependencies [e0daac1]
+  - bright@0.5.5
+
 ## 0.3.6
 
 ### Patch Changes
