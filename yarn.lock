@@ -230,10 +230,10 @@
     human-id "^1.0.2"
     prettier "^2.7.1"
 
-"@code-hike/lighter@0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.2.6.tgz#3c1ee5ba6976ca15f842c5aebbdeea8d034df38e"
-  integrity sha512-930ImSV4LTFcYLyiKpJ1SPfU9dpJKwvMJNzBFqDYprkcPaZVHNEt+AqTqMkPSPdyRYnMuAAkX7opKwuPX/79zg==
+"@code-hike/lighter@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-0.3.0.tgz#14b1c68f596ab7e9d9423e2462ef9783258376c7"
+  integrity sha512-wLhbAEJ22khUdb3Vc1zyGvTPXxU+CIQksWE3eGv9TiGo71mFrGRss10Nycl3LkOfZFZoevNBImhVgV1J5sYiGA==
 
 "@esbuild/android-arm@0.15.18":
   version "0.15.18"

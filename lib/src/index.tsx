@@ -23,23 +23,23 @@ type CodeProps = {
   title?: string
 }
 
-type CodeComponent = ((props: CodeProps) => Promise<JSX.Element>) & {
-  theme?: BrightTheme
-  replace?: { [x: string]: string }
-}
+type CodeComponent = ((props: CodeProps) => Promise<JSX.Element>) &
+  Partial<CodeProps>
 
-export const Code: CodeComponent = async ({
-  children,
-  lang,
-  style,
-  className,
-  codeClassName,
-  titleClassName,
-  lineNumbers,
-  unstyled,
-  title,
-  theme,
-}) => {
+export const Code: CodeComponent = async (componentProps) => {
+  const {
+    children,
+    lang,
+    style,
+    className,
+    codeClassName,
+    titleClassName,
+    lineNumbers,
+    unstyled,
+    title,
+    theme,
+  } = { ...componentProps, ...Code }
+
   const finalTheme = theme || Code.theme
   if (finalTheme && (finalTheme as any).dark && (finalTheme as any).light) {
     const doubleTheme = finalTheme as DoubleTheme
