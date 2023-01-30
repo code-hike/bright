@@ -1,36 +1,50 @@
 # Hello
 
-```bash
-npm i -D @tailwindcss/aspect-ratio
-```
+```jsx
+// title app/page.js
+import { Code } from "bright"
 
-The `tailwind.config.js` file:
-
-```js
-// filename tailwind.config.js
-module.exports = {
-  // mark[7:11]
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
-  // withClass[7:16] my-class
-  theme: {
-    extend: {},
+Code.extensions = {
+  mark: ({ children, query }) => (
+    <mark style={{ background: query }}>{children}</mark>
+  ),
+  number: ({ children, content }) => (
+    <input defaultValue={content} type="number" min={0} max={99} />
+  ),
+  title: {
+    beforeHighlight: (props, query) => ({
+      ...props,
+      title: query,
+    }),
   },
-  plugins: [require("@tailwindcss/aspect-ratio")],
+}
+
+const myCode = `
+// mark[3:10] red
+console.log(1)
+// number[11:12]
+const x = 20
+`
+
+export default function Page() {
+  return <Code lang="js">{myCode}</Code>
 }
 ```
 
+````md
 ```js
-async redirects() {
-  return [
-    {
-      // link[7:14] https://codehike.org
-      source: '/:path/index.xml',
-      destination: '/:path/feed.xml/:path/feed.xml/:path/feed.xml/:path/feed.xml/:path/feed.xml/:path/feed.xml',
-      permanent: true,
-    }
-  ]
-}
+/// mark[3:10] red
+console.log(1)
+/// number[11:12]
+const x = 20
+```
+````
+
+## Result
+
+```js
+// title foo.js
+console.log(1) // mark[3:10] red
+// number[11:12]
+const x = 20
 ```

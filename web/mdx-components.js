@@ -3,7 +3,7 @@ import { Fira_Code } from "@next/font/google"
 
 const font = Fira_Code({ subsets: ["latin"] })
 
-Code.theme = "monokai"
+Code.theme = "dracula"
 Code.codeClassName = font.className
 Code.titleClassName = font.className
 Code.replace = {
@@ -11,11 +11,16 @@ Code.replace = {
 }
 
 Code.extensions = {
-  mark: ({ children }) => <mark style={{ bacground: "red" }}>{children}</mark>,
-  collapse: ({ children }) => <details>{children}</details>,
-  // title: {
-  //   beforeHighlight: (props, query) => ({ ...props, title: query.title }),
+  mark: ({ children, query }) => (
+    <mark style={{ background: query }}>{children}</mark>
+  ),
+  number: ({ children, content }) => (
+    <input defaultValue={content} type="number" min={0} max={99} />
+  ),
+  // offset: {
+  //   // change line numbers
   // },
+  title: { beforeHighlight: (props, query) => ({ ...props, title: query }) },
   // twoSlash: {
   //   beforeHighlight: (props, query) => {
   //     const annotations = []
