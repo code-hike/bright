@@ -15,9 +15,9 @@
     "skipLibCheck": true,
     "strict": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "ES2015"],
+    "lib": ["dom", "ES2019"],
     "module": "ESNext",
-    "target": "es6"
+    "target": "ES2019"
   },
   "exclude": ["node_modules"]
 }

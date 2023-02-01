@@ -8,6 +8,13 @@ Code.extensions = {
       <Input defaultValue={content} name={query} />
     ),
   },
+  title: {
+    beforeHighlight: (props, annotations) => {
+      if (annotations.length > 0) {
+        return { ...props, title: annotations[0].query }
+      }
+    },
+  },
 }
 const code = `
 <div
@@ -21,7 +28,7 @@ const code = `
   Hello World
 </div>`
 
-export default function Page() {
+export default function ClientDemo() {
   return (
     <Wrapper>
       <Code lang="jsx">{code}</Code>

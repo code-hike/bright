@@ -1,14 +1,18 @@
-import { Code } from "bright"
-import { Wrapper, Input } from "../../client-components"
+import ClientDemo from "./client-demo"
 
-Code.theme = "dracula"
+```jsx
+// title app/page.js
+import { Code } from "bright"
+import { SomeContext, Input, Demo } from "./client-components"
+
 Code.extensions = {
   input: {
-    InlineAnnotation: ({ query, content }) => (
+    InlineAnnotation: ({ content, query }) => (
       <Input defaultValue={content} name={query} />
     ),
   },
 }
+
 const code = `
 <div
   style={{
@@ -23,8 +27,14 @@ const code = `
 
 export default function Page() {
   return (
-    <Wrapper>
-      <Code lang="jsx">{code}</Code>
-    </Wrapper>
+    <SomeContext>
+      <Code lang="js">{code}</Code>
+      <Demo />
+    </SomeContext>
   )
 }
+```
+
+## Result
+
+<ClientDemo />

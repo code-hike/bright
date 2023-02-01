@@ -498,19 +498,9 @@ print(theFuture is bright)`}</Code>
                     color: "rgb(195, 232, 141)",
                     textDecoration: "underline",
                   }}
-                  href="https://github.com/vercel/next.js/tree/canary/examples/app-dir-mdx"
+                  href="https://beta.nextjs.org/docs/guides/mdx"
                 >
-                  the Next.js example
-                </a>{" "}
-                or{" "}
-                <a
-                  style={{
-                    color: "rgb(195, 232, 141)",
-                    textDecoration: "underline",
-                  }}
-                  href="https://github.com/vercel/next.js/pull/44651"
-                >
-                  the PR
+                  the Next.js docs
                 </a>
               </span>
             </span>

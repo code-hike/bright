@@ -1,13 +1,18 @@
-# Hello
+# Demo
 
 ```jsx
 // title app/page.js
 import { Code } from "bright"
 
 Code.extensions = {
-  mark: ({ children, query }) => (
-    <mark style={{ background: query }}>{children}</mark>
-  ),
+  mark: {
+    InlineAnnotation: ({ children, query }) => (
+      <mark style={{ background: query }}>{children}</mark>
+    ),
+    MultilineAnnotation: ({ children, query }) => (
+      <mark style={{ background: query }}>{children}</mark>
+    ),
+  },
   number: ({ children, content }) => (
     <input defaultValue={content} type="number" min={0} max={99} />
   ),
@@ -22,7 +27,7 @@ Code.extensions = {
 const myCode = `
 // mark[3:10] red
 console.log(1)
-// number[11:12]
+// mark
 const x = 20
 `
 
@@ -45,6 +50,6 @@ const x = 20
 ```js
 // title foo.js
 console.log(1) // mark[3:10] red
-// number[11:12]
+// mark
 const x = 20
 ```

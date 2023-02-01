@@ -7,19 +7,53 @@ import {
   LineGroup,
   Tokens,
   Annotation,
+  Token,
 } from "@code-hike/lighter"
 import React from "react"
 import { TitleBar } from "./components"
 
-type Extension =
-  | React.Component
-  | {
-      beforeHighlight?: (
-        props: FinalCodeProps,
-        query?: string
-      ) => FinalCodeProps
-      AnnotationComponent: React.Component
-    }
+// TODO move to lighter
+type ThemeColors = {
+  background: string
+  foreground: string
+  lineNumberForeground: string
+  selectionBackground: string
+  editorBackground: string
+  editorGroupHeaderBackground: string
+  activeTabBackground: string
+  activeTabForeground: string
+  tabBorder: string
+  activeTabBorder: string
+  colorScheme: "dark" | "light"
+}
+
+type InlineAnnotationProps = {
+  children: React.ReactNode
+  tokens: Token[]
+  query?: string
+  content?: string
+  colors: ThemeColors
+}
+type InlineAnnotationComponent = (props: InlineAnnotationProps) => JSX.Element
+
+type MultilineAnnotationProps = {
+  children: React.ReactNode
+  query?: string
+  content?: string
+  colors: ThemeColors
+}
+type MultilineAnnotationComponent = (
+  props: MultilineAnnotationProps
+) => JSX.Element
+
+type Extension = {
+  beforeHighlight?: (
+    props: FinalCodeProps,
+    annotations: Annotation[]
+  ) => FinalCodeProps
+  InlineAnnotation?: InlineAnnotationComponent
+  MultilineAnnotation?: MultilineAnnotationComponent
+}
 type Extensions = Record<string, Extension>
 
 export type FinalCodeProps = {
@@ -55,9 +89,9 @@ export async function FinalCode(props: FinalCodeProps) {
 
   let filename = title
 
-  const { lines, colorScheme, ...colors } = await annotatedHighlight(
+  const { lines, ...colors } = await annotatedHighlight(
     code,
-    lang,
+    lang || "js",
     theme,
     annotations
   )
@@ -79,7 +113,7 @@ export async function FinalCode(props: FinalCodeProps) {
         borderRadius: "4px",
         overflow: "hidden",
         margin: "1em 0",
-        colorScheme,
+        colorScheme: colors.colorScheme,
         ...style,
       }}
     >
@@ -95,16 +129,20 @@ export async function FinalCode(props: FinalCodeProps) {
           margin: 0,
           color: foreground,
           background,
-          padding: "1em",
+          padding: "1em 0",
           overflow: "auto",
         }}
       >
         <Style colors={colors} themeName={themeName} scheme={scheme} />
-        <code className={codeClassName}>
+        <code
+          className={codeClassName}
+          style={{ display: "block", width: "fit-content" }}
+        >
           <LinesComponent
             lines={lines}
             digits={digits}
             extensions={extensions}
+            colors={colors}
           />
         </code>
       </pre>
@@ -116,10 +154,12 @@ function LinesComponent({
   lines,
   digits,
   extensions,
+  colors,
 }: {
   lines: Lines
   digits: number
   extensions: Extensions
+  colors: ThemeColors
 }) {
   return (
     <>
@@ -131,7 +171,21 @@ function LinesComponent({
               line={line}
               digits={digits}
               extensions={extensions}
+              colors={colors}
             />
+          )
+        } else if (extensions[line.annotationName]?.MultilineAnnotation) {
+          const extension = extensions[line.annotationName]
+          const Wrapper = extension.MultilineAnnotation!
+          return (
+            <Wrapper key={i} colors={colors} query={line.annotationQuery}>
+              <LinesComponent
+                lines={line.lines}
+                digits={digits}
+                extensions={extensions}
+                colors={colors}
+              />
+            </Wrapper>
           )
         } else {
           return (
@@ -140,6 +194,7 @@ function LinesComponent({
               lines={line.lines}
               digits={digits}
               extensions={extensions}
+              colors={colors}
             />
           )
         }
@@ -152,30 +207,40 @@ function LineComponent({
   line,
   digits,
   extensions,
+  colors,
 }: {
   line: Line
   digits: number
   extensions: Extensions
+  colors: ThemeColors
 }) {
   return (
-    <span>
-      {digits > 0 && (
-        <span className="bright-ln" style={{ width: `${digits}ch` }}>
-          {line.lineNumber}
-        </span>
-      )}
-      <TokensComponent tokens={line.tokens} extensions={extensions} />
-      <br />
-    </span>
+    <div style={{ padding: "0 1em" }}>
+      <span>
+        {digits > 0 && (
+          <span className="bright-ln" style={{ width: `${digits}ch` }}>
+            {line.lineNumber}
+          </span>
+        )}
+        <TokensComponent
+          tokens={line.tokens}
+          extensions={extensions}
+          colors={colors}
+        />
+        <br />
+      </span>
+    </div>
   )
 }
 
 function TokensComponent({
   tokens,
   extensions,
+  colors,
 }: {
   tokens: Tokens
-  extensions: Record<string, any>
+  extensions: Extensions
+  colors: ThemeColors
 }) {
   return (
     <>
@@ -186,27 +251,50 @@ function TokensComponent({
               {token.content}
             </span>
           )
-        } else {
-          const Wrapper = extensions[token.annotationName] || React.Fragment
+        } else if (extensions[token.annotationName]?.InlineAnnotation) {
+          const extension = extensions[token.annotationName]
+          const Wrapper = extension?.InlineAnnotation!
           // console.log("Wrapper", token.tokens)
           return (
             <Wrapper
               key={i}
               query={token.annotationQuery}
-              tokens={token.tokens}
+              tokens={getTokens(token.tokens)}
               content={getContent(token.tokens)}
+              colors={colors}
             >
               <TokensComponent
-                key={i}
                 tokens={token.tokens}
                 extensions={extensions}
+                colors={colors}
               />
             </Wrapper>
+          )
+        } else {
+          return (
+            <TokensComponent
+              key={i}
+              tokens={token.tokens}
+              extensions={extensions}
+              colors={colors}
+            />
           )
         }
       })}
     </>
   )
+}
+
+function getTokens(tokens: Tokens): Token[] {
+  return tokens
+    .map((token) => {
+      if ("content" in token) {
+        return token
+      } else {
+        return getTokens(token.tokens)
+      }
+    })
+    .flat()
 }
 
 function getContent(tokens: Tokens): string {

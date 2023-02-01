@@ -52,14 +52,18 @@ export async function Code(props: InnerCodeProps) {
     lang: language,
     annotations,
   } as FinalCodeProps
-  annotations.forEach((annotation) => {
-    const extension = extensions[annotation.name]
+
+  extensionNames.forEach((name) => {
+    const extension = extensions[name]
     if (
-      extension &&
       "beforeHighlight" in extension &&
       typeof extension.beforeHighlight === "function"
     ) {
-      newProps = extension.beforeHighlight(newProps, annotation.query)
+      const extensionAnnotations = annotations.filter(
+        (annotation) => annotation.name === name
+      )
+      newProps =
+        extension.beforeHighlight(newProps, extensionAnnotations) || newProps
     }
   })
 
