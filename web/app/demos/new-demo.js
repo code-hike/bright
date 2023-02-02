@@ -1,25 +1,8 @@
 import { Code } from "bright"
-import { Fira_Code } from "@next/font/google"
-
-const font = Fira_Code({ subsets: ["latin"] })
-
-Code.theme = "github-dark-dimmed"
-Code.codeClassName = font.className
-Code.titleClassName = font.className
-Code.replace = {
-  APIKEY: "sk_test_CGGvfNiIPwLXiDwaOfZ3oX6Y",
-}
-// Code.lineNumbers = true
+import { WithBackground } from "../with-background"
+import theme from "./theme"
 
 Code.extensions = {
-  mark: {
-    InlineAnnotation: ({ children, query }) => (
-      <mark style={{ background: query }}>{children}</mark>
-    ),
-    MultilineAnnotation: ({ children, query }) => (
-      <mark style={{ background: query }}>{children}</mark>
-    ),
-  },
   focus: {
     MultilineAnnotation: ({ children }) => (
       <div style={{ filter: "contrast(0.3)" }}>{children}</div>
@@ -82,38 +65,63 @@ Code.extensions = {
         name: "focus",
         ranges: newRanges,
       })
+
       return { ...props, annotations: newAnnotations }
     },
   },
-  // number: {
-  //   InlineAnnotation: ({ children, content }) => (
-  //     <input defaultValue={content} type="number" min={0} max={99} />
-  //   ),
-  // },
-  // offset: {
-  //   // change line numbers
-  // },
-  title: {
-    beforeHighlight: (props, annotations) => {
-      if (annotations.length > 0) {
-        return { ...props, title: annotations[0].query }
-      }
-    },
-  },
-  // twoSlash: {
-  //   beforeHighlight: (props, query) => {
-  //     const annotations = []
-  //     const newCode = ""
-  //     return {
-  //       ...props,
-  //       annotations: [...props.annotations, ...annotations],
-  //       code: newCode,
-  //     }
-  //   },
-  //   AnnotationComponent: ({ children, query }) => {},
-  // },
 }
 
-export function useMDXComponents(components) {
-  return { ...components, pre: Code }
+export function NewDemo({
+  sourceProps,
+  demoProps,
+  preview,
+  filename = "app/page.js",
+}) {
+  return (
+    <>
+      <WithBackground
+        blur={12}
+        opacity={0.9}
+        style={{
+          overflow: "hidden",
+          borderRadius: "4px",
+          border: "1px solid #444",
+          background: "#0F111A",
+        }}
+        bg={{ color: "rgba(137, 221, 255, 0.2)", "--text-color": "#ccc2" }}
+        fg={{ color: "rgb(137, 221, 255)", "--text-color": "#ccc" }}
+      >
+        <code
+          style={{
+            color: "#888",
+            fontSize: "1rem",
+            textAlign: "center",
+            display: "block",
+            marginTop: "0.3rem",
+          }}
+        >
+          {filename}
+        </code>
+        <Code
+          style={{ fontSize: "1.15rem", lineHeight: "1.5rem", margin: 0 }}
+          theme={theme}
+          {...sourceProps}
+        />
+      </WithBackground>
+      {preview || (
+        <Code
+          theme="dracula"
+          lang="py"
+          style={{
+            fontSize: "1.2rem",
+            margin: "-2rem auto 0",
+            position: "relative",
+            border: "1px solid #444",
+            width: "85%",
+          }}
+          {...demoProps}
+        ></Code>
+      )}
+    </>
+  )
 }
