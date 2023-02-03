@@ -1,5 +1,11 @@
 # bright
 
+## 0.6.2
+
+### Patch Changes
+
+- 4cf4528: Add content to multiline annotation props
+
 ## 0.6.1
 
 ### Patch Changes
