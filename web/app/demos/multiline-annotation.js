@@ -12,7 +12,7 @@ print("sunshiny")
 print("day")
 \`.trim()
 
-// focus(1:16)
+// focus(1:9)
 Code.extensions = {
   mark: {
     MultilineAnnotation: ({ children, query }) => (
@@ -23,11 +23,9 @@ Code.extensions = {
   },
 }
 
-// focus(3)
+// focus(2)
 export default function Page() {
-  return (
-    <Code lang="py">{myCode}</Code>
-  )
+  return <Code lang="py">{myCode}</Code>
 }
 `
 
@@ -56,7 +54,7 @@ export default function Demo() {
       <NewDemo
         sourceProps={{
           children: sourceCode,
-          lang: "js",
+          lang: "jsx",
         }}
         demoProps={demoProps}
       />

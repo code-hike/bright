@@ -4,6 +4,7 @@ import { SocialLinks } from "./icons"
 import { WithBackground } from "./with-background"
 import InlineAnnotationDemo from "./demos/inline-annotation"
 import MultilineAnnotationDemo from "./demos/multiline-annotation"
+import PropsAnnotationDemo from "./demos/props-annotation"
 
 export default async function Page() {
   return (
@@ -36,7 +37,6 @@ export default async function Page() {
       />
       <div style={{ height: "3rem" }} />
       <Details />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Title</h2>
       <div style={{ height: "1rem" }} />
@@ -84,7 +84,6 @@ export default async function Page() {
 console.log(hello, "my old friend")`}
         codeProps={{ title: "shiny.js", lang: "js" }}
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Line Numbers</h2>
       <div style={{ height: "1rem" }} />
@@ -130,7 +129,6 @@ console.log(hello, "my old friend")`}
 console.log(hello, "my old friend")`}
         codeProps={{ lineNumbers: true, lang: "js" }}
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Global Props</h2>
       <div style={{ height: "1rem" }} />
@@ -242,7 +240,6 @@ print(theFuture is bright)`}
         codeProps={{ lang: "py", theme: "material-lighter" }}
       />
       <div style={{ height: "3rem" }} />
-
       <h2 style={{ textAlign: "center" }}>Dark Mode</h2>
       <div style={{ height: "1rem" }} />
       <Demo
@@ -526,19 +523,18 @@ print(theFuture is bright)`}</Code>
           </code>
         }
       />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Inline Annotations</h2>
       <InlineAnnotationDemo />
-
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Multiline Annotations</h2>
       <MultilineAnnotationDemo />
-
       <div style={{ height: "3rem" }} />
-      <h2 style={{ textAlign: "center" }}>Replace</h2>
+      <h2 style={{ textAlign: "center" }}>Props Annotations</h2>
+      <PropsAnnotationDemo />
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Styles</h2>
+      soon...
       <div style={{ height: "3rem" }} />
     </div>
   )
