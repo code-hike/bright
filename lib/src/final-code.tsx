@@ -178,7 +178,12 @@ function LinesComponent({
           const extension = extensions[line.annotationName]
           const Wrapper = extension.MultilineAnnotation!
           return (
-            <Wrapper key={i} colors={colors} query={line.annotationQuery}>
+            <Wrapper
+              key={i}
+              colors={colors}
+              query={line.annotationQuery}
+              content={getLinesContent(line.lines)}
+            >
               <LinesComponent
                 lines={line.lines}
                 digits={digits}
@@ -307,6 +312,18 @@ function getContent(tokens: Tokens): string {
       }
     })
     .join("")
+}
+
+function getLinesContent(lines: Lines): string {
+  return lines
+    .map((line) => {
+      if ("lineNumber" in line) {
+        return getContent(line.tokens)
+      } else {
+        return getLinesContent(line.lines)
+      }
+    })
+    .join("\n")
 }
 
 function Style({
