@@ -136,7 +136,7 @@ export async function FinalCode(props: FinalCodeProps) {
         <Style colors={colors} themeName={themeName} scheme={scheme} />
         <code
           className={codeClassName}
-          style={{ display: "block", width: "fit-content" }}
+          style={{ display: "block", minWidth: "fit-content" }}
         >
           <LinesComponent
             lines={lines}

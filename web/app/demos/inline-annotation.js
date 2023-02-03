@@ -6,7 +6,6 @@ import { Code } from "bright"
 // focus(1:2)
 // here we wrap the columns 12 to 17 
 // inside a <mark> element 
-
 // focus(2:3)
 const myCode = \`
 # myMark[12:17] rgba(241, 250, 140, 0.25)

@@ -3,6 +3,7 @@ import { CodeLine, demo, Demo } from "./demo"
 import { SocialLinks } from "./icons"
 import { WithBackground } from "./with-background"
 import InlineAnnotationDemo from "./demos/inline-annotation"
+import MultilineAnnotationDemo from "./demos/multiline-annotation"
 
 export default async function Page() {
   return (
@@ -527,8 +528,12 @@ print(theFuture is bright)`}</Code>
       />
 
       <div style={{ height: "3rem" }} />
-      <h2 style={{ textAlign: "center" }}>Annotations</h2>
+      <h2 style={{ textAlign: "center" }}>Inline Annotations</h2>
       <InlineAnnotationDemo />
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Multiline Annotations</h2>
+      <MultilineAnnotationDemo />
 
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Replace</h2>

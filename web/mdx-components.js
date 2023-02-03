@@ -12,12 +12,19 @@ Code.replace = {
 // Code.lineNumbers = true
 
 Code.extensions = {
+  lineNumbers: {
+    beforeHighlight: (props, annotations) => {
+      if (annotations.length > 0) {
+        return { ...props, lineNumbers: true }
+      }
+    },
+  },
   mark: {
     InlineAnnotation: ({ children, query }) => (
       <mark style={{ background: query }}>{children}</mark>
     ),
     MultilineAnnotation: ({ children, query }) => (
-      <mark style={{ background: query }}>{children}</mark>
+      <div style={{ background: query }}>{children}</div>
     ),
   },
   focus: {
