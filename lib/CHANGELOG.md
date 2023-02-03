@@ -1,5 +1,11 @@
 # bright
 
+## 0.6.1
+
+### Patch Changes
+
+- 162cc0b: Multiline annotations
+
 ## 0.6.0
 
 ### Minor Changes
