@@ -5,7 +5,7 @@ export default {
     {
       name: "Global settings",
       settings: {
-        background: "#0F111A",
+        background: "#0F111A00",
         foreground: "#A6ACCD",
       },
     },
@@ -639,7 +639,7 @@ export default {
     "tab.inactiveModifiedBorder": "#904348",
     "tab.unfocusedActiveModifiedBorder": "#c05a60",
     "tab.unfocusedInactiveModifiedBorder": "#904348",
-    "editor.background": "#0F111A",
+    "editor.background": "#0F111A00",
     "editor.foreground": "#A6ACCD",
     "editorLineNumber.foreground": "#3B3F5180",
     "editorLineNumber.activeForeground": "#525975",

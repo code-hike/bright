@@ -86,7 +86,7 @@ export function NewDemo({
           overflow: "hidden",
           borderRadius: "4px",
           border: "1px solid #444",
-          background: "#0F111A",
+          background: "#2226",
         }}
         bg={{ color: "rgba(137, 221, 255, 0.2)", "--text-color": "#ccc2" }}
         fg={{ color: "rgb(137, 221, 255)", "--text-color": "#ccc" }}
