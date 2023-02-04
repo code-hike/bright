@@ -1,22 +1,20 @@
-import { Code } from "bright"
 import Demo from "./demo"
 
 import rawDemo from "!!raw-loader!./demo.js"
 import rawCollapse from "!!raw-loader!./collapse.js"
 
+import { Recipe } from "../recipe"
+
+const data = {
+  title: "Collapse Annotation",
+  id: "collapse",
+  Demo,
+  source: [
+    { title: "app/page.js", children: rawDemo },
+    { title: "app/collapse.js", children: rawCollapse },
+  ],
+}
+
 export default function Page() {
-  return (
-    <main>
-      <h1>Collapse Annotation</h1>
-      <h2>Demo</h2>
-      <Demo />
-      <h2>Source</h2>
-      <Code lang="jsx" theme="material-ocean" title="app/page.js">
-        {rawDemo}
-      </Code>
-      <Code lang="jsx" theme="material-ocean" title="app/collapse.js">
-        {rawCollapse}
-      </Code>
-    </main>
-  )
+  return <Recipe {...data} />
 }

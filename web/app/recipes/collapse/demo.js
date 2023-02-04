@@ -2,7 +2,7 @@ import { Code } from "bright"
 import { CollapseAnnotation } from "./collapse"
 
 const myCode = `
-// collapse(1:5) closes
+// collapse(1:5) close
 function lorem(ipsum, dolor = 1) {
   const sit = ipsum == null ? 0 : ipsum.sit;
   dolor = sit - amet(dolor);
@@ -16,8 +16,7 @@ function consectetur(...adipiscing) {
 }
 `.trim()
 
-Code.theme = "dracula"
-Code.extensions = {
+const extensions = {
   collapse: {
     MultilineAnnotation: CollapseAnnotation,
   },
@@ -25,7 +24,7 @@ Code.extensions = {
 
 export default function Page() {
   return (
-    <Code lang="js" lineNumbers>
+    <Code lang="js" lineNumbers extensions={extensions} theme="dracula">
       {myCode}
     </Code>
   )
