@@ -585,6 +585,10 @@ function Details() {
           <span>VS Code's syntax highlighting. </span>
           <span style={{ color: "#fb7fec" }}>All the themes.</span>
         </li>
+        <li>
+          <span style={{ color: "rgb(137, 221, 255)" }}>Super flexible.</span>
+          <span>Extend it as much as you want.</span>
+        </li>
       </ul>
       <div style={{ height: "2rem" }} />
       <SocialLinks />
