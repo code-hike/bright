@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { ChevronRightIcon, ChevronDownIcon } from "@radix-ui/react-icons"
 
-export function CollapseAnnotation({ children, query, colors }) {
+export function CollapseAnnotation({ children, query, color }) {
   const firstLine = React.Children.toArray(children)[0]
   const [isOpen, setIsOpen] = useState(query !== "close")
   const Icon = isOpen ? ChevronDownIcon : ChevronRightIcon
@@ -22,7 +22,7 @@ export function CollapseAnnotation({ children, query, colors }) {
       >
         <Icon
           style={{
-            color: colors.lineNumberForeground,
+            color,
             verticalAlign: "middle",
             display: "inline-block",
           }}

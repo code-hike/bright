@@ -9,6 +9,7 @@ function lorem(ipsum, dolor = 1) {
 }
 `.trim()
 
+/** @type {import("bright").BrightProps["extensions"]} */
 const extensions = {
   link: {
     InlineAnnotation: ({ children, query }) => (

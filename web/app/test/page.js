@@ -1,11 +1,11 @@
-import { Code } from "bright"
+import { Code, tokensToContent } from "bright"
 import { Wrapper, Input } from "../../client-components"
 
 Code.theme = "dracula"
 Code.extensions = {
   input: {
-    InlineAnnotation: ({ query, content }) => (
-      <Input defaultValue={content} name={query} />
+    InlineAnnotation: ({ query, tokens }) => (
+      <Input defaultValue={tokensToContent(tokens)} name={query} />
     ),
   },
 }

@@ -1,72 +1,124 @@
-import { LanguageAlias, extractAnnotations } from "@code-hike/lighter"
-import { FinalCode, FinalCodeProps } from "./final-code"
+import { Theme, annotatedHighlight } from "@code-hike/lighter"
+import { TitleBar } from "./title"
+import { LinesComponent } from "./lines"
+import { BrightProps, CodeProps } from "./types"
 
-// children when it comes from the Markdown pre element
-type MdCodeText = {
-  type: "code"
-  props: { className: string; children: string }
-}
-export type CodeText = string | MdCodeText
-
-export type InnerCodeProps = Omit<FinalCodeProps, "code"> & {
-  children: CodeText
-}
-
-function parseChildren(
-  children: CodeText,
-  lang: LanguageAlias
-): { code: string; language: LanguageAlias } {
-  if (typeof children === "object") {
-    return {
-      code: children.props?.children,
-      language: children.props?.className.replace(
-        "language-",
-        ""
-      ) as LanguageAlias,
-    }
-  } else {
-    return {
-      code: children,
-      language: lang,
-    }
-  }
-}
-
-export async function Code(props: InnerCodeProps) {
-  const { children, lang, extensions, ...rest } = props
-
-  let { code: text, language } = parseChildren(children, lang)
-  text = text.trim()
-
-  const extensionNames = Object.keys(extensions)
-  const { code, annotations } = await extractAnnotations(
-    text,
-    language,
-    extensionNames
+export async function BrightCode(props: CodeProps) {
+  const { code, lang, theme, annotations } = props
+  const { lines, ...colors } = await annotatedHighlight(
+    code,
+    lang,
+    theme,
+    annotations
   )
 
-  let newProps = {
-    ...rest,
-    extensions,
-    code,
-    lang: language,
-    annotations,
-  } as FinalCodeProps
+  const brightProps: BrightProps = {
+    ...props,
+    colors,
+    lines,
+    // TODO find largest line number (line numbers can be changed by extensions)
+    lineCount: code.split(`\n`).length,
+  }
 
-  extensionNames.forEach((name) => {
-    const extension = extensions[name]
-    if (
-      "beforeHighlight" in extension &&
-      typeof extension.beforeHighlight === "function"
-    ) {
-      const extensionAnnotations = annotations.filter(
-        (annotation) => annotation.name === name
-      )
-      newProps =
-        extension.beforeHighlight(newProps, extensionAnnotations) || newProps
+  return <WrapperRenderer {...brightProps}></WrapperRenderer>
+}
+
+function WrapperRenderer(props: BrightProps) {
+  const { theme, className, style, colors, scheme, title } = props
+  const { foreground } = colors
+  const themeName = getThemeName(theme)
+  return (
+    <div
+      data-bright-theme={themeName}
+      className={className}
+      style={{
+        color: foreground,
+        borderRadius: "4px",
+        overflow: "hidden",
+        margin: "1em 0",
+        colorScheme: colors.colorScheme,
+        ...style,
+      }}
+    >
+      <Style colors={colors} themeName={themeName} scheme={scheme} />
+      {title && <TitleBar {...props} />}
+      <Pre {...props} />
+    </div>
+  )
+}
+
+function Pre(props: BrightProps) {
+  const { lines, codeClassName, colors } = props
+  const { foreground, background } = colors
+  return (
+    <pre
+      style={{
+        margin: 0,
+        color: foreground,
+        background,
+        padding: "1em 0",
+        overflow: "auto",
+      }}
+    >
+      <code
+        className={codeClassName}
+        style={{ display: "block", minWidth: "fit-content" }}
+      >
+        <LinesComponent lines={lines} brightProps={props} />
+      </code>
+    </pre>
+  )
+}
+
+function Style({
+  themeName,
+  scheme,
+  colors,
+}: {
+  themeName: string
+  scheme: "dark" | "light" | undefined
+  colors: { selectionBackground: string; lineNumberForeground: string }
+}) {
+  const codeSelector = `div[data-bright-theme="${themeName}"]`
+  const css = `
+  ${displayStyle(scheme, codeSelector)}
+  ${codeSelector} ::selection {
+    background-color: ${colors.selectionBackground};
+  }
+  ${codeSelector} .bright-ln { 
+    color: ${colors.lineNumberForeground}; 
+    margin-right: 1.5ch; 
+    display: inline-block;
+    text-align: right;
+    user-select: none;
+  }`
+  return <style dangerouslySetInnerHTML={{ __html: css }} />
+}
+
+function displayStyle(
+  scheme: "dark" | "light" | undefined,
+  codeSelector: string
+) {
+  if (scheme === "dark") {
+    return `${codeSelector} {
+      display: block;
     }
-  })
-
-  //  @ts-expect-error Server Component
-  return <FinalCode {...newProps} />
+    [data-theme="light"] ${codeSelector}  {
+      display: none;
+    }`
+  }
+  if (scheme === "light") {
+    return `${codeSelector} {
+      display: none;
+    }
+    [data-theme="light"] ${codeSelector} {
+      display: block;
+    }`
+  }
+  return ""
+}
+function getThemeName(theme?: Theme) {
+  if (!theme) return "default"
+  if (typeof theme === "string") return theme
+  return (theme as any).name
 }
