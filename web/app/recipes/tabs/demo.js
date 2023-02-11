@@ -16,7 +16,30 @@ function Root({ brightProps, ...props }) {
 function Title({ brightProps, ...props }) {
   const { subProps, title } = brightProps
   const titles = subProps ? subProps.map((subProp) => subProp.title) : [title]
-  return <TabsList titles={titles} />
+
+  // todo reuse
+  const { activeTabBackground, activeTabBorder, activeTabForeground } =
+    brightProps.colors
+  const elementProps = {
+    style: {
+      background: activeTabBackground,
+      color: activeTabForeground,
+      borderBottom: `1px solid ${activeTabBorder}`,
+      display: "inline-block",
+      padding: "0.5em 1em",
+      fontSize: "0.8em",
+    },
+  }
+
+  return (
+    <Code.TitleComponent {...props} brightProps={brightProps}>
+      <TabsList titles={titles}>
+        {titles.map((title) => (
+          <Code.TabComponent key={title} {...elementProps} children={title} />
+        ))}
+      </TabsList>
+    </Code.TitleComponent>
+  )
 }
 
 /** @type {import("bright").BrightProps["PreComponent"]} */
