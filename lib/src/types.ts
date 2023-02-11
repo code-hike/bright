@@ -102,14 +102,18 @@ export type CodeProps = Prettify<
     // extensions
     extensions: Extensions
     annotations: Annotation[]
+
+    subProps?: Partial<Omit<CodeProps, "subProps">>[]
   } & BrightComponents
 >
 
 // afterHighlight
 export type BrightProps = Prettify<
-  CodeProps & {
+  Omit<CodeProps, "subProps"> & {
     colors: Prettify<ThemeColors>
     lines: Lines
     lineCount: number
+
+    subProps?: Partial<Omit<BrightProps, "subProps">>[]
   }
 >

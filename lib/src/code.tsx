@@ -4,6 +4,23 @@ import { LinesComponent } from "./lines"
 import { BrightProps, CodeProps } from "./types"
 
 export async function BrightCode(props: CodeProps) {
+  const brightProps = await highlight(props)
+  return <WrapperRenderer {...brightProps}></WrapperRenderer>
+}
+
+async function highlight(props: CodeProps): Promise<BrightProps> {
+  if (props.subProps) {
+    const { subProps, ...rootProps } = props
+    const newSubProps = await Promise.all(
+      subProps.map((sub) => highlight({ ...rootProps, ...sub }))
+    )
+    return {
+      ...newSubProps[0],
+      ...rootProps,
+      subProps: newSubProps,
+    }
+  }
+
   const { code, lang, theme, annotations } = props
   const { lines, ...colors } = await annotatedHighlight(
     code,
@@ -14,13 +31,14 @@ export async function BrightCode(props: CodeProps) {
 
   const brightProps: BrightProps = {
     ...props,
+    subProps: [],
     colors,
     lines,
     // TODO find largest line number (line numbers can be changed by extensions)
     lineCount: code.split(`\n`).length,
   }
 
-  return <WrapperRenderer {...brightProps}></WrapperRenderer>
+  return brightProps
 }
 
 function WrapperRenderer(props: BrightProps) {

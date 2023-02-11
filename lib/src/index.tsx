@@ -16,7 +16,7 @@ type CodeComponent = ((props: InputCodeProps) => Promise<JSX.Element>) &
 
 const Code: CodeComponent = async (componentProps) => {
   // merge props and global props
-  const { theme, children, lang, extensions, ...rest } = {
+  const { children, lang, ...rest } = {
     ...Code,
     ...componentProps,
   }
@@ -25,22 +25,9 @@ const Code: CodeComponent = async (componentProps) => {
   const { code: text, language } = parseChildren(children, lang)
 
   // split code and annotations
-  const extensionNames = Object.keys(extensions)
-  const { code, annotations } = await extractAnnotations(
-    text,
-    language,
-    extensionNames
-  )
+  let props = { ...rest, code: text, lang: language }
 
-  const inputAnnotations = rest.annotations || []
-
-  const props = {
-    ...rest,
-    code,
-    lang: language,
-    extensions,
-    annotations: inputAnnotations.concat(annotations),
-  }
+  const { theme } = props
 
   const isDouble =
     (theme && (theme as any).dark && (theme as any).light) || false
@@ -64,7 +51,66 @@ const Code: CodeComponent = async (componentProps) => {
 }
 
 async function AnnotatedCode(props: CodeProps) {
-  // run beforeHighlight for each extension
+  let newProps = await extractAnnotationsFromCode(props)
+  newProps = runExtensionsBeforeHighlight(newProps)
+
+  /* @ts-expect-error Server Component */
+  return <BrightCode {...newProps} />
+}
+
+Code.theme = "dark-plus"
+Code.extensions = {}
+Object.assign(Code, components)
+
+export { Code, tokensToContent, tokensToTokenList, linesToContent }
+
+export type { BrightProps, BrightComponents }
+
+async function extractAnnotationsFromCode(
+  props: CodeProps
+): Promise<CodeProps> {
+  if (props.subProps) {
+    const { subProps, ...rootProps } = props
+    return {
+      ...rootProps,
+      subProps: await Promise.all(
+        subProps.map((sub) =>
+          extractAnnotationsFromCode({ ...rootProps, ...sub })
+        )
+      ),
+    }
+  }
+
+  const { extensions, code, lang } = props
+
+  const extensionNames = Object.keys(extensions)
+  const { code: newCode, annotations } = await extractAnnotations(
+    code,
+    lang,
+    extensionNames
+  )
+
+  const inputAnnotations = props.annotations || []
+
+  const newProps = {
+    ...props,
+    code: newCode,
+    annotations: inputAnnotations.concat(annotations),
+  }
+  return newProps
+}
+
+function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
+  if (props.subProps) {
+    const { subProps, ...rootProps } = props
+    return {
+      ...rootProps,
+      subProps: subProps.map((sub) =>
+        runExtensionsBeforeHighlight({ ...rootProps, ...sub })
+      ),
+    }
+  }
+
   const { annotations, extensions } = props
   const extensionNames = Object.keys(extensions)
   let newProps = props
@@ -81,18 +127,8 @@ async function AnnotatedCode(props: CodeProps) {
         extension.beforeHighlight(newProps, extensionAnnotations) || newProps
     }
   })
-
-  /* @ts-expect-error Server Component */
-  return <BrightCode {...newProps} />
+  return newProps
 }
-
-Code.theme = "dark-plus"
-Code.extensions = {}
-Object.assign(Code, components)
-
-export { Code, tokensToContent, tokensToTokenList, linesToContent }
-
-export type { BrightProps, BrightComponents }
 
 function parseChildren(
   children: InputCodeProps["children"],
@@ -100,7 +136,7 @@ function parseChildren(
 ): { code: string; language: LanguageAlias } {
   if (typeof children === "object") {
     return {
-      code: children.props?.children,
+      code: children.props?.children?.trim(),
       language: children.props?.className.replace(
         "language-",
         ""
