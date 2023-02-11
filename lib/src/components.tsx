@@ -1,7 +1,9 @@
+import { Pre } from "./code"
 import { BrightComponents } from "./types"
 
 const components: BrightComponents = {
-  WrapperComponent: ({ brightProps, ...props }) => <div {...props} />,
+  RootComponent: ({ brightProps, ...props }) => <div {...props} />,
+  PreComponent: ({ brightProps, ...props }) => <Pre {...brightProps} />,
   TitleComponent: ({ brightProps, ...props }) => <div {...props} />,
   TabComponent: ({ brightProps, ...props }) => <code {...props} />,
 }

@@ -5,7 +5,7 @@ import { BrightProps, CodeProps } from "./types"
 
 export async function BrightCode(props: CodeProps) {
   const brightProps = await highlight(props)
-  return <WrapperRenderer {...brightProps}></WrapperRenderer>
+  return <Root {...brightProps}></Root>
 }
 
 async function highlight(props: CodeProps): Promise<BrightProps> {
@@ -15,8 +15,8 @@ async function highlight(props: CodeProps): Promise<BrightProps> {
       subProps.map((sub) => highlight({ ...rootProps, ...sub }))
     )
     return {
-      ...newSubProps[0],
       ...rootProps,
+      ...newSubProps[0],
       subProps: newSubProps,
     }
   }
@@ -41,12 +41,21 @@ async function highlight(props: CodeProps): Promise<BrightProps> {
   return brightProps
 }
 
-function WrapperRenderer(props: BrightProps) {
-  const { theme, className, style, colors, scheme, title } = props
+function Root(props: BrightProps) {
+  const {
+    theme,
+    className,
+    style,
+    colors,
+    scheme,
+    title,
+    RootComponent,
+    PreComponent,
+  } = props
   const { foreground } = colors
   const themeName = getThemeName(theme)
   return (
-    <div
+    <RootComponent
       data-bright-theme={themeName}
       className={className}
       style={{
@@ -57,16 +66,17 @@ function WrapperRenderer(props: BrightProps) {
         colorScheme: colors.colorScheme,
         ...style,
       }}
+      brightProps={props}
     >
       <Style colors={colors} themeName={themeName} scheme={scheme} />
       {title && <TitleBar {...props} />}
-      <Pre {...props} />
-    </div>
+      <PreComponent brightProps={props} />
+    </RootComponent>
   )
 }
 
-function Pre(props: BrightProps) {
-  const { lines, codeClassName, colors } = props
+export function Pre(brightProps: BrightProps) {
+  const { lines, codeClassName, colors } = brightProps
   const { foreground, background } = colors
   return (
     <pre
@@ -82,7 +92,7 @@ function Pre(props: BrightProps) {
         className={codeClassName}
         style={{ display: "block", minWidth: "fit-content" }}
       >
-        <LinesComponent lines={lines} brightProps={props} />
+        <LinesComponent lines={lines} brightProps={brightProps} />
       </code>
     </pre>
   )

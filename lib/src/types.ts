@@ -13,7 +13,8 @@ type BrightComponent<T> = (
 ) => JSX.Element
 
 export type BrightComponents = {
-  WrapperComponent: BrightComponent<HTMLProps>
+  RootComponent: BrightComponent<HTMLProps>
+  PreComponent: BrightComponent<{}>
   TitleComponent: BrightComponent<HTMLProps>
   TabComponent: BrightComponent<HTMLProps>
 }
