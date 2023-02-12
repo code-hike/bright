@@ -1,5 +1,6 @@
 import { Code } from "bright"
 import { diffLines } from "diff"
+import React from "react"
 
 // TODO get colors from lighter (https://code.visualstudio.com/api/references/theme-color#diff-editor-colors)
 const green = "#7f74"
@@ -101,6 +102,28 @@ const extensions = {
 }
 
 export function Diff({ children }) {
-  console.log(children)
-  return "Hi"
+  return (
+    <Code
+      theme="github-dark"
+      lineNumbers
+      PreComponent={Content}
+      extensions={extensions}
+      subProps={React.Children.toArray(children).map((c) => parseChildren(c))}
+    />
+  )
+}
+
+function parseChildren(children, lang) {
+  if (typeof children === "object") {
+    const codeProps = children.props?.children?.props
+    return {
+      code: codeProps.children?.trim(),
+      lang: codeProps.className.replace("language-", ""),
+    }
+  } else {
+    return {
+      code: children,
+      lang,
+    }
+  }
 }
