@@ -57,6 +57,7 @@ type MultilineAnnotationComponent = (
 ) => JSX.Element
 
 type Extension = {
+  beforeRoot?: (props: CodeProps, annotations: Annotation[]) => CodeProps
   beforeHighlight?: (props: CodeProps, annotations: Annotation[]) => CodeProps
   InlineAnnotation?: InlineAnnotationComponent
   MultilineAnnotation?: MultilineAnnotationComponent

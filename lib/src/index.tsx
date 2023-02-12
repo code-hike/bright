@@ -19,6 +19,7 @@ const Code: CodeComponent = async (componentProps) => {
   const { children, lang, ...rest } = {
     ...Code,
     ...componentProps,
+    // TODO concat extensions and annotations
   }
 
   // parse code and lang maybe from markdown
@@ -102,10 +103,28 @@ async function extractAnnotationsFromCode(
 
 function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
   if (props.subProps) {
-    const { subProps, ...rootProps } = props
+    const { annotations = [], extensions } = props
+    const extensionNames = Object.keys(extensions)
+
+    let newProps = props
+    extensionNames.forEach((name) => {
+      const extension = extensions[name]
+      if (
+        "beforeRoot" in extension &&
+        typeof extension.beforeRoot === "function"
+      ) {
+        const extensionAnnotations = annotations.filter(
+          (annotation) => annotation.name === name
+        )
+        newProps =
+          extension.beforeRoot(newProps, extensionAnnotations) || newProps
+      }
+    })
+
+    const { subProps, ...rootProps } = newProps
     return {
       ...rootProps,
-      subProps: subProps.map((sub) =>
+      subProps: (subProps || []).map((sub) =>
         runExtensionsBeforeHighlight({ ...rootProps, ...sub })
       ),
     }
