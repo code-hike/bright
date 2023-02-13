@@ -49,11 +49,20 @@ function Content({ brightProps }) {
 /** @type {import("bright").BrightProps["extensions"]} */
 const extensions = {
   diff: {
-    MultilineAnnotation: ({ children, query }) => (
-      <div style={{ background: query.startsWith("added") ? green : red }}>
-        {children}
-      </div>
-    ),
+    MultilineAnnotation: ({ children, query, brightProps }) => {
+      const { colors } = brightProps
+      return (
+        <div
+          style={{
+            background: query.startsWith("added")
+              ? colors.diffInsertedLineBackground
+              : colors.diffRemovedLineBackground,
+          }}
+        >
+          {children}
+        </div>
+      )
+    },
     beforeRoot: (brightProps) => {
       const { subProps } = brightProps
       const [prev, next] = subProps
@@ -104,7 +113,7 @@ const extensions = {
 export function Diff({ children }) {
   return (
     <Code
-      theme="github-dark"
+      theme="dracula"
       lineNumbers
       PreComponent={Content}
       extensions={extensions}

@@ -4,6 +4,7 @@ import {
   Lines,
   Tokens,
   Annotation,
+  ThemeColors,
 } from "@code-hike/lighter"
 
 type HTMLProps = React.HTMLAttributes<HTMLElement>
@@ -22,21 +23,6 @@ export type BrightComponents = {
 type Prettify<T> = {
   [K in keyof T]: T[K]
 } & {}
-
-// TODO move to lighter
-export type ThemeColors = {
-  background: string
-  foreground: string
-  lineNumberForeground: string
-  selectionBackground: string
-  editorBackground: string
-  editorGroupHeaderBackground: string
-  activeTabBackground: string
-  activeTabForeground: string
-  tabBorder: string
-  activeTabBorder: string
-  colorScheme: "dark" | "light"
-}
 
 type InlineAnnotationProps = {
   children: React.ReactNode

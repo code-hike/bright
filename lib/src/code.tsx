@@ -22,7 +22,7 @@ async function highlight(props: CodeProps): Promise<BrightProps> {
   }
 
   const { code, lang, theme, annotations } = props
-  const { lines, ...colors } = await annotatedHighlight(
+  const { lines, colors } = await annotatedHighlight(
     code,
     lang,
     theme,

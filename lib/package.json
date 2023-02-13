@@ -16,7 +16,7 @@
     "watch": "tsup src/index.tsx --format esm,cjs --watch --dts"
   },
   "dependencies": {
-    "@code-hike/lighter": "0.3.4"
+    "@code-hike/lighter": "0.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
