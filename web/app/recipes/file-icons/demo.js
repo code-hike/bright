@@ -1,17 +1,33 @@
 import { Code } from "bright"
 import { themeIcons } from "seti-icons"
-const getIcon = themeIcons({
-  blue: "#268bd2",
-  grey: "#657b83",
-  "grey-light": "#839496",
-  green: "#859900",
-  orange: "#cb4b16",
-  pink: "#d33682",
-  purple: "#6c71c4",
-  red: "#dc322f",
-  white: "#fdf6e3",
-  yellow: "#b58900",
-  ignore: "#586e75",
+
+// colors from https://github.com/microsoft/vscode/blob/main/extensions/theme-seti/icons/vs-seti-icon-theme.json
+const getDarkIcon = themeIcons({
+  blue: "#519aba",
+  grey: "#4d5a5e",
+  "grey-light": "#6d8086",
+  green: "#8dc149",
+  orange: "#e37933",
+  pink: "#f55385",
+  purple: "#a074c4",
+  red: "#cc3e44",
+  white: "#d4d7d6",
+  yellow: "#cbcb41",
+  ignore: "#41535b",
+})
+
+const getLightIcon = themeIcons({
+  blue: "#498ba7",
+  grey: "#455155",
+  "grey-light": "#627379",
+  green: "#7fae42",
+  orange: "#cc6d2e",
+  pink: "#dd4b78",
+  purple: "#9068b0",
+  red: "#b8383d",
+  white: "#bfc2c1",
+  yellow: "#b7b73b",
+  ignore: "#3b4b52",
 })
 
 const myCode = `
@@ -24,9 +40,10 @@ function lorem(ipsum, dolor = 1) {
 
 /** @type {import("bright").BrightProps["TabComponent"]} */
 function TabWithIcon({ brightProps, ...props }) {
-  const { title } = brightProps
+  const { title, colors } = brightProps
 
-  const { svg, color } = getIcon(title)
+  const { svg, color } =
+    colors.colorScheme === "dark" ? getDarkIcon(title) : getLightIcon(title)
   const __html = svg.replace(/svg/, `svg fill='${color}'`)
 
   return (

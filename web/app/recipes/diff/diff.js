@@ -2,10 +2,6 @@ import { Code } from "bright"
 import { diffLines } from "diff"
 import React from "react"
 
-// TODO get colors from lighter (https://code.visualstudio.com/api/references/theme-color#diff-editor-colors)
-const green = "#7f74"
-const red = "#f774"
-
 /** @type {import("bright").BrightProps["PreComponent"]} */
 function Content({ brightProps }) {
   const { subProps } = brightProps
