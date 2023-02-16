@@ -56,7 +56,10 @@ function LineComponent({
     <div style={{ padding: "0 1em" }}>
       <span>
         {digits > 0 && (
-          <span className="bright-ln" style={{ width: `${digits}ch` }}>
+          <span
+            data-bright-ln={line.lineNumber}
+            style={{ width: `${digits}ch` }}
+          >
             {line.lineNumber}
           </span>
         )}

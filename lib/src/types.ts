@@ -62,7 +62,7 @@ type MdCodeText = {
 type CodeText = string | MdCodeText
 
 export type InputCodeProps = Prettify<
-  Omit<CodeProps, "scheme" | "code" | "theme"> & {
+  Omit<CodeProps, "mode" | "code" | "theme"> & {
     theme: Theme | DoubleTheme
     children: CodeText
     lang?: LanguageAlias
@@ -75,7 +75,7 @@ export type CodeProps = Prettify<
     theme: Theme
     lang: LanguageAlias
     code: string
-    scheme?: "dark" | "light"
+    mode?: "dark" | "light"
 
     // atttributes
     style?: React.CSSProperties

@@ -47,7 +47,7 @@ function Root(props: BrightProps) {
     className,
     style,
     colors,
-    scheme,
+    mode,
     title,
     RootComponent,
     PreComponent,
@@ -57,18 +57,21 @@ function Root(props: BrightProps) {
   return (
     <RootComponent
       data-bright-theme={themeName}
+      data-bright-mode={mode}
       className={className}
       style={{
         color: foreground,
         borderRadius: "4px",
         overflow: "hidden",
         margin: "1em 0",
+        ["--selection-background" as any]: colors.selectionBackground,
+        ["--line-number-color" as any]: colors.lineNumberForeground,
         colorScheme: colors.colorScheme,
         ...style,
       }}
       brightProps={props}
     >
-      <Style colors={colors} themeName={themeName} scheme={scheme} />
+      <Style mode={mode} lineNumbers={props.lineNumbers} />
       {title && <TitleBar {...props} />}
       <PreComponent brightProps={props} />
     </RootComponent>
@@ -99,52 +102,39 @@ export function Pre(brightProps: BrightProps) {
 }
 
 function Style({
-  themeName,
-  scheme,
-  colors,
+  mode,
+  lineNumbers,
 }: {
-  themeName: string
-  scheme: "dark" | "light" | undefined
-  colors: { selectionBackground: string; lineNumberForeground: string }
+  mode: "dark" | "light" | undefined
+  lineNumbers?: boolean
 }) {
-  const codeSelector = `div[data-bright-theme="${themeName}"]`
-  const css = `
-  ${displayStyle(scheme, codeSelector)}
-  ${codeSelector} ::selection {
-    background-color: ${colors.selectionBackground};
-  }
-  ${codeSelector} .bright-ln { 
-    color: ${colors.lineNumberForeground}; 
+  const lineNumbersStyle = lineNumbers
+    ? ""
+    : `[data-bright-theme] [data-bright-ln] { 
+    color: var(--line-number-color); 
     margin-right: 1.5ch; 
     display: inline-block;
     text-align: right;
     user-select: none;
   }`
+  const css = `${displayStyle(mode)}
+  [data-bright-theme] ::selection { background-color: var(--selection-background) }
+  ${lineNumbersStyle}
+  `
   return <style dangerouslySetInnerHTML={{ __html: css }} />
 }
 
-function displayStyle(
-  scheme: "dark" | "light" | undefined,
-  codeSelector: string
-) {
-  if (scheme === "dark") {
-    return `${codeSelector} {
-      display: block;
-    }
-    [data-theme="light"] ${codeSelector}  {
-      display: none;
-    }`
-  }
-  if (scheme === "light") {
-    return `${codeSelector} {
-      display: none;
-    }
-    [data-theme="light"] ${codeSelector} {
-      display: block;
-    }`
-  }
+function displayStyle(mode: "dark" | "light" | undefined) {
+  if (!mode) return ""
+  if (mode === "dark")
+    return `[data-bright-mode="dark"] { display: block }
+[data-theme="light"] [data-bright-mode="dark"] { display: none }`
+  if (mode === "light")
+    return `[data-bright-mode="light"] { display: none }
+[data-theme="light"] [data-bright-mode="light"] { display: block }`
   return ""
 }
+
 function getThemeName(theme?: Theme) {
   if (!theme) return "default"
   if (typeof theme === "string") return theme
