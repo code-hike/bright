@@ -42,8 +42,9 @@ print("the bright side of life")`
 const demoProps = {
   children: demoCode,
   lang: "py",
-  extensions: {
-    myMark: {
+  extensions: [
+    {
+      name: "myMark",
       InlineAnnotation: ({ children, query }) => (
         <mark
           style={{
@@ -57,7 +58,7 @@ const demoProps = {
         </mark>
       ),
     },
-  },
+  ],
 }
 
 export default function Demo() {

@@ -2,8 +2,9 @@ import { Code } from "bright"
 import { WithBackground } from "../with-background"
 import theme from "./theme"
 
-Code.extensions = {
-  focus: {
+Code.extensions = [
+  {
+    name: "focus",
     MultilineAnnotation: ({ children }) => (
       <div style={{ filter: "contrast(0.3)" }}>{children}</div>
     ),
@@ -69,7 +70,7 @@ Code.extensions = {
       return { ...props, annotations: newAnnotations }
     },
   },
-}
+]
 
 export function NewDemo({
   sourceProps,

@@ -2,13 +2,14 @@ import { Code, tokensToContent } from "bright"
 import { Wrapper, Input } from "../../client-components"
 
 Code.theme = "dracula"
-Code.extensions = {
-  input: {
+Code.extensions = [
+  {
+    name: "input",
     InlineAnnotation: ({ query, tokens }) => (
       <Input defaultValue={tokensToContent(tokens)} name={query} />
     ),
   },
-}
+]
 const code = `
 <div
   style={{

@@ -33,7 +33,7 @@ function TokenGroupRenderer({
   brightProps: BrightProps
 }) {
   const { extensions } = brightProps
-  const extension = extensions[tokens.annotationName]
+  const extension = extensions.find((ext) => ext.name === tokens.annotationName)
   const Wrapper = extension?.InlineAnnotation
   if (!Wrapper) {
     return <TokensRenderer tokens={tokens.tokens} brightProps={brightProps} />

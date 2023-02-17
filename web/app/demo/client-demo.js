@@ -2,20 +2,22 @@ import { Code } from "bright"
 import { Wrapper, Input } from "../../client-components"
 
 Code.theme = "dracula"
-Code.extensions = {
-  input: {
+Code.extensions = [
+  {
+    name: "input",
     InlineAnnotation: ({ query, content }) => (
       <Input defaultValue={content} name={query} />
     ),
   },
-  title: {
+  {
+    name: "title",
     beforeHighlight: (props, annotations) => {
       if (annotations.length > 0) {
         return { ...props, title: annotations[0].query }
       }
     },
   },
-}
+]
 const code = `
 <div
   style={{

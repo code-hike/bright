@@ -5,13 +5,14 @@ import ClientDemo from "./client-demo"
 import { Code } from "bright"
 import { SomeContext, Input, Demo } from "./client-components"
 
-Code.extensions = {
-  input: {
+Code.extensions = [
+  {
+    name: "input",
     InlineAnnotation: ({ content, query }) => (
       <Input defaultValue={content} name={query} />
     ),
   },
-}
+]
 
 const code = `
 <div

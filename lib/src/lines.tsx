@@ -15,8 +15,12 @@ export function LinesComponent({
       {lines.map((line, i) => {
         if ("lineNumber" in line) {
           return <LineComponent key={i} line={line} brightProps={brightProps} />
-        } else if (extensions[line.annotationName]?.MultilineAnnotation) {
-          const extension = extensions[line.annotationName]
+        }
+
+        const extension = extensions.find(
+          (ext) => ext.name === line.annotationName
+        )
+        if (extension?.MultilineAnnotation) {
           const Wrapper = extension.MultilineAnnotation!
           return (
             <Wrapper

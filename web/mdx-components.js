@@ -11,15 +11,17 @@ Code.replace = {
 }
 // Code.lineNumbers = true
 
-Code.extensions = {
-  lineNumbers: {
+Code.extensions = [
+  {
+    name: "lineNumbers",
     beforeHighlight: (props, annotations) => {
       if (annotations.length > 0) {
         return { ...props, lineNumbers: true }
       }
     },
   },
-  mark: {
+  {
+    name: "mark",
     InlineAnnotation: ({ children, query }) => (
       <mark style={{ background: query }}>{children}</mark>
     ),
@@ -27,7 +29,8 @@ Code.extensions = {
       <div style={{ background: query }}>{children}</div>
     ),
   },
-  focus: {
+  {
+    name: "focus",
     MultilineAnnotation: ({ children }) => (
       <div style={{ filter: "contrast(0.3)" }}>{children}</div>
     ),
@@ -100,7 +103,8 @@ Code.extensions = {
   // offset: {
   //   // change line numbers
   // },
-  title: {
+  {
+    name: "title",
     beforeHighlight: (props, annotations) => {
       if (annotations.length > 0) {
         return { ...props, title: annotations[0].query }
@@ -119,7 +123,7 @@ Code.extensions = {
   //   },
   //   AnnotationComponent: ({ children, query }) => {},
   // },
-}
+]
 
 export function useMDXComponents(components) {
   return { ...components, pre: Code }

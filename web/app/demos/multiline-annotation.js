@@ -38,13 +38,14 @@ print("day")`
 const demoProps = {
   children: demoCode,
   lang: "py",
-  extensions: {
-    mark: {
+  extensions: [
+    {
+      name: "mark",
       MultilineAnnotation: ({ children, query }) => (
         <div style={{ background: query }}>{children}</div>
       ),
     },
-  },
+  ],
 }
 
 export default function Demo() {

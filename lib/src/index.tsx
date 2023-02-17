@@ -60,7 +60,7 @@ async function AnnotatedCode(props: CodeProps) {
 }
 
 Code.theme = "dark-plus"
-Code.extensions = {}
+Code.extensions = []
 Object.assign(Code, components)
 
 export { Code, tokensToContent, tokensToTokenList, linesToContent }
@@ -84,7 +84,7 @@ async function extractAnnotationsFromCode(
 
   const { extensions, code, lang } = props
 
-  const extensionNames = Object.keys(extensions)
+  const extensionNames = extensions.map((e) => e.name)
   const { code: newCode, annotations } = await extractAnnotations(
     code,
     lang,
@@ -104,11 +104,10 @@ async function extractAnnotationsFromCode(
 function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
   if (props.subProps) {
     const { annotations = [], extensions } = props
-    const extensionNames = Object.keys(extensions)
 
     let newProps = props
-    extensionNames.forEach((name) => {
-      const extension = extensions[name]
+    extensions.forEach((extension) => {
+      const { name } = extension
       if (
         "beforeRoot" in extension &&
         typeof extension.beforeRoot === "function"
@@ -131,10 +130,9 @@ function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
   }
 
   const { annotations, extensions } = props
-  const extensionNames = Object.keys(extensions)
   let newProps = props
-  extensionNames.forEach((name) => {
-    const extension = extensions[name]
+  extensions.forEach((extension) => {
+    const { name } = extension
     if (
       "beforeHighlight" in extension &&
       typeof extension.beforeHighlight === "function"

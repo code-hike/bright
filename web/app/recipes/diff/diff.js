@@ -43,8 +43,9 @@ function Content(brightProps) {
 }
 
 /** @type {import("bright").BrightProps["extensions"]} */
-const extensions = {
-  diff: {
+const extensions = [
+  {
+    name: "diff",
     MultilineAnnotation: ({ children, query, brightProps }) => {
       const { colors } = brightProps
       return (
@@ -104,7 +105,7 @@ const extensions = {
       return newProps
     },
   },
-}
+]
 
 export function Diff({ children }) {
   return (

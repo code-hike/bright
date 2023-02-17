@@ -17,8 +17,9 @@ function consectetur(...adipiscing) {
 `.trim()
 
 /** @type {import("bright").BrightProps["extensions"]} */
-const extensions = {
-  collapse: {
+const extensions = [
+  {
+    name: "collapse",
     MultilineAnnotation: ({ children, query, brightProps }) => (
       <CollapseAnnotation
         children={children}
@@ -27,7 +28,7 @@ const extensions = {
       />
     ),
   },
-}
+]
 
 export default function Page() {
   return (

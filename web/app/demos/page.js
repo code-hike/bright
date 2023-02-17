@@ -10,8 +10,9 @@ print("the bright side of life")
 `.trim()
 
 // focus(1:16)
-Code.extensions = {
-  myMark: {
+Code.extensions = [
+  {
+    name: "myMark",
     InlineAnnotation: ({ children, query }) => (
       <mark
         style={{
@@ -25,7 +26,7 @@ Code.extensions = {
       </mark>
     ),
   },
-}
+]
 
 // focus(3)
 export default function Page() {

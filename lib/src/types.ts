@@ -33,13 +33,14 @@ type MultilineAnnotationComponent = (
 ) => JSX.Element
 
 type Extension = {
+  name: string
   beforeRoot?: (props: CodeProps, annotations: Annotation[]) => CodeProps
   beforeHighlight?: (props: CodeProps, annotations: Annotation[]) => CodeProps
   InlineAnnotation?: InlineAnnotationComponent
   MultilineAnnotation?: MultilineAnnotationComponent
 }
 
-export type Extensions = Record<string, Extension>
+export type Extensions = Extension[]
 
 export type DoubleTheme = {
   dark: Theme

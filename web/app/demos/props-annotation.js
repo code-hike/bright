@@ -37,15 +37,16 @@ const demoProps = {
   children: demoCode,
   lang: "py",
   theme: "github-light",
-  extensions: {
-    title: {
+  extensions: [
+    {
+      name: "title",
       beforeHighlight: (props, annotations) => {
         if (annotations.length > 0) {
           return { ...props, title: annotations[0].query }
         }
       },
     },
-  },
+  ],
 }
 
 export default function Demo() {

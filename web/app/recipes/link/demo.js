@@ -10,15 +10,16 @@ function lorem(ipsum, dolor = 1) {
 `.trim()
 
 /** @type {import("bright").BrightProps["extensions"]} */
-const extensions = {
-  link: {
+const extensions = [
+  {
+    name: "link",
     InlineAnnotation: ({ children, query }) => (
       <a href={query} style={{ textDecoration: "underline" }}>
         {children}
       </a>
     ),
   },
-}
+]
 
 export default function Page() {
   return (
