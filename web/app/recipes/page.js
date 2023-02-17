@@ -2,6 +2,8 @@ import CollapseAnnotationDemo from "./collapse/demo"
 import LinkAnnotationDemo from "./link/demo"
 import TitleBarDemo from "./title/demo"
 import FileIconsDemo from "./file-icons/demo"
+import DiffDemo from "./diff/demo"
+import TabsDemo from "./tabs/demo"
 import Link from "next/link"
 
 const recipes = [
@@ -24,6 +26,16 @@ const recipes = [
     title: "File Icons",
     id: "file-icons",
     Demo: FileIconsDemo,
+  },
+  {
+    title: "Diff",
+    id: "diff",
+    Demo: DiffDemo,
+  },
+  {
+    title: "Tabs",
+    id: "tabs",
+    Demo: TabsDemo,
   },
 ]
 

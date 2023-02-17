@@ -38,54 +38,46 @@ function lorem(ipsum, dolor = 1) {
 }
 `.trim()
 
-/** @type {import("bright").BrightProps["TabComponent"]} */
-function TabWithIcon({ brightProps, ...props }) {
-  const { title, colors } = brightProps
+/** @type {import("bright").BrightProps["TabContent"]} */
+function MyTab(props) {
+  const { title, colors } = props
 
   const { svg, color } =
     colors.colorScheme === "dark" ? getDarkIcon(title) : getLightIcon(title)
   const __html = svg.replace(/svg/, `svg fill='${color}'`)
-
   return (
-    <Code.TabComponent brightProps={brightProps} {...props}>
-      <div
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        height: "1.5em",
+        marginLeft: -8,
+      }}
+    >
+      <span
+        dangerouslySetInnerHTML={{ __html }}
         style={{
-          display: "flex",
-          alignItems: "center",
-          height: "1.5em",
-          marginLeft: -8,
+          display: "inline-block",
+          height: "2em",
+          width: "2em",
+          margin: "-0.5em 0",
         }}
-      >
-        <span
-          dangerouslySetInnerHTML={{ __html }}
-          style={{
-            display: "inline-block",
-            height: "2em",
-            width: "2em",
-            margin: "-0.5em 0",
-          }}
-        />
-        {title}
-      </div>
-    </Code.TabComponent>
+      />
+      {title}
+    </div>
   )
 }
 
 export default function Page() {
   return (
     <>
-      <Code
-        lang="js"
-        theme="github-light"
-        title="lorem.js"
-        TabComponent={TabWithIcon}
-      >
+      <Code lang="js" theme="github-light" title="lorem.js" TabContent={MyTab}>
         {myCode}
       </Code>
-      <Code lang="js" title="ipsum.py" TabComponent={TabWithIcon}>
+      <Code lang="js" title="ipsum.py" TabContent={MyTab}>
         {myCode}
       </Code>
-      <Code lang="js" title="package.json" TabComponent={TabWithIcon}>
+      <Code lang="js" title="package.json" TabContent={MyTab}>
         {myCode}
       </Code>
     </>

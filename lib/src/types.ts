@@ -6,23 +6,13 @@ import {
   Annotation,
   ThemeColors,
 } from "@code-hike/lighter"
-
-type HTMLProps = React.HTMLAttributes<HTMLElement>
-
-type BrightComponent<T> = (
-  props: T & { brightProps: BrightProps }
-) => JSX.Element
-
-export type BrightComponents = {
-  RootComponent: BrightComponent<HTMLProps>
-  PreComponent: BrightComponent<{}>
-  TitleComponent: BrightComponent<HTMLProps>
-  TabComponent: BrightComponent<HTMLProps>
-}
+import brightComponents from "./components"
 
 type Prettify<T> = {
   [K in keyof T]: T[K]
 } & {}
+
+export type BrightComponents = Prettify<typeof brightComponents>
 
 type InlineAnnotationProps = {
   children: React.ReactNode

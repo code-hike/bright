@@ -5,7 +5,8 @@ import { BrightProps, CodeProps } from "./types"
 
 export async function BrightCode(props: CodeProps) {
   const brightProps = await highlight(props)
-  return <Root {...brightProps}></Root>
+  const { Root } = brightProps
+  return <Root {...brightProps} />
 }
 
 async function highlight(props: CodeProps): Promise<BrightProps> {
@@ -41,21 +42,12 @@ async function highlight(props: CodeProps): Promise<BrightProps> {
   return brightProps
 }
 
-function Root(props: BrightProps) {
-  const {
-    theme,
-    className,
-    style,
-    colors,
-    mode,
-    title,
-    RootComponent,
-    PreComponent,
-  } = props
+export function Root(props: BrightProps) {
+  const { theme, className, style, colors, mode, title, Pre } = props
   const { foreground } = colors
   const themeName = getThemeName(theme)
   return (
-    <RootComponent
+    <div
       data-bright-theme={themeName}
       data-bright-mode={mode}
       className={className}
@@ -66,15 +58,21 @@ function Root(props: BrightProps) {
         margin: "1em 0",
         ["--selection-background" as any]: colors.selectionBackground,
         ["--line-number-color" as any]: colors.lineNumberForeground,
+        ["--tab-border" as any]: colors.tabBorder,
+        ["--tab-background" as any]: colors.activeTabBackground,
+        ["--tab-color" as any]: colors.activeTabForeground,
+        ["--inactive-tab-background" as any]: colors.inactiveTabBackground,
+        ["--inactive-tab-color" as any]: colors.inactiveTabForeground,
+        ["--tab-top-border" as any]: colors.activeTabTopBorder,
+        ["--tab-bottom-border" as any]: colors.activeTabBorder,
         colorScheme: colors.colorScheme,
         ...style,
       }}
-      brightProps={props}
     >
       <Style mode={mode} lineNumbers={props.lineNumbers} />
       {title && <TitleBar {...props} />}
-      <PreComponent brightProps={props} />
-    </RootComponent>
+      <Pre {...props} />
+    </div>
   )
 }
 

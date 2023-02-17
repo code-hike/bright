@@ -2,6 +2,7 @@ import { NewDemo } from "./new-demo"
 
 const sourceCode = `
 import { Code } from "bright"
+import {tabs, fileIcons, twoSlash, copyButton} from "./my-extensions"
 
 // focus(2:3)
 const myCode = \`
@@ -10,17 +11,7 @@ print("the bright side of life")
 \`.trim()
 
 // focus(1:11)
-Code.extensions = {
-  title: {
-    // you can change props inside annotations
-    // this one adds a title 
-    beforeHighlight: (props, annotations) => {
-      if (annotations.length > 0) {
-        return { ...props, title: annotations[0].query }
-      }
-    },
-  },
-}
+Code.extensions = [tabs, fileIcons, twoSlash, copyButton]
 
 // focus(2)
 export default function Page() {
@@ -36,7 +27,6 @@ print("the bright side of life")
 const demoProps = {
   children: demoCode,
   lang: "py",
-  theme: "github-light",
   extensions: {
     title: {
       beforeHighlight: (props, annotations) => {

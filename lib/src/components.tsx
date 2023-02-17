@@ -1,11 +1,12 @@
-import { Pre } from "./code"
-import { BrightComponents } from "./types"
+import { Root, Pre } from "./code"
+import { Tab, TabContent, TitleBarContent } from "./title"
 
-const components: BrightComponents = {
-  RootComponent: ({ brightProps, ...props }) => <div {...props} />,
-  PreComponent: ({ brightProps, ...props }) => <Pre {...brightProps} />,
-  TitleComponent: ({ brightProps, ...props }) => <div {...props} />,
-  TabComponent: ({ brightProps, ...props }) => <code {...props} />,
+const components = {
+  Pre,
+  Root,
+  TitleBarContent,
+  Tab,
+  TabContent,
 }
 
 export default components

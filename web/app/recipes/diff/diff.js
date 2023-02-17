@@ -2,8 +2,8 @@ import { Code } from "bright"
 import { diffLines } from "diff"
 import React from "react"
 
-/** @type {import("bright").BrightProps["PreComponent"]} */
-function Content({ brightProps }) {
+/** @type {import("bright").BrightProps["Pre"]} */
+function Content(brightProps) {
   const { subProps } = brightProps
   const annotations = subProps[0].annotations.concat(subProps[1].annotations)
 
@@ -39,7 +39,7 @@ function Content({ brightProps }) {
     annotations,
     lines: newLines,
   }
-  return <Code.PreComponent brightProps={newProps} />
+  return <Code.Pre {...newProps} />
 }
 
 /** @type {import("bright").BrightProps["extensions"]} */
@@ -111,7 +111,7 @@ export function Diff({ children }) {
     <Code
       theme="dracula"
       lineNumbers
-      PreComponent={Content}
+      Pre={Content}
       extensions={extensions}
       subProps={React.Children.toArray(children).map((c) => parseChildren(c))}
     />
