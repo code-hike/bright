@@ -1,8 +1,8 @@
 import { Code } from "bright"
 
-/** @type {import("bright").BrightProps["TitleComponent"]} */
-function Title({ brightProps }) {
-  const { title, colors } = brightProps
+/** @type {import("bright").BrightProps["TitleBarContent"]} */
+function Title(props) {
+  const { title, colors } = props
   const { foreground, background } = colors
 
   const circle = {
@@ -18,12 +18,12 @@ function Title({ brightProps }) {
       style={{
         background,
         color: foreground,
-        textAlign: "center",
-        paddingTop: 6,
+        padding: "3px 0",
         fontSize: "0.9em",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        width: "100%",
       }}
     >
       <div style={{ gap: 4, display: "flex", marginLeft: 8 }}>
@@ -47,12 +47,7 @@ function lorem(ipsum, dolor = 1) {
 
 export default function Page() {
   return (
-    <Code
-      lang="js"
-      title="Lorem Ipsum"
-      TitleComponent={Title}
-      theme="dracula-soft"
-    >
+    <Code lang="js" title="Lorem Ipsum" TitleBarContent={Title} theme="dracula">
       {myCode}
     </Code>
   )
