@@ -45,9 +45,14 @@ function lorem(ipsum, dolor = 1) {
 }
 `.trim()
 
+const titleBar = {
+  name: "title",
+  TitleBarContent: Title,
+}
+
 export default function Page() {
   return (
-    <Code lang="js" title="Lorem Ipsum" TitleBarContent={Title} theme="dracula">
+    <Code lang="js" title="Lorem Ipsum" theme="dracula" extensions={[titleBar]}>
       {myCode}
     </Code>
   )

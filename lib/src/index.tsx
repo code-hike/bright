@@ -23,7 +23,7 @@ const Code: CodeComponent = async (componentProps) => {
   }
 
   // parse code and lang maybe from markdown
-  const { code: text, language } = parseChildren(children, lang)
+  const { code: text, language } = parseChildren(children, lang, rest.code)
 
   // split code and annotations
   let props = { ...rest, code: text, lang: language }
@@ -102,10 +102,21 @@ async function extractAnnotationsFromCode(
 }
 
 function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
-  if (props.subProps) {
-    const { annotations = [], extensions } = props
+  let newProps = props
+  const { extensions, annotations = [] } = props
 
-    let newProps = props
+  extensions.forEach((extension) => {
+    const { Pre, Root, TitleBarContent, Tab, TabContent } = extension
+    // Object.assign(newProps, {
+    //   Pre,
+    //   Root,
+    //   TitleBarContent,
+    //   Tab,
+    //   TabContent,
+    // })
+  })
+
+  if (props.subProps) {
     extensions.forEach((extension) => {
       const { name } = extension
       if (
@@ -129,8 +140,6 @@ function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
     }
   }
 
-  const { annotations, extensions } = props
-  let newProps = props
   extensions.forEach((extension) => {
     const { name } = extension
     if (
@@ -149,7 +158,8 @@ function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
 
 function parseChildren(
   children: InputCodeProps["children"],
-  lang: LanguageAlias
+  lang: LanguageAlias,
+  code?: string
 ): { code: string; language: LanguageAlias } {
   if (typeof children === "object") {
     return {
@@ -161,7 +171,7 @@ function parseChildren(
     }
   } else {
     return {
-      code: children,
+      code: (children as string) || code || "",
       language: lang,
     }
   }

@@ -32,13 +32,15 @@ type MultilineAnnotationComponent = (
   props: MultilineAnnotationProps
 ) => JSX.Element
 
-type Extension = {
-  name: string
-  beforeRoot?: (props: CodeProps, annotations: Annotation[]) => CodeProps
-  beforeHighlight?: (props: CodeProps, annotations: Annotation[]) => CodeProps
-  InlineAnnotation?: InlineAnnotationComponent
-  MultilineAnnotation?: MultilineAnnotationComponent
-}
+type Extension = Prettify<
+  {
+    name: string
+    beforeRoot?: (props: CodeProps, annotations: Annotation[]) => CodeProps
+    beforeHighlight?: (props: CodeProps, annotations: Annotation[]) => CodeProps
+    InlineAnnotation?: InlineAnnotationComponent
+    MultilineAnnotation?: MultilineAnnotationComponent
+  } & BrightComponents
+>
 
 export type Extensions = Extension[]
 
@@ -57,6 +59,7 @@ export type InputCodeProps = Prettify<
     theme: Theme | DoubleTheme
     children: CodeText
     lang?: LanguageAlias
+    code?: string
   }
 >
 

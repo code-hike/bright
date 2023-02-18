@@ -4,8 +4,10 @@ import { TabsRoot, TabsContent, TabsList } from "./tabs"
 /** @type {import("bright").BrightProps["TitleBarContent"]} */
 function TitleBarComponent(brightProps) {
   const { subProps, title, Tab } = brightProps
-  const titles = subProps ? subProps.map((subProp) => subProp.title) : [title]
-  const childProps = subProps ? subProps : [brightProps]
+  const titles = subProps?.length
+    ? subProps.map((subProp) => subProp.title)
+    : [title]
+  const childProps = subProps?.length ? subProps : [brightProps]
   return (
     <TabsList titles={titles}>
       {titles.map((title, i) => (
@@ -18,7 +20,10 @@ function TitleBarComponent(brightProps) {
 /** @type {import("bright").BrightProps["Root"]} */
 function Root(brightProps) {
   const { subProps, title } = brightProps
-  const titles = subProps ? subProps.map((subProp) => subProp.title) : [title]
+
+  const titles = subProps?.length
+    ? subProps.map((subProp) => subProp.title)
+    : [title]
 
   return (
     <TabsRoot defaultValue={titles[0]}>
@@ -41,7 +46,7 @@ function Root(brightProps) {
 /** @type {import("bright").BrightProps["Pre"]} */
 function Content(brightProps) {
   const { subProps } = brightProps
-  const propsList = subProps ? subProps : [brightProps]
+  const propsList = subProps?.length ? subProps : [brightProps]
   return (
     <>
       {propsList.map((props) => (
@@ -53,11 +58,16 @@ function Content(brightProps) {
   )
 }
 
+const tabs = {
+  name: "tabs",
+  Root,
+  TitleBarContent: TitleBarComponent,
+  Pre: Content,
+}
+
 export default function Page() {
   const props = {
-    Root,
-    TitleBarContent: TitleBarComponent,
-    Pre: Content,
+    extensions: [tabs],
     subProps: [
       { code: "console.log(1)", lang: "js", title: "foo.js" },
       { code: "print(2)", lang: "py", title: "bar.py" },
@@ -75,6 +85,13 @@ export default function Page() {
       <Code {...props} theme="material-darker" />
       <Code {...props} theme="material-default" />
       <Code {...props} theme="material-lighter" />
+      <Code
+        title="foo.js"
+        extensions={[tabs]}
+        lang="js"
+        code="console.log(1)"
+        theme="material-lighter"
+      />
     </>
   )
 }
