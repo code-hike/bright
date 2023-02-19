@@ -58,7 +58,7 @@ function Content(brightProps) {
   )
 }
 
-const tabs = {
+export const tabs = {
   name: "tabs",
   Root,
   TitleBarContent: TitleBarComponent,

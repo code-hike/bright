@@ -50,7 +50,7 @@ export function Demo({
           theme="dracula"
           lang="py"
           style={{
-            fontSize: "1.2rem",
+            fontSize: "1.1rem",
             margin: "-2rem auto 0",
             position: "relative",
             border: "1px solid #444",

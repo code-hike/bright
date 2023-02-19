@@ -10,7 +10,7 @@ export function TabsRoot({ children, defaultValue }) {
 export function TabsList({ titles, children }) {
   const tabs = React.Children.toArray(children)
   return (
-    <Tabs.List>
+    <Tabs.List style={{ display: "flex" }}>
       {titles.map((title, i) => (
         <Tabs.Trigger asChild key={title} value={title}>
           {tabs[i]}

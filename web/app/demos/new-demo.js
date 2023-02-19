@@ -1,6 +1,7 @@
-import { Code } from "bright"
+import { Code, tokensToContent } from "bright"
 import { WithBackground } from "../with-background"
 import theme from "./theme"
+import Link from "next/link"
 
 Code.extensions = [
   {
@@ -70,6 +71,20 @@ Code.extensions = [
       return { ...props, annotations: newAnnotations }
     },
   },
+  {
+    name: "link",
+    InlineAnnotation: ({ children, query }) => (
+      <Link href={query} style={{ textDecoration: "underline" }}>
+        {children}
+      </Link>
+    ),
+  },
+  {
+    name: "color",
+    InlineAnnotation: ({ query, tokens }) => (
+      <span style={{ color: query }}>{tokensToContent(tokens)}</span>
+    ),
+  },
 ]
 
 export function NewDemo({
@@ -114,7 +129,7 @@ export function NewDemo({
           theme="dracula"
           lang="py"
           style={{
-            fontSize: "1.2rem",
+            fontSize: "1.1rem",
             margin: "-2rem auto 0",
             position: "relative",
             border: "1px solid #444",

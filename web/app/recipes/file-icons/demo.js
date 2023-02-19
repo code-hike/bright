@@ -68,16 +68,25 @@ function MyTab(props) {
   )
 }
 
+export const fileIcons = {
+  TabContent: MyTab,
+}
+
 export default function Page() {
   return (
     <>
-      <Code lang="js" theme="github-light" title="lorem.js" TabContent={MyTab}>
+      <Code
+        lang="js"
+        theme="github-light"
+        title="lorem.js"
+        extensions={[fileIcons]}
+      >
         {myCode}
       </Code>
-      <Code lang="js" title="ipsum.py" TabContent={MyTab}>
+      <Code lang="js" title="ipsum.py" extensions={[fileIcons]}>
         {myCode}
       </Code>
-      <Code lang="js" title="package.json" TabContent={MyTab}>
+      <Code lang="js" title="package.json" extensions={[fileIcons]}>
         {myCode}
       </Code>
     </>

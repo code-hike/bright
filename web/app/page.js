@@ -5,6 +5,7 @@ import { WithBackground } from "./with-background"
 import InlineAnnotationDemo from "./demos/inline-annotation"
 import MultilineAnnotationDemo from "./demos/multiline-annotation"
 import PropsAnnotationDemo from "./demos/props-annotation"
+import ExtensionsAnnotationDemo from "./demos/extensions"
 
 export default async function Page() {
   return (
@@ -523,7 +524,7 @@ print(theFuture is bright)`}</Code>
           </code>
         }
       />
-      <div style={{ height: "3rem" }} />
+      {/* <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Inline Annotations</h2>
       <InlineAnnotationDemo />
       <div style={{ height: "3rem" }} />
@@ -531,11 +532,12 @@ print(theFuture is bright)`}</Code>
       <MultilineAnnotationDemo />
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Props Annotations</h2>
-      <PropsAnnotationDemo />
+      <PropsAnnotationDemo /> */}
       <div style={{ height: "3rem" }} />
-      <h2 style={{ textAlign: "center" }}>Styles</h2>
-      soon...
-      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Customization</h2>
+      <ExtensionsAnnotationDemo />
+
+      <div style={{ height: "50vh" }} />
     </div>
   )
 }

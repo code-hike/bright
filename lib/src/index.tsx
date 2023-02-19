@@ -107,13 +107,14 @@ function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
 
   extensions.forEach((extension) => {
     const { Pre, Root, TitleBarContent, Tab, TabContent } = extension
-    // Object.assign(newProps, {
-    //   Pre,
-    //   Root,
-    //   TitleBarContent,
-    //   Tab,
-    //   TabContent,
-    // })
+    newProps = {
+      ...newProps,
+      Pre: Pre || newProps.Pre,
+      Root: Root || newProps.Root,
+      TitleBarContent: TitleBarContent || newProps.TitleBarContent,
+      Tab: Tab || newProps.Tab,
+      TabContent: TabContent || newProps.TabContent,
+    }
   })
 
   if (props.subProps) {
