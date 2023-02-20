@@ -1,19 +1,17 @@
 import Demo from "./demo"
 
-import rawUsage from "!!raw-loader!./usage.mdx"
-import rawDiff from "!!raw-loader!./diff.js"
+import rawDemo from "!!raw-loader!./demo.js"
 import rawExtension from "!!raw-loader!./extension.js"
 
 import { Recipe } from "../recipe"
 
 const data = {
-  title: "Diff",
-  id: "diff",
+  title: "Title Bar",
+  id: "title",
   Demo,
   source: {
     subProps: [
-      { title: "app/page.mdx", code: rawUsage, lang: "md" },
-      { title: "app/diff.js", code: rawDiff, lang: "jsx" },
+      { title: "app/page.js", code: rawDemo, lang: "jsx" },
       {
         title: "app/extension.js",
         code: rawExtension,

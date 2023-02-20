@@ -1,25 +1,18 @@
-"use client"
+import { Code } from "bright"
+import { tabs } from "./extension"
 
-import * as Tabs from "@radix-ui/react-tabs"
-import React from "react"
-
-export function TabsRoot({ children, defaultValue }) {
-  return <Tabs.Root defaultValue={defaultValue}>{children}</Tabs.Root>
+/** @type {import("bright").Extension} */
+const title = {
+  name: "title",
+  beforeHighlight: (props, annotations) => {
+    if (annotations.length > 0) {
+      return { ...props, title: annotations[0].query }
+    }
+  },
 }
 
-export function TabsList({ titles, children }) {
-  const tabs = React.Children.toArray(children)
+export function Tabs({ children }) {
   return (
-    <Tabs.List style={{ display: "flex" }}>
-      {titles.map((title, i) => (
-        <Tabs.Trigger asChild key={title} value={title}>
-          {tabs[i]}
-        </Tabs.Trigger>
-      ))}
-    </Tabs.List>
+    <Code children={children} extensions={[title, tabs]} />
   )
-}
-
-export function TabsContent(props) {
-  return <Tabs.Content {...props} />
 }

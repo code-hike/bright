@@ -1,0 +1,5 @@
+---
+"bright": minor
+---
+
+Better extensions

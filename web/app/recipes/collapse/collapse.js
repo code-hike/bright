@@ -1,7 +1,10 @@
 "use client"
 
 import React, { useState } from "react"
-import { ChevronRightIcon, ChevronDownIcon } from "@radix-ui/react-icons"
+import {
+  ChevronRightIcon,
+  ChevronDownIcon,
+} from "@radix-ui/react-icons"
 
 export function CollapseAnnotation({ children, query, color }) {
   const firstLine = React.Children.toArray(children)[0]

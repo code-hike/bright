@@ -74,7 +74,7 @@ Code.extensions = [
   {
     name: "link",
     InlineAnnotation: ({ children, query }) => (
-      <Link href={query} style={{ textDecoration: "underline" }}>
+      <Link href={query} style={{ textDecoration: "underline" }} scroll>
         {children}
       </Link>
     ),

@@ -1,4 +1,8 @@
-import { Code } from "bright"
+/** @type {import("bright").Extension} */
+export const titleBar = {
+  name: "titleBar",
+  TitleBarContent: Title,
+}
 
 /** @type {import("bright").BrightProps["TitleBarContent"]} */
 function Title(props) {
@@ -26,7 +30,9 @@ function Title(props) {
         width: "100%",
       }}
     >
-      <div style={{ gap: 4, display: "flex", marginLeft: 8 }}>
+      <div
+        style={{ gap: 4, display: "flex", marginLeft: 8 }}
+      >
         <div style={circle} />
         <div style={circle} />
         <div style={circle} />
@@ -34,26 +40,5 @@ function Title(props) {
       <span style={{ opacity: 0.8 }}>{title}</span>
       <div style={{ width: 45 }} />
     </div>
-  )
-}
-
-const myCode = `
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return dolor;
-}
-`.trim()
-
-const titleBar = {
-  name: "title",
-  TitleBarContent: Title,
-}
-
-export default function Page() {
-  return (
-    <Code lang="js" title="Lorem Ipsum" theme="dracula" extensions={[titleBar]}>
-      {myCode}
-    </Code>
   )
 }

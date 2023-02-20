@@ -1,11 +1,15 @@
-import { fileIcons } from "../recipes/file-icons/demo"
+import { fileIcons } from "../recipes/file-icons/extension"
 import { focus } from "../recipes/focus/extension"
-import { tabs } from "../recipes/tabs/demo"
+import { tabs } from "../recipes/tabs/extension"
 import { NewDemo } from "./new-demo"
 
 const sourceCode = `
 import { Code } from "bright"
-import { tabs, fileIcons, focus } from "./my-extensions"
+import { 
+  tabs, 
+  fileIcons, 
+  focus 
+} from "./my-extensions"
 
 // focus(1:7)
 // use extensions to customize anything

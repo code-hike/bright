@@ -7,9 +7,11 @@ import {
   InputCodeProps,
   BrightComponents,
   BrightProps,
+  Extension,
 } from "./types"
 import { linesToContent } from "./lines"
 import { tokensToContent, tokensToTokenList } from "./tokens"
+import React from "react"
 
 type CodeComponent = ((props: InputCodeProps) => Promise<JSX.Element>) &
   Partial<InputCodeProps>
@@ -22,11 +24,11 @@ const Code: CodeComponent = async (componentProps) => {
     // TODO concat extensions and annotations
   }
 
-  // parse code and lang maybe from markdown
-  const { code: text, language } = parseChildren(children, lang, rest.code)
+  // parse code, lang, subProps maybe from markdown
+  const propsFromChildren = parseChildren(children, lang, rest.code)
 
   // split code and annotations
-  let props = { ...rest, code: text, lang: language }
+  let props = { ...rest, ...propsFromChildren }
 
   const { theme } = props
 
@@ -65,7 +67,7 @@ Object.assign(Code, components)
 
 export { Code, tokensToContent, tokensToTokenList, linesToContent }
 
-export type { BrightProps, BrightComponents }
+export type { BrightProps, BrightComponents, Extension }
 
 async function extractAnnotationsFromCode(
   props: CodeProps
@@ -84,7 +86,12 @@ async function extractAnnotationsFromCode(
 
   const { extensions, code, lang } = props
 
-  const extensionNames = extensions.map((e) => e.name)
+  const extensionNames = extensions.map((e) => {
+    if (!e || !e.name) {
+      throw new Error("Extension must have a name")
+    }
+    return e.name
+  })
   const { code: newCode, annotations } = await extractAnnotations(
     code,
     lang,
@@ -161,19 +168,27 @@ function parseChildren(
   children: InputCodeProps["children"],
   lang: LanguageAlias,
   code?: string
-): { code: string; language: LanguageAlias } {
-  if (typeof children === "object") {
+): Partial<BrightProps> {
+  if (typeof children === "object" && children?.type === "code") {
     return {
       code: children.props?.children?.trim(),
-      language: children.props?.className.replace(
-        "language-",
-        ""
-      ) as LanguageAlias,
+      lang: children.props?.className.replace("language-", "") as LanguageAlias,
+    }
+  } else if (typeof children === "object") {
+    const subProps = React.Children.toArray(children as any).map((c: any) => {
+      const codeProps = c.props?.children?.props
+      return {
+        code: codeProps.children?.trim(),
+        lang: codeProps.className.replace("language-", ""),
+      }
+    })
+    return {
+      subProps,
     }
   } else {
     return {
       code: (children as string) || code || "",
-      language: lang,
+      lang,
     }
   }
 }

@@ -6,9 +6,6 @@ const font = Fira_Code({ subsets: ["latin"] })
 Code.theme = "github-dark-dimmed"
 Code.codeClassName = font.className
 Code.titleClassName = font.className
-Code.replace = {
-  APIKEY: "sk_test_CGGvfNiIPwLXiDwaOfZ3oX6Y",
-}
 // Code.lineNumbers = true
 
 Code.extensions = [

@@ -1,4 +1,4 @@
-/** @type {import("bright").BrightProps["extensions"][0]} */
+/** @type {import("bright").Extension} */
 export const focus = {
   name: "focus",
   MultilineAnnotation: ({ children }) => (
@@ -16,14 +16,20 @@ export const focus = {
     for (const range of ranges) {
       const { fromLineNumber, toLineNumber } = range
       newRanges = newRanges.flatMap((r) => {
-        if (r.fromLineNumber > toLineNumber || r.toLineNumber < fromLineNumber)
+        if (
+          r.fromLineNumber > toLineNumber ||
+          r.toLineNumber < fromLineNumber
+        )
           return [r]
         if (
           r.fromLineNumber >= fromLineNumber &&
           r.toLineNumber <= toLineNumber
         )
           return []
-        if (r.fromLineNumber < fromLineNumber && r.toLineNumber > toLineNumber)
+        if (
+          r.fromLineNumber < fromLineNumber &&
+          r.toLineNumber > toLineNumber
+        )
           return [
             {
               fromLineNumber: r.fromLineNumber,
@@ -51,7 +57,9 @@ export const focus = {
       })
     }
 
-    const newAnnotations = props.annotations.filter((a) => a.name !== "focus")
+    const newAnnotations = props.annotations.filter(
+      (a) => a.name !== "focus"
+    )
     newAnnotations.push({
       name: "focus",
       ranges: newRanges,

@@ -32,7 +32,7 @@ type MultilineAnnotationComponent = (
   props: MultilineAnnotationProps
 ) => JSX.Element
 
-type Extension = Prettify<
+export type Extension = Prettify<
   {
     name: string
     beforeRoot?: (props: CodeProps, annotations: Annotation[]) => CodeProps
@@ -52,7 +52,14 @@ type MdCodeText = {
   type: "code"
   props: { className: string; children: string }
 }
-type CodeText = string | MdCodeText
+
+type MdMultiCodeText = {
+  type: Function
+  props: {
+    children: MdCodeText[]
+  }
+}
+type CodeText = string | MdCodeText | MdMultiCodeText
 
 export type InputCodeProps = Prettify<
   Omit<CodeProps, "mode" | "code" | "theme"> & {
