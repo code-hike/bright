@@ -1,5 +1,0 @@
----
-"bright": minor
----
-
-Better extensions

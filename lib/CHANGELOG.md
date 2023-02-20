@@ -1,5 +1,11 @@
 # bright
 
+## 0.7.0
+
+### Minor Changes
+
+- dcc2558: Better extensions
+
 ## 0.6.2
 
 ### Patch Changes
