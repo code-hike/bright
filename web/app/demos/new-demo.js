@@ -3,7 +3,7 @@ import { WithBackground } from "../with-background"
 import theme from "./theme"
 import Link from "next/link"
 
-Code.extensions = [
+const extensions = [
   {
     name: "focus",
     MultilineAnnotation: ({ children }) => (
@@ -119,6 +119,7 @@ export function NewDemo({
           {filename}
         </code>
         <Code
+          extensions={extensions}
           style={{ fontSize: "1.15rem", lineHeight: "1.5rem", margin: 0 }}
           theme={theme}
           {...sourceProps}
