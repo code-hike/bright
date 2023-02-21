@@ -1,5 +1,3 @@
-**work in progress**
-
 > the future is bright
 
 ## Usage
@@ -17,6 +15,8 @@ export default function Page() {
   return <Code lang="py">print("hello brightness")</Code>
 }
 ```
+
+Docs: https://bright.codehike.org
 
 ## Credits
 

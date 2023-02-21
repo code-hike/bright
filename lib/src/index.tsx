@@ -12,6 +12,7 @@ import {
 import { linesToContent } from "./lines"
 import { tokensToContent, tokensToTokenList } from "./tokens"
 import React from "react"
+import "server-only"
 
 type CodeComponent = ((props: InputCodeProps) => Promise<JSX.Element>) &
   Partial<InputCodeProps>
