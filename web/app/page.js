@@ -172,10 +172,7 @@ console.log(hello, "my old friend")`}
                   <span style={{ color: "rgb(199, 146, 234)" }}>lang</span>
                   <span>="</span>
                   <span style={{ color: "rgb(195, 232, 141)" }}>js</span>
-                  <span>" </span>
-                  <span style={{ color: "rgb(199, 146, 234)" }}>
-                    lineNumbers
-                  </span>
+                  <span>"</span>
                 </>
               }
             />
