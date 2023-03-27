@@ -421,13 +421,13 @@ print(theFuture is bright)`}</Code>
                 <br />
                 // with{" "}
                 <a
-                  href="https://themes.codehike.org/bright"
+                  href="https://themes.codehike.org/editor"
                   style={{
                     color: "rgb(195, 232, 141)",
                     textDecoration: "underline",
                   }}
                 >
-                  https://themes.codehike.org/bright
+                  https://themes.codehike.org/editor
                 </a>
               </span>
               <br />
