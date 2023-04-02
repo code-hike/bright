@@ -1,5 +1,11 @@
 # bright
 
+## 0.7.1
+
+### Patch Changes
+
+- 9f29213: Default to text in md codeblocks
+
 ## 0.7.0
 
 ### Minor Changes
