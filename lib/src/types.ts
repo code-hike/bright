@@ -50,7 +50,7 @@ export type DoubleTheme = {
 }
 type MdCodeText = {
   type: "code"
-  props: { className: string; children: string }
+  props: { className?: string; children: string }
 }
 
 type MdMultiCodeText = {

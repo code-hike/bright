@@ -173,14 +173,15 @@ function parseChildren(
   if (typeof children === "object" && children?.type === "code") {
     return {
       code: children.props?.children?.trim(),
-      lang: children.props?.className.replace("language-", "") as LanguageAlias,
+      lang: (children.props?.className?.replace("language-", "") ||
+        "text") as LanguageAlias,
     }
   } else if (typeof children === "object") {
     const subProps = React.Children.toArray(children as any).map((c: any) => {
       const codeProps = c.props?.children?.props
       return {
         code: codeProps.children?.trim(),
-        lang: codeProps.className.replace("language-", ""),
+        lang: codeProps.className?.replace("language-", "") || "text",
       }
     })
     return {
