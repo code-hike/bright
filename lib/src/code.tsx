@@ -106,18 +106,17 @@ function Style({
   mode: "dark" | "light" | undefined
   lineNumbers?: boolean
 }) {
-  const lineNumbersStyle = lineNumbers
-    ? ""
-    : `[data-bright-theme] [data-bright-ln] { 
+  const lineNumbersStyle = `[data-bright-theme] [data-bright-ln] { 
     color: var(--line-number-color); 
     margin-right: 1.5ch; 
     display: inline-block;
     text-align: right;
     user-select: none;
   }`
+
   const css = `${displayStyle(mode)}
   [data-bright-theme] ::selection { background-color: var(--selection-background) }
-  ${lineNumbersStyle}
+  ${lineNumbers ? lineNumbersStyle : ""}
   `
   return <style dangerouslySetInnerHTML={{ __html: css }} />
 }
