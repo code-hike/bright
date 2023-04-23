@@ -1,5 +1,11 @@
 # bright
 
+## 0.7.2
+
+### Patch Changes
+
+- e42c026: Fix line numbers style
+
 ## 0.7.1
 
 ### Patch Changes
