@@ -1,5 +1,19 @@
 # bright
 
+## 0.7.3
+
+### Patch Changes
+
+- a6cf1d0: Add lightThemeSelector
+
+  ```
+  Code.theme = {
+    dark: "min-dark",
+    light: "min-light",
+    lightSelector: ".light", // default is [data-theme="light"]
+  }
+  ```
+
 ## 0.7.2
 
 ### Patch Changes
