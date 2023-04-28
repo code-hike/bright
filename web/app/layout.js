@@ -17,7 +17,6 @@ export const metadata = {
     title: "Bright - Syntax Highlighting React Server Component",
     description: "A server component for syntax highlighting.",
     creator: "@codehike_",
-    images: ["https://nextjs.org/og.png"],
   },
 }
 
