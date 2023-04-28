@@ -1,5 +1,7 @@
 import { Code } from "bright"
 import { Fira_Code } from "@next/font/google"
+import type { MDXComponents } from "mdx/types"
+import React from "react"
 
 const font = Fira_Code({ subsets: ["latin"] })
 
@@ -41,6 +43,8 @@ Code.extensions = [
       let newRanges = [{ fromLineNumber: 1, toLineNumber: lineCount }]
 
       for (const range of ranges) {
+        if (!("fromLineNumber" in range)) continue
+
         const { fromLineNumber, toLineNumber } = range
         newRanges = newRanges.flatMap((r) => {
           if (
@@ -81,6 +85,7 @@ Code.extensions = [
                 toLineNumber: r.toLineNumber,
               },
             ]
+          return []
         })
       }
 
@@ -122,6 +127,6 @@ Code.extensions = [
   // },
 ]
 
-export function useMDXComponents(components) {
+export function useMDXComponents(components: MDXComponents): MDXComponents {
   return { ...components, pre: Code }
 }

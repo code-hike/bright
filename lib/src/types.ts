@@ -7,6 +7,7 @@ import {
   ThemeColors,
 } from "@code-hike/lighter"
 import brightComponents from "./components"
+import type { ReactNode } from "react"
 
 type Prettify<T> = {
   [K in keyof T]: T[K]
@@ -36,10 +37,13 @@ export type Extension = Prettify<
   {
     name: string
     beforeRoot?: (props: CodeProps, annotations: Annotation[]) => CodeProps
-    beforeHighlight?: (props: CodeProps, annotations: Annotation[]) => CodeProps
+    beforeHighlight?: (
+      props: CodeProps,
+      annotations: Annotation[]
+    ) => CodeProps | undefined
     InlineAnnotation?: InlineAnnotationComponent
     MultilineAnnotation?: MultilineAnnotationComponent
-  } & BrightComponents
+  } & Partial<BrightComponents>
 >
 
 export type Extensions = Extension[]
@@ -60,12 +64,12 @@ type MdMultiCodeText = {
     children: MdCodeText[]
   }
 }
-type CodeText = string | MdCodeText | MdMultiCodeText
+export type CodeText = string | MdCodeText | MdMultiCodeText
 
 export type InputCodeProps = Prettify<
-  Omit<CodeProps, "mode" | "code" | "theme"> & {
-    theme: Theme | DoubleTheme
-    children: CodeText
+  Omit<Partial<CodeProps>, "mode" | "code" | "theme"> & {
+    theme?: Theme | DoubleTheme
+    children?: ReactNode
     lang?: LanguageAlias
     code?: string
   }

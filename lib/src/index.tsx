@@ -8,16 +8,18 @@ import {
   BrightComponents,
   BrightProps,
   Extension,
+  CodeText,
 } from "./types"
 import { linesToContent } from "./lines"
 import { tokensToContent, tokensToTokenList } from "./tokens"
-import React from "react"
+import React, { FunctionComponent } from "react"
 import "server-only"
 
 type CodeComponent = ((props: InputCodeProps) => Promise<JSX.Element>) &
-  Partial<InputCodeProps>
+  Partial<InputCodeProps> &
+  FunctionComponent<InputCodeProps> // this is a lie, until we have typescript 5.1
 
-const Code: CodeComponent = async (componentProps) => {
+const Code = (async (componentProps) => {
   // merge props and global props
   const { children, lang, ...rest } = {
     ...Code,
@@ -26,7 +28,7 @@ const Code: CodeComponent = async (componentProps) => {
   }
 
   // parse code, lang, subProps maybe from markdown
-  const propsFromChildren = parseChildren(children, lang, rest.code)
+  const propsFromChildren = parseChildren(children as CodeText, lang, rest.code)
 
   // split code and annotations
   let props = { ...rest, ...propsFromChildren }
@@ -62,7 +64,7 @@ const Code: CodeComponent = async (componentProps) => {
       />
     </>
   )
-}
+}) as CodeComponent
 
 async function AnnotatedCode(props: CodeProps) {
   let newProps = await extractAnnotationsFromCode(props)
@@ -176,8 +178,8 @@ function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
 }
 
 function parseChildren(
-  children: InputCodeProps["children"],
-  lang: LanguageAlias,
+  children: CodeText,
+  lang?: LanguageAlias,
   code?: string
 ): Partial<BrightProps> {
   if (typeof children === "object" && children?.type === "code") {
