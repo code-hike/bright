@@ -2,9 +2,6 @@ import { Code } from "bright"
 import { CodeLine, demo, Demo } from "./demo"
 import { SocialLinks } from "./icons"
 import { WithBackground } from "./with-background"
-import InlineAnnotationDemo from "./demos/inline-annotation"
-import MultilineAnnotationDemo from "./demos/multiline-annotation"
-import PropsAnnotationDemo from "./demos/props-annotation"
 import ExtensionsAnnotationDemo from "./demos/extensions"
 
 export default async function Page() {
