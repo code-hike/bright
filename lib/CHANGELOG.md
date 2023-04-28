@@ -1,5 +1,11 @@
 # bright
 
+## 0.8.0
+
+### Minor Changes
+
+- 8bee843: Better typescript support
+
 ## 0.7.3
 
 ### Patch Changes
