@@ -50,7 +50,7 @@ export function DiscordLink(props) {
     <a
       target="_blank"
       rel="noopener noreferrer"
-      href="https://discord.gg/zYJMDBANkj"
+      href="http://discord.codehike.org"
       {...props}
     >
       <svg

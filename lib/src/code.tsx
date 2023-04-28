@@ -69,7 +69,11 @@ export function Root(props: BrightProps) {
         ...style,
       }}
     >
-      <Style mode={mode} lineNumbers={props.lineNumbers} />
+      <Style
+        mode={mode}
+        lineNumbers={props.lineNumbers}
+        lightThemeSelector={props.lightThemeSelector}
+      />
       {title && <TitleBar {...props} />}
       <Pre {...props} />
     </div>
@@ -102,9 +106,11 @@ export function Pre(brightProps: BrightProps) {
 function Style({
   mode,
   lineNumbers,
+  lightThemeSelector,
 }: {
   mode: "dark" | "light" | undefined
   lineNumbers?: boolean
+  lightThemeSelector?: string
 }) {
   const lineNumbersStyle = `[data-bright-theme] [data-bright-ln] { 
     color: var(--line-number-color); 
@@ -114,21 +120,27 @@ function Style({
     user-select: none;
   }`
 
-  const css = `${displayStyle(mode)}
+  const css = `${displayStyle(mode, lightThemeSelector)}
   [data-bright-theme] ::selection { background-color: var(--selection-background) }
   ${lineNumbers ? lineNumbersStyle : ""}
   `
   return <style dangerouslySetInnerHTML={{ __html: css }} />
 }
 
-function displayStyle(mode: "dark" | "light" | undefined) {
+function displayStyle(
+  mode: "dark" | "light" | undefined,
+  lightThemeSelector: string = '[data-theme="light"]'
+) {
   if (!mode) return ""
+
   if (mode === "dark")
     return `[data-bright-mode="dark"] { display: block }
-[data-theme="light"] [data-bright-mode="dark"] { display: none }`
+${lightThemeSelector} [data-bright-mode="dark"] { display: none }`
+
   if (mode === "light")
     return `[data-bright-mode="light"] { display: none }
-[data-theme="light"] [data-bright-mode="light"] { display: block }`
+${lightThemeSelector} [data-bright-mode="light"] { display: block }`
+
   return ""
 }
 

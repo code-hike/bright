@@ -1,31 +1,33 @@
-import { Code, tokensToContent } from "bright"
-import { Wrapper, Input } from "../../client-components"
+import { Code } from "bright"
 
-Code.theme = "dracula"
-Code.extensions = [
-  {
-    name: "input",
-    InlineAnnotation: ({ query, tokens }) => (
-      <Input defaultValue={tokensToContent(tokens)} name={query} />
-    ),
-  },
-]
+Code.theme = {
+  dark: "min-dark",
+  light: "min-light",
+  lightSelector: ".light",
+}
+Code.extensions = []
 const code = `
 <div
   style={{
-    // input[13:19] color
     color: "#fafafa",
-    // input[18:24] bg
     background: "#222222",
   }}
 >
   Hello World
-</div>`
+</div>`.trim()
 
 export default function Page() {
   return (
-    <Wrapper>
-      <Code lang="jsx">{code}</Code>
-    </Wrapper>
+    <main>
+      <div className="light">
+        <Code lang="jsx">{code}</Code>
+      </div>
+      <div>
+        <Code lang="jsx">{code}</Code>
+      </div>
+      <div data-theme="dark">
+        <Code lang="jsx">{code}</Code>
+      </div>
+    </main>
   )
 }

@@ -47,9 +47,19 @@ const Code: CodeComponent = async (componentProps) => {
   return (
     <>
       {/* @ts-expect-error Server Component */}
-      <AnnotatedCode {...props} theme={darkTheme} mode="dark" />
+      <AnnotatedCode
+        {...props}
+        theme={darkTheme}
+        mode="dark"
+        lightThemeSelector={doubleTheme.lightSelector}
+      />
       {/* @ts-expect-error Server Component */}
-      <AnnotatedCode {...props} theme={lightTheme} mode="light" />
+      <AnnotatedCode
+        {...props}
+        theme={lightTheme}
+        mode="light"
+        lightThemeSelector={doubleTheme.lightSelector}
+      />
     </>
   )
 }

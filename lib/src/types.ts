@@ -45,6 +45,7 @@ export type Extension = Prettify<
 export type Extensions = Extension[]
 
 export type DoubleTheme = {
+  lightSelector?: string
   dark: Theme
   light: Theme
 }
@@ -77,6 +78,7 @@ export type CodeProps = Prettify<
     lang: LanguageAlias
     code: string
     mode?: "dark" | "light"
+    lightThemeSelector?: string
 
     // atttributes
     style?: React.CSSProperties
