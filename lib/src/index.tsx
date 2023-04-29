@@ -1,4 +1,8 @@
-import { extractAnnotations, LanguageAlias } from "@code-hike/lighter"
+import {
+  extractAnnotations,
+  LANG_NAMES,
+  LanguageAlias,
+} from "@code-hike/lighter"
 import components from "./components"
 import { BrightCode } from "./code"
 import {
@@ -199,28 +203,37 @@ function parseChildren(
       subProps,
     }
   } else {
+    let newLang = lang || "text"
+    if (!LANG_NAMES.includes(newLang)) {
+      console.warn(`Bright warning: Unknown language ${JSON.stringify(lang)}`)
+      newLang = "text"
+    }
     return {
       code: (children as string) || code || "",
-      lang,
+      lang: newLang,
     }
   }
 }
 
 function getLanguageAndTitle(className: string | undefined) {
   if (!className) {
-    return {
-      lang: "text",
-    }
+    return { lang: "text" }
   }
   const metastring = className.replace("language-", "")
-  const lang = metastring.split(".").pop()
+  const lang = metastring.split(".").pop()!
+
+  if (!LANG_NAMES.includes(lang)) {
+    console.warn(
+      `Bright warning: Unknown language ${JSON.stringify(
+        lang
+      )} in ${JSON.stringify(metastring)}`
+    )
+
+    return { lang: "text" }
+  }
+
   if (lang !== metastring) {
-    return {
-      lang: lang!,
-      title: metastring,
-    }
+    return { lang, title: metastring }
   }
-  return {
-    lang,
-  }
+  return { lang }
 }
