@@ -28,11 +28,6 @@ export function useMDXComponents(components) {
 }
 `.trim()
 
-const demoCode = `
-# title monthy.py
-print("the bright side of life")
-`.trim()
-
 const demoProps = {
   extensions: [tabs, fileIcons, focus],
   // theme: "github-light",
@@ -92,10 +87,7 @@ export default function Demo() {
       <div style={{ height: "1rem" }} />
       <NewDemo
         filename="mdx-components.js"
-        sourceProps={{
-          children: sourceCode,
-          lang: "jsx",
-        }}
+        sourceProps={{ children: sourceCode, lang: "jsx" }}
         demoProps={demoProps}
       />
     </>

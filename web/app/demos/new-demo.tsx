@@ -1,9 +1,10 @@
 import { Code, tokensToContent } from "bright"
 import { WithBackground } from "../with-background"
-import theme from "./theme"
+import theme from "./theme.json"
 import Link from "next/link"
+import type { Extension } from "bright"
 
-const extensions = [
+const extensions: Extension[] = [
   {
     name: "focus",
     MultilineAnnotation: ({ children }) => (
@@ -19,6 +20,8 @@ const extensions = [
       let newRanges = [{ fromLineNumber: 1, toLineNumber: lineCount }]
 
       for (const range of ranges) {
+        if (!("fromLineNumber" in range)) continue
+
         const { fromLineNumber, toLineNumber } = range
         newRanges = newRanges.flatMap((r) => {
           if (
@@ -87,12 +90,36 @@ const extensions = [
   },
 ]
 
+type CodeProps = Parameters<typeof Code>[0]
+
 export function NewDemo({
-  sourceProps,
+  sourceProps = {},
   demoProps,
   preview,
   filename = "app/page.js",
+}: {
+  sourceProps?: Partial<CodeProps>
+  demoProps?: Partial<CodeProps>
+  preview?: any
+  filename?: string
 }) {
+  const demoPreview = preview ? (
+    preview
+  ) : demoProps ? (
+    /* @ts-expect-error Server Component */
+    <Code
+      theme="dracula"
+      lang="py"
+      style={{
+        fontSize: "1.1rem",
+        margin: "-2rem auto 0",
+        position: "relative",
+        border: "1px solid #444",
+        width: "85%",
+      }}
+      {...demoProps}
+    />
+  ) : null
   return (
     <>
       <WithBackground
@@ -118,6 +145,7 @@ export function NewDemo({
         >
           {filename}
         </code>
+        {/* @ts-expect-error Server Component */}
         <Code
           extensions={extensions}
           style={{ fontSize: "1.15rem", lineHeight: "1.5rem", margin: 0 }}
@@ -125,20 +153,7 @@ export function NewDemo({
           {...sourceProps}
         />
       </WithBackground>
-      {preview || (
-        <Code
-          theme="dracula"
-          lang="py"
-          style={{
-            fontSize: "1.1rem",
-            margin: "-2rem auto 0",
-            position: "relative",
-            border: "1px solid #444",
-            width: "85%",
-          }}
-          {...demoProps}
-        ></Code>
-      )}
+      {demoPreview}
     </>
   )
 }

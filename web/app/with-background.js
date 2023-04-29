@@ -1,8 +1,8 @@
 export function WithBackground({
   children,
-  bg,
+  bg = {},
   fg,
-  style,
+  style = {},
   blur = 50,
   opacity = 0.66,
 }) {
