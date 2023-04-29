@@ -1,5 +1,12 @@
 # bright-web
 
+## 0.3.17
+
+### Patch Changes
+
+- Updated dependencies [63c89ff]
+  - bright@0.8.2
+
 ## 0.3.16
 
 ### Patch Changes

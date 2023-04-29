@@ -1,5 +1,11 @@
 # bright
 
+## 0.8.2
+
+### Patch Changes
+
+- 63c89ff: Don't fail with unknown languages
+
 ## 0.8.1
 
 ### Patch Changes
