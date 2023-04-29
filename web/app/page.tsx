@@ -8,6 +8,7 @@ import ThemeDemo from "./demos/theme"
 import DarkModeDemo from "./demos/dark-mode"
 import CustomThemeDemo from "./demos/custom-theme"
 import MarkdownDemo from "./demos/markdown"
+import TitlesInMarkdownDemo from "./demos/titles-in-markdown"
 import ExtensionsDemo from "./demos/customization"
 
 export default async function Page() {
@@ -49,6 +50,10 @@ export default async function Page() {
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Markdown / MDX</h2>
       <MarkdownDemo />
+
+      <div style={{ height: "3rem" }} />
+      <h2 style={{ textAlign: "center" }}>Titles in Markdown</h2>
+      <TitlesInMarkdownDemo />
 
       <div style={{ height: "3rem" }} />
       <h2 style={{ textAlign: "center" }}>Customization</h2>

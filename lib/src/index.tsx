@@ -185,15 +185,14 @@ function parseChildren(
   if (typeof children === "object" && children?.type === "code") {
     return {
       code: children.props?.children?.trim(),
-      lang: (children.props?.className?.replace("language-", "") ||
-        "text") as LanguageAlias,
+      ...getLanguageAndTitle(children.props?.className),
     }
   } else if (typeof children === "object") {
     const subProps = React.Children.toArray(children as any).map((c: any) => {
       const codeProps = c.props?.children?.props
       return {
         code: codeProps.children?.trim(),
-        lang: codeProps.className?.replace("language-", "") || "text",
+        ...getLanguageAndTitle(codeProps.className),
       }
     })
     return {
@@ -204,5 +203,24 @@ function parseChildren(
       code: (children as string) || code || "",
       lang,
     }
+  }
+}
+
+function getLanguageAndTitle(className: string | undefined) {
+  if (!className) {
+    return {
+      lang: "text",
+    }
+  }
+  const metastring = className.replace("language-", "")
+  const lang = metastring.split(".").pop()
+  if (lang !== metastring) {
+    return {
+      lang: lang!,
+      title: metastring,
+    }
+  }
+  return {
+    lang,
   }
 }

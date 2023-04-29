@@ -455,7 +455,8 @@
       "name": "Entity name",
       "scope": "entity.name.function",
       "settings": {
-        "foreground": "#82AAFF"
+        "foreground": "#c3e88dff",
+        "fontStyle": "normal"
       }
     },
     {
