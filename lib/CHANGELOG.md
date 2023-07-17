@@ -1,5 +1,11 @@
 # bright
 
+## 0.8.3
+
+### Patch Changes
+
+- 4f7ce9f: Upgrade lighter for edge support
+
 ## 0.8.2
 
 ### Patch Changes
