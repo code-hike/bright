@@ -21,15 +21,12 @@ export default function Page() {
   return (
     <main>
       <div className="light">
-        {/* @ts-expect-error */}
         <Code lang="jsx">{code}</Code>
       </div>
       <div>
-        {/* @ts-expect-error */}
         <Code lang="jsx">{code}</Code>
       </div>
       <div data-theme="dark">
-        {/* @ts-expect-error */}
         <Code lang="jsx">{code}</Code>
       </div>
     </main>

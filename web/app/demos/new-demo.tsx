@@ -106,7 +106,6 @@ export function NewDemo({
   const demoPreview = preview ? (
     preview
   ) : demoProps ? (
-    /* @ts-expect-error Server Component */
     <Code
       theme="dracula"
       lang="py"
@@ -145,7 +144,6 @@ export function NewDemo({
         >
           {filename}
         </code>
-        {/* @ts-expect-error Server Component */}
         <Code
           extensions={extensions}
           style={{ fontSize: "1.15rem", lineHeight: "1.5rem", margin: 0 }}

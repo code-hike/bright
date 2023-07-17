@@ -36,7 +36,6 @@ export default function Page() {
 const preview = (
   <>
     <div>
-      {/* @ts-expect-error Server Component */}
       <Code
         lang="py"
         theme={{
@@ -54,7 +53,6 @@ const preview = (
 print(theFuture is bright)`}</Code>
     </div>
     <div data-theme="light">
-      {/* @ts-expect-error Server Component */}
       <Code
         lang="py"
         theme={{

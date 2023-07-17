@@ -127,6 +127,6 @@ Code.extensions = [
   // },
 ]
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+export function useMDXComponents(components: MDXComponents) {
   return { ...components, pre: Code }
 }
