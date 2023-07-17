@@ -1,4 +1,8 @@
-import { Theme, annotatedHighlight } from "@code-hike/lighter"
+import {
+  Theme,
+  getThemeColorsSync,
+  highlight as light,
+} from "@code-hike/lighter"
 import { TitleBar } from "./title"
 import { LinesComponent } from "./lines"
 import { BrightProps, CodeProps } from "./types"
@@ -23,12 +27,9 @@ async function highlight(props: CodeProps): Promise<BrightProps> {
   }
 
   const { code, lang, theme, annotations } = props
-  const { lines, colors } = await annotatedHighlight(
-    code,
-    lang,
-    theme,
-    annotations
-  )
+
+  const { lines } = await light(code, lang, theme, { annotations })
+  const colors = getThemeColorsSync(theme)
 
   const brightProps: BrightProps = {
     ...props,
@@ -56,15 +57,16 @@ export function Root(props: BrightProps) {
         borderRadius: "4px",
         overflow: "hidden",
         margin: "1em 0",
-        ["--selection-background" as any]: colors.selectionBackground,
-        ["--line-number-color" as any]: colors.lineNumberForeground,
-        ["--tab-border" as any]: colors.tabBorder,
-        ["--tab-background" as any]: colors.activeTabBackground,
-        ["--tab-color" as any]: colors.activeTabForeground,
-        ["--inactive-tab-background" as any]: colors.inactiveTabBackground,
-        ["--inactive-tab-color" as any]: colors.inactiveTabForeground,
-        ["--tab-top-border" as any]: colors.activeTabTopBorder,
-        ["--tab-bottom-border" as any]: colors.activeTabBorder,
+        ["--selection-background" as any]: colors.editor.selectionBackground,
+        ["--line-number-color" as any]: colors.editorLineNumber.foreground,
+
+        ["--tab-border" as any]: colors.tab.border,
+        ["--tab-background" as any]: colors.tab.activeBackground,
+        ["--tab-color" as any]: colors.tab.activeForeground,
+        ["--inactive-tab-background" as any]: colors.tab.inactiveBackground,
+        ["--inactive-tab-color" as any]: colors.tab.inactiveForeground,
+        ["--tab-top-border" as any]: colors.tab.activeBorderTop,
+        ["--tab-bottom-border" as any]: colors.tab.activeBorder,
         colorScheme: colors.colorScheme,
         ...style,
       }}

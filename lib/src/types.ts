@@ -4,7 +4,7 @@ import {
   Lines,
   Tokens,
   Annotation,
-  ThemeColors,
+  getThemeColorsSync,
 } from "@code-hike/lighter"
 import brightComponents from "./components"
 import type { ReactNode } from "react"
@@ -105,7 +105,7 @@ export type CodeProps = Prettify<
 // afterHighlight
 export type BrightProps = Prettify<
   Omit<CodeProps, "subProps"> & {
-    colors: Prettify<ThemeColors>
+    colors: Prettify<ReturnType<typeof getThemeColorsSync>>
     lines: Lines
     lineCount: number
 

@@ -2,14 +2,13 @@ import React from "react"
 import { BrightProps } from "./types"
 
 export function TitleBar(props: BrightProps) {
-  const { activeTabForeground, editorGroupHeaderBackground, tabsBorder } =
-    props.colors
+  const colors = props.colors
   const { TitleBarContent } = props
   const elementProps = {
     className: props.titleClassName,
     style: {
-      background: editorGroupHeaderBackground,
-      color: activeTabForeground,
+      background: colors.editorGroupHeader.tabsBackground,
+      color: colors.tab.activeForeground,
       position: "relative" as const,
       display: "flex",
     },
@@ -24,7 +23,7 @@ export function TitleBar(props: BrightProps) {
           left: 0,
           width: "100%",
           pointerEvents: "none",
-          background: tabsBorder,
+          background: colors.tab.border,
           height: 1,
           zIndex: 9,
         }}
