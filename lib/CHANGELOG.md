@@ -1,5 +1,11 @@
 # bright
 
+## 0.8.4
+
+### Patch Changes
+
+- e088ecb: Don't trim all whitespace
+
 ## 0.8.3
 
 ### Patch Changes

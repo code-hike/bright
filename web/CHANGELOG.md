@@ -1,5 +1,13 @@
 # bright-web
 
+## 0.3.19
+
+### Patch Changes
+
+- e088ecb: Don't trim all whitespace
+- Updated dependencies [e088ecb]
+  - bright@0.8.4
+
 ## 0.3.18
 
 ### Patch Changes

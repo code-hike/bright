@@ -1,14 +1,14 @@
 {
   "name": "bright-web",
   "private": true,
-  "version": "0.3.18",
+  "version": "0.3.19",
   "dependencies": {
     "@mdx-js/react": "2.3.0",
     "@next/font": "13.4.10",
     "@next/mdx": "13.4.10",
     "@radix-ui/react-icons": "^1.1.1",
     "@radix-ui/react-tabs": "^1.0.2",
-    "bright": "0.8.3",
+    "bright": "0.8.4",
     "diff": "^5.1.0",
     "next": "13.4.10",
     "raw-loader": "^4.0.2",
