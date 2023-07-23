@@ -181,8 +181,8 @@ function runExtensionsBeforeHighlight(props: CodeProps): CodeProps {
   return newProps
 }
 
-function trimTrailingNewlines(code: string | null): string | undefined {
-  return code?.replace(/\n+$/, "") ?? undefined
+function trimTrailingNewline(code: string | null): string | undefined {
+  return code?.replace(/\n$/, "") ?? undefined
 }
 
 function parseChildren(
@@ -192,14 +192,14 @@ function parseChildren(
 ): Partial<BrightProps> {
   if (typeof children === "object" && children?.type === "code") {
     return {
-      code: trimTrailingNewlines(children.props?.children),
+      code: trimTrailingNewline(children.props?.children),
       ...getLanguageAndTitle(children.props?.className),
     }
   } else if (typeof children === "object") {
     const subProps = React.Children.toArray(children as any).map((c: any) => {
       const codeProps = c.props?.children?.props
       return {
-        code: trimTrailingNewlines(codeProps.children),
+        code: trimTrailingNewline(codeProps.children),
         ...getLanguageAndTitle(codeProps.className),
       }
     })

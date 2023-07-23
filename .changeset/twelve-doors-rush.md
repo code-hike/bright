@@ -1,5 +1,5 @@
 ---
-"bright": minor
+"bright": patch
 "bright-web": patch
 ---
 
