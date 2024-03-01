@@ -197,7 +197,8 @@ function parseChildren(
     }
   } else if (typeof children === "object") {
     const subProps = React.Children.toArray(children as any).map((c: any) => {
-      const codeProps = c.props?.children?.props
+      const codeProps = c.props?.children?.props ?? c.props
+
       return {
         code: trimTrailingNewline(codeProps.children),
         ...getLanguageAndTitle(codeProps.className),
