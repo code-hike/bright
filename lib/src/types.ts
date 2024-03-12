@@ -53,12 +53,12 @@ export type DoubleTheme = {
   dark: Theme
   light: Theme
 }
-type MdCodeText = {
+export type MdCodeText = {
   type: "code"
   props: { className?: string; children: string }
 }
 
-type MdMultiCodeText = {
+export type MdMultiCodeText = {
   type: Function
   props: {
     children: MdCodeText[]

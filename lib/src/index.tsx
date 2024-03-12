@@ -13,6 +13,7 @@ import {
   BrightProps,
   Extension,
   CodeText,
+  MdCodeText,
 } from "./types"
 import { linesToContent } from "./lines"
 import { tokensToContent, tokensToTokenList } from "./tokens"
@@ -190,23 +191,13 @@ function parseChildren(
   lang?: LanguageAlias,
   code?: string
 ): Partial<BrightProps> {
-  if (typeof children === "object" && children?.type === "code") {
-    return {
-      code: trimTrailingNewline(children.props?.children),
-      ...getLanguageAndTitle(children.props?.className),
-    }
-  } else if (typeof children === "object") {
-    const subProps = React.Children.toArray(children as any).map((c: any) => {
-      const codeProps = c.props?.children?.props
-      return {
-        code: trimTrailingNewline(codeProps.children),
-        ...getLanguageAndTitle(codeProps.className),
-      }
-    })
-    return {
-      subProps,
-    }
-  } else {
+  // the Code component can be used in many ways
+  // this function use some heuristics to guess the correct usage
+
+  if (typeof children === "string" || code) {
+    // Basic usage
+    // either: <Code lang="js">console.log(1)</Code>
+    // or: <Code lang="js" code="console.log(1)" />
     let newLang = lang || "text"
     if (!LANG_NAMES.includes(newLang)) {
       console.warn(`Bright warning: Unknown language ${JSON.stringify(lang)}`)
@@ -216,6 +207,46 @@ function parseChildren(
       code: (children as string) || code || "",
       lang: newLang,
     }
+  }
+
+  if (
+    typeof children === "object" &&
+    typeof children?.props?.children === "string"
+  ) {
+    // Basic MDX usage, children usually is <code className="language-js">console.log(1)</code>
+    // the code tag can be replaced by a custom component https://github.com/code-hike/bright/issues/37, so we can't check for the tag name
+    return {
+      code: trimTrailingNewline(children.props?.children),
+      ...getLanguageAndTitle((children as MdCodeText).props?.className),
+    }
+  }
+
+  if (typeof children === "object") {
+    // MDX usage with multiple code blocks (for example: https://bright.codehike.org/recipes/tabs)
+    // children is an array of <Code> components
+    const subProps = React.Children.toArray(children as any).map((c: any) => {
+      const codeElement = c.props?.children
+      const codeProps = codeElement?.props
+
+      return {
+        code: trimTrailingNewline(codeProps.children),
+        ...getLanguageAndTitle(codeProps.className),
+      }
+    })
+    return {
+      subProps,
+    }
+  }
+
+  // unknown usage
+  let newLang = lang || "text"
+  if (!LANG_NAMES.includes(newLang)) {
+    console.warn(`Bright warning: Unknown language ${JSON.stringify(lang)}`)
+    newLang = "text"
+  }
+  return {
+    code: (children as string) || code || "",
+    lang: newLang,
   }
 }
 
