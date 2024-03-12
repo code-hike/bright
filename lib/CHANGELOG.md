@@ -1,5 +1,11 @@
 # bright
 
+## 0.8.5
+
+### Patch Changes
+
+- bbe97c3: Fix usage with overriden code element
+
 ## 0.8.4
 
 ### Patch Changes
