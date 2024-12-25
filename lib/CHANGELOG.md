@@ -1,5 +1,11 @@
 # bright
 
+## 0.8.6
+
+### Patch Changes
+
+- 27cea57: Add react 19 as peer dep
+
 ## 0.8.5
 
 ### Patch Changes
