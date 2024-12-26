@@ -1,8 +1,9 @@
 {
   "name": "bright",
   "version": "0.8.6",
+  "type": "module",
+  "module": "./dist/index.js",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "repository": "https://github.com/code-hike/bright",
   "homepage": "https://bright.codehike.org",
@@ -12,11 +13,11 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --dts",
-    "watch": "tsup src/index.tsx --format esm,cjs --watch --dts"
+    "build": "tsup src/index.tsx --format esm --dts",
+    "watch": "tsup src/index.tsx --format esm --watch --dts"
   },
   "dependencies": {
-    "@code-hike/lighter": "^1.0.0",
+    "@code-hike/lighter": "^1.0.2",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
