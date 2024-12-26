@@ -1,6 +1,6 @@
 {
   "name": "bright",
-  "version": "0.8.6",
+  "version": "1.0.0",
   "type": "module",
   "module": "./dist/index.js",
   "main": "./dist/index.js",

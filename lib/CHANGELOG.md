@@ -1,5 +1,11 @@
 # bright
 
+## 1.0.0
+
+### Major Changes
+
+- 3a0e7fd: Remove CJS support. [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+
 ## 0.8.6
 
 ### Patch Changes

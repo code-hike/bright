@@ -237,12 +237,13 @@
     human-id "^1.0.2"
     prettier "^2.7.1"
 
-"@code-hike/lighter@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-1.0.0.tgz#05ab87127a060f325fff8ef61748bad19ac6cd30"
-  integrity sha512-GVd0NveUTZ2jgeUh4lrLBZr2zSQT1ws32H747qK6AxSOMas4lXfp5KvkgmsHVg8WLdWwhtaaU9IXpyHEjfeDBw==
+"@code-hike/lighter@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@code-hike/lighter/-/lighter-1.0.2.tgz#ffdc37fda9a7f23433d15a6bca1529680c584515"
+  integrity sha512-gyJikppIy717OlkyUWhLffATabiGfF2eWA3g0HWnogGuaxVoyb1R2AikeOsX04rigcH+yKROOjc2cgRLnaGPQQ==
   dependencies:
     ansi-sequence-parser "1.1.1"
+    tm-grammars "^1.21.10"
 
 "@esbuild/android-arm@0.15.18":
   version "0.15.18"
@@ -2804,6 +2805,11 @@ thenify-all@^1.0.0:
   integrity sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==
   dependencies:
     any-promise "^1.0.0"
+
+tm-grammars@^1.21.10:
+  version "1.21.10"
+  resolved "https://registry.yarnpkg.com/tm-grammars/-/tm-grammars-1.21.10.tgz#978b2fa8ceea6bda6df39bf888af0e216cd0e909"
+  integrity sha512-0TSAeQ90vvh0xRGdLw/HZG3K4M9gE1rwhGDB29QtoA5h2eRRD8tlGwukBJKx/y23l9EDbMP3+2QFeJqMsVOgBQ==
 
 tmp@^0.0.33:
   version "0.0.33"
