@@ -120,6 +120,7 @@ function Style({
     display: inline-block;
     text-align: right;
     user-select: none;
+    -webkit-user-select: none;
   }`
 
   const css = `${displayStyle(mode, lightThemeSelector)}
